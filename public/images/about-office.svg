@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none" className="w-full h-full object-cover">
+  <defs>
+    <linearGradient id="officeWall" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="60%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="receptionDesk" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F1F5F9" />
+      <stop offset="50%" stop-color="#E2E8F0" />
+      <stop offset="100%" stop-color="#CBD5E1" />
+    </linearGradient>
+    <linearGradient id="signGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#60A5FA" stop-opacity="0.05" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Dark Architectural Wall -->
+  <rect width="800" height="600" fill="url(#officeWall)" />
+
+  <!-- Wood Slat Acoustic Paneling on Left Wall -->
+  <g opacity="0.15">
+    <line x1="20" y1="0" x2="20" y2="450" stroke="#F4C542" stroke-width="6" />
+    <line x1="40" y1="0" x2="40" y2="450" stroke="#F4C542" stroke-width="6" />
+    <line x1="60" y1="0" x2="60" y2="450" stroke="#F4C542" stroke-width="6" />
+    <line x1="80" y1="0" x2="80" y2="450" stroke="#F4C542" stroke-width="6" />
+    <line x1="100" y1="0" x2="100" y2="450" stroke="#F4C542" stroke-width="6" />
+    <line x1="120" y1="0" x2="120" y2="450" stroke="#F4C542" stroke-width="6" />
+  </g>
+
+  <!-- Ambient Light Cone on Main Wall -->
+  <polygon points="400,0 200,450 600,450" fill="url(#signGlow)" />
+
+  <!-- Backlit Signage Board -->
+  <g transform="translate(250, 110)">
+    <!-- Backing Glow Panel -->
+    <rect x="-20" y="-15" width="340" height="150" rx="16" fill="#0A1128" stroke="#334155" stroke-width="2" />
+    <!-- Square HS Icon -->
+    <rect x="15" y="15" width="80" height="80" rx="10" fill="#1C274C" stroke="#3B82F6" stroke-width="2" filter="url(#glow)" />
+    <!-- H -->
+    <path d="M 30 32 L 42 32 L 42 50 L 56 50 L 56 32 L 68 32 L 68 78 L 56 78 L 56 60 L 42 60 L 42 78 L 30 78 Z" fill="#FFFFFF" />
+    <!-- S -->
+    <path d="M 72 40 C 68 35 60 35 56 38 C 52 41 52 45 56 48 C 60 52 76 54 78 62 C 80 70 74 78 64 78 C 56 78 48 72 46 66 L 54 60 C 56 64 62 66 66 64 C 68 62 68 58 66 56 C 62 52 48 50 46 42 C 44 34 50 26 60 25 C 68 24 74 27 78 32 Z" fill="#FFFFFF" opacity="0.9" />
+    <!-- Golden Arrow in Icon -->
+    <path d="M 40 62 L 80 38 L 54 54 L 46 72 Z" fill="#F4C542" filter="url(#glow)" />
+
+    <!-- Text -->
+    <text x="115" y="60" font-family="system-ui, sans-serif" font-weight="800" font-size="28" fill="#FFFFFF" letter-spacing="1">H&amp;S AUDITORS</text>
+    <text x="117" y="80" font-family="system-ui, sans-serif" font-weight="600" font-size="9" fill="#94A3B8" letter-spacing="0.5">Accounting | Tax | Audit | Consultancy</text>
+  </g>
+
+  <!-- Polished Marble Reception Desk -->
+  <polygon points="120,400 680,400 740,550 60,550" fill="url(#receptionDesk)" />
+  <line x1="120" y1="400" x2="680" y2="400" stroke="#FFFFFF" stroke-width="3" />
+  <rect x="80" y="520" width="640" height="80" fill="#0F172A" />
+
+  <!-- Indoor Green Plant in Pot on Left -->
+  <g transform="translate(100, 360)">
+    <!-- Pot -->
+    <polygon points="15,60 55,60 65,120 5,120" fill="#334155" />
+    <!-- Foliage Leaves -->
+    <ellipse cx="35" cy="50" rx="16" ry="30" fill="#15803D" transform="rotate(-25 35 50)" />
+    <ellipse cx="35" cy="40" rx="14" ry="35" fill="#22C55E" transform="rotate(15 35 40)" />
+    <ellipse cx="15" cy="45" rx="12" ry="28" fill="#16A34A" transform="rotate(-50 15 45)" />
+    <ellipse cx="55" cy="45" rx="12" ry="28" fill="#16A34A" transform="rotate(45 55 45)" />
+  </g>
+
+  <!-- Visitor iPad / Reception terminal on desk -->
+  <rect x="520" y="380" width="50" height="35" rx="4" fill="#0F172A" stroke="#94A3B8" stroke-width="2" transform="rotate(-10 520 380)" />
+</svg>

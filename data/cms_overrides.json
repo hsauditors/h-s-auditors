@@ -1,0 +1,121 @@
+{
+  "homepage_sections": {
+    "hero": {
+      "section_key": "hero",
+      "eyebrow": "PREMIER ACCOUNTING & TAX CONSULTANCY • INDIA",
+      "headline": "Your Trusted Partner in Financial Growth and Compliance",
+      "description": "Professional accounting, taxation and compliance solutions bringing together deep expertise in GST, Income Tax, Bookkeeping, Audit & Assurance and Business Registration — for businesses across India.",
+      "primary_cta_text": "Book a Consultation",
+      "primary_cta_link": "/contact",
+      "secondary_cta_text": "Our Services",
+      "secondary_cta_link": "/services",
+      "trust_badge_value": "500+",
+      "trust_badge_label": "Businesses Trust Us",
+      "desktop_image_url": "/uploads/1791380975583-de0e86a4-95a9-408b-849e-d1dded1b5cd5.png",
+      "mobile_image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1791534428/hs_auditors/trs7lymo4itmg9iry5xk.png",
+      "image_alt": "H&S Auditors Team of Accounting & Tax Professionals in Consultation",
+      "is_active": true,
+      "updated_at": "2026-10-09T08:27:23.136Z",
+      "id": "hero",
+      "_deleted": false
+    }
+  },
+  "about_content": {
+    "default": {
+      "eyebrow": "ABOUT THE FIRM",
+      "heading": "Premier Accounting & Tax Consultancy",
+      "paragraph_1": "H&S Auditors is a premier Accounting & Tax consultancy firm. Our team of seasoned specialists brings together deep expertise in GST, Income Tax, Bookkeeping, Audit & Assurance and Business Registration.",
+      "paragraph_2": "We believe every business deserves financial clarity without compromise. Our commitment to integrity, confidentiality, and timely delivery has made us the preferred partner for businesses across India.",
+      "cta_text": "More About Us",
+      "cta_link": "/about",
+      "image_url": "/images/about-office.jpg"
+    }
+  },
+  "services": {
+    "00000000-0000-0000-0004-000000000001": {
+      "id": "00000000-0000-0000-0004-000000000001",
+      "title": "GST Filing",
+      "slug": "gst-filing",
+      "short_description": "Accurate, hassle-free GST registration, monthly returns and reconciliation.",
+      "long_description": "Navigating Goods and Services Tax in India requires meticulous attention to deadlines, classification, and input tax credit (ITC) reconciliation. H&S Auditors provides comprehensive GST advisory, registration, periodic return filings (GSTR-1, GSTR-3B, GSTR-9/9C), departmental audit support, and handling of departmental notices to ensure 100% statutory compliance without business disruption.",
+      "icon": "FileText",
+      "image_url": "/images/service-gst.png",
+      "cta_text": "Learn More",
+      "cta_url": "/services/gst-filing",
+      "benefits": [
+        "Accurate ITC reconciliation eliminating double-taxation",
+        "Prompt monthly GSTR-1 and GSTR-3B filings",
+        "Expert handling of GST departmental notices & audits",
+        "Assistance in GST refund applications for exporters"
+      ],
+      "process_steps": [
+        "Invoice & ledger collection",
+        "Input Tax Credit verification",
+        "Return preparation & validation",
+        "Client sign-off & electronic filing"
+      ],
+      "display_order": 1,
+      "is_active": true,
+      "seo_title": "GST Filing & Compliance Services | H&S Auditors",
+      "seo_description": "Accurate, hassle-free GST registration, monthly returns and reconciliation by experienced tax professionals.",
+      "created_at": "2026-10-07T12:18:51.14279+00:00",
+      "updated_at": "2026-10-09T06:30:22.863Z",
+      "sub_services": [
+        {
+          "id": "sub_1791527395756",
+          "title": "today is friday ",
+          "description": "need to go to mosque and pray "
+        }
+      ],
+      "_deleted": false
+    }
+  },
+  "testimonials": {
+    "test_1791455063679": {
+      "id": "test_1791455063679",
+      "name": "biju",
+      "company": "fishfarm",
+      "designation": "fighter",
+      "quote": "i want a big aquarium for my fighter\n",
+      "image_url": null,
+      "rating": 5,
+      "display_order": 1,
+      "is_active": true,
+      "created_at": "2026-10-08T10:23:40.009Z",
+      "updated_at": "2026-10-08T10:24:23.708Z",
+      "_deleted": false
+    },
+    "test_1791455301948": {
+      "id": "test_1791455301948",
+      "name": "bikji",
+      "company": "vshgieubker",
+      "designation": "akvugvhjfudiljv",
+      "quote": "dgiyiswveirepjid vkkml",
+      "image_url": null,
+      "rating": 5,
+      "display_order": 1,
+      "is_active": true,
+      "created_at": "2026-10-08T10:28:09.721Z",
+      "updated_at": "2026-10-08T10:28:21.986Z",
+      "_deleted": false
+    }
+  },
+  "careers": {
+    "career_1791536666142": {
+      "id": "career_1791536666142",
+      "job_title": "senior developer",
+      "department": "Audit & Assurance",
+      "location": "Ottapalam, Kerala",
+      "employment_type": "Full-time",
+      "description": "wertyuioppfdsasdfghjkl",
+      "requirements": [
+        "oiuytreskl;iuytrdcvbnmluyfcvbnml;iuyf"
+      ],
+      "display_order": 1,
+      "is_active": true,
+      "created_at": "2026-10-09T09:03:39.447Z",
+      "updated_at": "2026-10-09T09:15:12.712Z",
+      "_deleted": false
+    }
+  }
+}

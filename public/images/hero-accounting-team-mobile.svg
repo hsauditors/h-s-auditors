@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" fill="none" className="w-full h-full object-cover">
+  <defs>
+    <linearGradient id="heroMobileBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F2447" />
+      <stop offset="60%" stop-color="#1E3A6B" />
+      <stop offset="100%" stop-color="#0A1833" />
+    </linearGradient>
+    <filter id="mShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <rect width="600" height="500" fill="url(#heroMobileBg)" />
+
+  <!-- Skyline silhouettes -->
+  <g opacity="0.3">
+    <rect x="50" y="50" width="80" height="300" fill="#2563EB" />
+    <rect x="160" y="80" width="100" height="270" fill="#1D4ED8" />
+    <rect x="300" y="40" width="90" height="310" fill="#3B82F6" />
+    <rect x="420" y="70" width="120" height="280" fill="#1E40AF" />
+  </g>
+
+  <!-- Conference Table -->
+  <polygon points="30,340 570,340 600,500 0,500" fill="#6B3F31" />
+
+  <!-- Person 1 -->
+  <g>
+    <rect x="120" y="200" width="100" height="150" rx="14" fill="#0F172A" />
+    <path d="M 110 340 C 120 250 220 250 230 340 Z" fill="#1E293B" />
+    <circle cx="170" cy="230" r="30" fill="#D97706" opacity="0.7" />
+    <ellipse cx="170" cy="215" rx="30" ry="18" fill="#111827" />
+  </g>
+
+  <!-- Person 2 -->
+  <g>
+    <rect x="260" y="180" width="110" height="170" rx="16" fill="#0A1128" />
+    <path d="M 245 340 C 260 230 370 230 385 340 Z" fill="#111827" />
+    <polygon points="305,260 325,260 318,330 312,330" fill="#FFFFFF" />
+    <circle cx="315" cy="205" r="32" fill="#D97706" opacity="0.75" />
+    <ellipse cx="315" cy="190" rx="32" ry="20" fill="#0F172A" />
+  </g>
+
+  <!-- Laptop on table -->
+  <g transform="translate(240, 310)">
+    <polygon points="10,20 130,20 145,45 -5,45" fill="#64748B" />
+    <rect x="20" y="-35" width="100" height="55" rx="4" fill="#0F172A" stroke="#94A3B8" stroke-width="2" />
+    <line x1="30" y1="-20" x2="110" y2="-20" stroke="#38BDF8" stroke-width="2" />
+    <line x1="30" y1="-10" x2="90" y2="-10" stroke="#34D399" stroke-width="2" />
+  </g>
+
+  <!-- Cursive text on mobile -->
+  <g transform="translate(360, 40)" filter="url(#mShadow)">
+    <text x="0" y="30" font-family="'Caveat', 'Brush Script MT', cursive, sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Compliance</text>
+    <text x="25" y="60" font-family="'Caveat', 'Brush Script MT', cursive, sans-serif" font-style="italic" font-weight="600" font-size="24" fill="#F4C542">Today</text>
+    <text x="2" y="95" font-family="'Caveat', 'Brush Script MT', cursive, sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">A Stronger</text>
+    <text x="35" y="125" font-family="'Caveat', 'Brush Script MT', cursive, sans-serif" font-style="italic" font-weight="700" font-size="26" fill="#F4C542">Tomorrow</text>
+  </g>
+</svg>
