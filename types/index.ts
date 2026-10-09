@@ -22,6 +22,14 @@ export interface SubService {
   id: string;
   title: string;
   description: string;
+  image_url?: string;
+}
+
+export interface ServicesBannerData {
+  eyebrow?: string;
+  headline?: string;
+  description?: string;
+  image_url?: string;
 }
 
 export interface ServiceWithSubServices extends Omit<Service, 'sub_services'> {

@@ -28,10 +28,66 @@
       "paragraph_2": "We believe every business deserves financial clarity without compromise. Our commitment to integrity, confidentiality, and timely delivery has made us the preferred partner for businesses across India.",
       "cta_text": "More About Us",
       "cta_link": "/about",
-      "image_url": "/images/about-office.jpg"
+      "image_url": "/images/H&S Auditors about section.png"
     }
   },
   "services": {
+    "00000000-0000-0000-0004-000000000005": {
+      "id": "00000000-0000-0000-0004-000000000005",
+      "title": "Audit & Assurance",
+      "slug": "audit-assurance",
+      "short_description": "Statutory, internal and tax audits that ensure compliance and transparency.",
+      "long_description": "Independent audits provide lenders, shareholders, and regulatory authorities with absolute confidence in your financial statements. We conduct statutory audits under the Companies Act, tax audits under Section 44AB of the Income Tax Act, internal audits to strengthen internal controls, and inventory/stock verifications.",
+      "icon": "ShieldCheck",
+      "image_url": "/images/service-audit.png",
+      "cta_text": "Learn More",
+      "cta_url": "/services/audit-assurance",
+      "benefits": [
+        "Rigorous verification adhering to ICAI Standards",
+        "Tax audit reporting via Form 3CA/3CB-3CD",
+        "Internal audits designed to mitigate financial risks",
+        "Enhanced credibility with investors and banking institutions"
+      ],
+      "process_steps": [
+        "Audit planning & risk assessment",
+        "Substantive testing & sampling",
+        "Observation discussion with leadership",
+        "Final audit report issuance"
+      ],
+      "display_order": 5,
+      "is_active": true,
+      "seo_title": "Audit & Assurance Services | H&S Auditors",
+      "seo_description": "Statutory, internal and tax audits that ensure complete compliance and financial transparency.",
+      "created_at": "2026-10-07T12:18:51.14279+00:00",
+      "updated_at": "2026-10-09T11:35:42.901Z",
+      "sub_services": [
+        {
+          "id": "sub-aud-1",
+          "title": "Statutory Audit",
+          "description": "Audit under the Companies Act 2013 with compliance to applicable standards (SA/AS).",
+          "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1791545130/hs_auditors/services/dacyofutvkhbgjytq6pb.png"
+        },
+        {
+          "id": "sub-aud-2",
+          "title": "Tax Audit (Sec. 44AB)",
+          "description": "Audit for businesses exceeding prescribed turnover with reporting in Form 3CA/3CB and 3CD.",
+          "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1791545534/hs_auditors/services/o5bvhqldguzyd1tespki.png"
+        },
+        {
+          "id": "sub-aud-3",
+          "title": "Internal Audit",
+          "description": "Risk-based internal audit processes to strengthen controls and governance.",
+          "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1791545668/hs_auditors/services/tzclwrqmaxhjoxidqvie.png"
+        },
+        {
+          "id": "sub-aud-4",
+          "title": "GST Audit & Reconciliation",
+          "description": "Annual reconciliation of books with GSTR-1, GSTR-3B and GSTR-2A and certified reconciliation in GSTR-9C.",
+          "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1791545744/hs_auditors/services/ncczsdrs7fki4hp4ypvf.png"
+        }
+      ],
+      "_deleted": false
+    },
     "00000000-0000-0000-0004-000000000001": {
       "id": "00000000-0000-0000-0004-000000000001",
       "title": "GST Filing",
@@ -59,15 +115,111 @@
       "seo_title": "GST Filing & Compliance Services | H&S Auditors",
       "seo_description": "Accurate, hassle-free GST registration, monthly returns and reconciliation by experienced tax professionals.",
       "created_at": "2026-10-07T12:18:51.14279+00:00",
-      "updated_at": "2026-10-09T06:30:22.863Z",
+      "updated_at": "2026-10-09T11:51:59.840Z",
       "sub_services": [
         {
-          "id": "sub_1791527395756",
-          "title": "today is friday ",
-          "description": "need to go to mosque and pray "
+          "id": "sub_1791545805921",
+          "title": "GST Registration",
+          "description": "Registration once turnover crosses ₹40 lakh for goods or ₹20 lakh for services (₹20 lakh / ₹10 lakh in special category states), plus voluntary and composition registrations.",
+          "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1791546229/hs_auditors/services/vemlthw02ae866iwi4wo.png"
+        },
+        {
+          "id": "sub_1791545975676",
+          "title": "Return Filing",
+          "description": "GSTR-1, GSTR-3B, CMP-08, GSTR-9 and GSTR-9C filed on time, with input tax credit matched against GSTR-2B every month.",
+          "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1791546189/hs_auditors/services/baco0l454kugvnt3yjjb.png"
+        },
+        {
+          "id": "sub_1791546257244",
+          "title": "Refunds & Exports",
+          "description": "Refund claims for exports, LUT filing, SEZ supplies and inverted duty structure under Section 54.",
+          "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1791546379/hs_auditors/services/lkgqn0opgqqeqxeymxhe.png"
+        },
+        {
+          "id": "sub_1791546460866",
+          "title": "Notices & Assessment",
+          "description": "Replies to ASMT-10, DRC-01 and audit notices, plus representation before GST officers and appellate authorities.",
+          "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1791546606/hs_auditors/services/fvzfx23dlxkcflxgj26k.png"
         }
       ],
       "_deleted": false
+    },
+    "00000000-0000-0000-0004-000000000002": {
+      "id": "00000000-0000-0000-0004-000000000002",
+      "title": "Income Tax",
+      "slug": "income-tax",
+      "short_description": "Maximise tax savings while staying fully compliant with the Income Tax Act.",
+      "long_description": "Our direct tax consultancy assists corporate entities, partnerships, LLPs, and individuals in strategic tax planning, advance tax computation, tax-deducted-at-source (TDS) management, and annual return filings. We provide sound representation in scrutiny assessments and appeals before tax authorities, keeping your tax liability optimised and fully legitimate.",
+      "icon": "BarChart3",
+      "image_url": "/images/service-tax.png",
+      "cta_text": "Learn More",
+      "cta_url": "/services/income-tax",
+      "benefits": [
+        "Proactive tax planning under new & old regimes",
+        "Advance tax computation to avoid interest penalties",
+        "TDS/TCS compliance & quarterly return filing",
+        "Appellate and scrutiny assessment representation"
+      ],
+      "process_steps": [
+        "Financial review & tax computations",
+        "Deductions & exemption optimisation",
+        "Draft return review",
+        "E-filing and acknowledgement verification"
+      ],
+      "display_order": 2,
+      "is_active": true,
+      "seo_title": "Income Tax Planning & Filing Services | H&S Auditors",
+      "seo_description": "Maximise tax savings while staying fully compliant with the Income Tax Act with expert advisory from H&S Auditors.",
+      "created_at": "2026-10-07T12:18:51.14279+00:00",
+      "updated_at": "2026-10-09T12:14:58.419Z",
+      "sub_services": [
+        {
+          "id": "sub_1791546843150",
+          "title": "Return Filing",
+          "description": "ITR-1 to ITR-7 filed with the right regime choice — old vs. new — and complete capital gains, house property and foreign asset disclosure.",
+          "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1791547253/hs_auditors/services/fm3drk5fsajgcl7yp6f2.png"
+        },
+        {
+          "id": "sub_1791547276934",
+          "title": "TDS & TCS",
+          "description": "Monthly deduction and deposit, quarterly 24Q/26Q/27Q returns, Form 16/16A issuance and correction of defaults on TRACES.",
+          "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1791547517/hs_auditors/services/pdjxnb2pwwbo4evwttep.png"
+        },
+        {
+          "id": "sub_1791547629707",
+          "title": "Advance Tax & Planning",
+          "description": "Quarterly advance tax computation (15 June, 15 Sept, 15 Dec, 15 March) and lawful tax planning under Chapter VI-A and presumptive schemes 44AD/44ADA.",
+          "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1791547917/hs_auditors/services/k7weg16rk83upjhfdtwi.png"
+        },
+        {
+          "id": "sub_1791548012160",
+          "title": "Assessments & Appeals",
+          "description": "Responses to Section 143(1), 143(2), 148 and faceless assessment notices, and appeals before CIT(A) and ITAT.\n\n",
+          "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1791548094/hs_auditors/services/qm8wqmi3tjucxnantotl.png"
+        }
+      ],
+      "_deleted": false
+    },
+    "00000000-0000-0000-0004-000000000003": {
+      "_deleted": true,
+      "updated_at": "2026-10-09T12:18:25.878Z"
+    },
+    "00000000-0000-0000-0004-000000000004": {
+      "_deleted": true,
+      "updated_at": "2026-10-09T12:18:33.016Z"
+    },
+    "00000000-0000-0000-0004-000000000006": {
+      "_deleted": true,
+      "updated_at": "2026-10-09T12:18:37.577Z"
+    }
+  },
+  "services_banner": {
+    "banner": {
+      "id": "banner",
+      "eyebrow": "OUR SERVICES",
+      "headline": "Accounting, Audit & Advisory Services",
+      "description": "Explore our core domains below. Each service is delivered with expertise, accuracy and a deep understanding of regulatory requirements to support your business goals.",
+      "image_url": "/images/service-accounting.jpg"
     }
   },
   "testimonials": {

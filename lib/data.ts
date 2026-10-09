@@ -4,6 +4,7 @@ import cloudinary from './cloudinary';
 import { createClient } from './supabase/server';
 import {
   DEFAULT_SERVICES,
+  DEFAULT_SERVICES_BANNER,
   DEFAULT_COMPLIANCE_DEADLINES,
   DEFAULT_WHY_CHOOSE,
   DEFAULT_STATS,
@@ -19,6 +20,7 @@ import {
   HomepageSection,
   HomepageStat,
   Service,
+  ServicesBannerData,
   ComplianceDeadline,
   WhyChooseItem,
   AboutContent,
@@ -63,13 +65,19 @@ function ensureLocalImages() {
     }
 
     const officeDest = path.join(pubImages, 'about-office.jpg');
-    const newOfficeSrc = path.join(ARTIFACT_DIR, 'about_reception_lounge_1791449919209.jpg');
-    if (fs.existsSync(newOfficeSrc)) {
-      fs.copyFileSync(newOfficeSrc, officeDest);
+    const customAboutPng = path.join(pubImages, 'H&S Auditors about section.png');
+    if (fs.existsSync(customAboutPng)) {
+      fs.copyFileSync(customAboutPng, officeDest);
+      fs.copyFileSync(customAboutPng, path.join(pubImages, 'about-office.png'));
     } else {
-      const officeSrc = path.join(CURRENT_ARTIFACT_DIR, 'about_office_reception_1791439743586.jpg');
-      if (fs.existsSync(officeSrc)) {
-        fs.copyFileSync(officeSrc, officeDest);
+      const newOfficeSrc = path.join(ARTIFACT_DIR, 'about_reception_lounge_1791449919209.jpg');
+      if (fs.existsSync(newOfficeSrc)) {
+        fs.copyFileSync(newOfficeSrc, officeDest);
+      } else {
+        const officeSrc = path.join(CURRENT_ARTIFACT_DIR, 'about_office_reception_1791439743586.jpg');
+        if (fs.existsSync(officeSrc)) {
+          fs.copyFileSync(officeSrc, officeDest);
+        }
       }
     }
 
@@ -81,9 +89,15 @@ function ensureLocalImages() {
       }
     }
 
-    const uploadedBanner = path.join(process.cwd(), 'public', 'uploads', '1791380975583-de0e86a4-95a9-408b-849e-d1dded1b5cd5.png');
-    if (fs.existsSync(uploadedBanner)) {
-      fs.copyFileSync(uploadedBanner, path.join(pubImages, 'hero-team.jpg'));
+    const customOurTeam = path.join(pubImages, 'H&S ourteam page.png');
+    if (fs.existsSync(customOurTeam)) {
+      fs.copyFileSync(customOurTeam, path.join(pubImages, 'hero-ourteam.png'));
+    }
+
+    const uploadedLogoText = path.join(CURRENT_ARTIFACT_DIR, '.user_uploaded', 'media_1791550388798.png');
+    if (fs.existsSync(uploadedLogoText)) {
+      fs.copyFileSync(uploadedLogoText, path.join(pubImages, 'H&S Auditors logo text.png'));
+      fs.copyFileSync(uploadedLogoText, path.join(pubImages, 'hs-brand-text.png'));
     }
 
     const uploadedLogo = path.join(CURRENT_ARTIFACT_DIR, '.user_uploaded', 'media_1791441565319.png');
@@ -174,6 +188,17 @@ export async function getHomepageSection(sectionKey: string): Promise<HomepageSe
 
   if (!base && !override) return null;
   return { ...(base || {}), ...(override || {}) } as HomepageSection;
+}
+
+export async function getServicesBanner(): Promise<ServicesBannerData> {
+  ensureLocalImages();
+  const override =
+    getOverride('services_banner', 'banner') ||
+    getOverride('services_banner', 'default');
+  return {
+    ...DEFAULT_SERVICES_BANNER,
+    ...(override || {}),
+  };
 }
 
 export async function getHomepageStats(): Promise<HomepageStat[]> {

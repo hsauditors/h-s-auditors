@@ -2,7 +2,22 @@ export interface SubService {
   id: string;
   title: string;
   description: string;
+  image_url?: string;
 }
+
+export interface ServicesBannerData {
+  eyebrow?: string;
+  headline?: string;
+  description?: string;
+  image_url?: string;
+}
+
+export const DEFAULT_SERVICES_BANNER: ServicesBannerData = {
+  eyebrow: 'OUR SERVICES',
+  headline: 'Accounting, Audit & Advisory Services',
+  description: 'Explore our core domains below. Each service is delivered with expertise, accuracy and a deep understanding of regulatory requirements to support your business goals.',
+  image_url: '/images/service-accounting.jpg',
+};
 
 export interface DefaultServiceItem {
   id: string;
@@ -25,22 +40,162 @@ export interface DefaultServiceItem {
 
 export const DEFAULT_SERVICES: DefaultServiceItem[] = [
   {
-    id: '1',
+    id: 'cat-taxation',
+    title: 'Taxation Services',
+    slug: 'taxation-services',
+    short_description:
+      'Comprehensive direct and indirect tax solutions for individuals, businesses and corporates.',
+    long_description:
+      'Our direct and indirect tax consultancy assists corporate entities, partnerships, LLPs, and individuals in strategic tax planning, GST filings, and compliance with statutory provisions.',
+    icon: 'FileText',
+    image_url: null,
+    cta_text: 'Explore Taxation Services',
+    cta_url: '/contact',
+    benefits: [
+      'Accurate GST and Income Tax compliance',
+      'Timely return filing and tax computation',
+      'Minimised tax exposure and dispute prevention',
+    ],
+    process_steps: [
+      'Document review and ledger verification',
+      'Tax computation & deductions validation',
+      'Timely submission and acknowledgement',
+    ],
+    sub_services: [
+      {
+        id: 'sub-tax-1',
+        title: 'GST Filing',
+        description:
+          'Accurate, hassle-free GST registration, monthly returns and reconciliation.',
+      },
+      {
+        id: 'sub-tax-2',
+        title: 'Income Tax',
+        description:
+          'Maximise tax savings while staying fully compliant with the Income Tax Act.',
+      },
+      {
+        id: 'sub-tax-3',
+        title: 'Return Filing',
+        description:
+          'ITR-1 to ITR-7 filing with end-to-end compliance, capital gains and tax planning.',
+      },
+      {
+        id: 'sub-tax-4',
+        title: 'TDS & TCS',
+        description:
+          'Monthly deduction and deposit, quarterly returns and Form 16/16A issuance and correction.',
+      },
+    ],
+    display_order: 1,
+    is_active: true,
+  },
+  {
+    id: 'cat-advisory',
+    title: 'Advisory & Compliance',
+    slug: 'advisory-compliance',
+    short_description:
+      'Strategic advisory and regulatory support tailored to your industry and growth plans.',
+    long_description:
+      'Practical, strategic and sustainable advice for businesses navigating complex tax legislation, international transfers, and departmental scrutiny.',
+    icon: 'TrendingUp',
+    image_url: null,
+    cta_text: 'Explore Advisory & Compliance',
+    cta_url: '/contact',
+    benefits: [
+      'Proactive tax forecasting and cash flow management',
+      'Professional representation before statutory bodies',
+      'Cross-border compliance and DTAA certifications',
+    ],
+    process_steps: [
+      'Initial situation assessment and transaction mapping',
+      'Drafting computations, certificates, and grounds of appeal',
+      'Representation and final resolution',
+    ],
+    sub_services: [
+      {
+        id: 'sub-adv-1',
+        title: 'Advance Tax & Planning',
+        description:
+          'Advance tax computation and planning to optimise tax liability and manage cash flow.',
+      },
+      {
+        id: 'sub-adv-2',
+        title: 'Assessments & Appeals',
+        description:
+          'Representation before tax authorities for assessments, scrutiny, penalties and appeals.',
+      },
+      {
+        id: 'sub-adv-3',
+        title: 'Form 15CA/15CB',
+        description:
+          'Certification for foreign remittances and DTAA benefit claims.',
+      },
+      {
+        id: 'sub-adv-4',
+        title: 'Transfer Pricing',
+        description:
+          'End-to-end transfer pricing studies, documentation and compliance.',
+      },
+    ],
+    display_order: 2,
+    is_active: true,
+  },
+  {
+    id: 'cat-accounting',
+    title: 'Accounting & Business Support',
+    slug: 'accounting-business-support',
+    short_description:
+      'Reliable financial support to keep your business organised and compliant.',
+    long_description:
+      'Accurate bookkeeping and reliable incorporation services to provide strong organizational foundation and real-time financial transparency.',
+    icon: 'Calculator',
+    image_url: null,
+    cta_text: 'Explore Business Support',
+    cta_url: '/contact',
+    benefits: [
+      'Up-to-date reconciliations and clean ledgers',
+      'Fast-track entity registration with complete secretarial documentation',
+      'Dedicated accounting supervisors',
+    ],
+    process_steps: [
+      'Document and voucher ingestion',
+      'System recording and ledger reconciliation',
+      'Periodic MIS reporting',
+    ],
+    sub_services: [
+      {
+        id: 'sub-acc-1',
+        title: 'Bookkeeping & Accounting',
+        description:
+          'Clean, current financial records to help you make informed business decisions.',
+      },
+      {
+        id: 'sub-acc-2',
+        title: 'Business Registration',
+        description:
+          'End-to-end assistance for company, LLP and firm registration.',
+      },
+    ],
+    display_order: 3,
+    is_active: true,
+  },
+  {
+    id: 'cat-audit',
     title: 'Audit & Assurance',
     slug: 'audit-assurance',
     short_description:
-      'A systematic scrutiny of books of account and statutory records to verify the true and fair view of your financial position, reported under the Companies Act, 2013 and the Standards on Auditing issued by ICAI.',
+      'Independent audit and assurance services to enhance compliance and transparency.',
     long_description:
-      'Independent audits provide lenders, shareholders, and regulatory authorities with absolute confidence in your financial statements. We conduct statutory audits under the Companies Act, tax audits under Section 44AB of the Income Tax Act, and internal audits.',
-    icon: 'FileCheck',
+      'A systematic scrutiny of books of account and statutory records to verify the true and fair view of your financial position, reported under the Companies Act, 2013 and ICAI standards.',
+    icon: 'ShieldCheck',
     image_url: null,
     cta_text: 'Explore Audit & Assurance',
     cta_url: '/contact',
     benefits: [
-      'Statutory audit (as per applicable laws)',
-      'Internal audit & risk assessment',
-      'Compliance and process review',
-      'Management reporting',
+      'Independent verification trusted by lenders and stakeholders',
+      'Thorough risk assessment and internal control evaluation',
+      'Seamless regulatory compliance',
     ],
     process_steps: [
       'Audit planning & risk assessment',
@@ -50,320 +205,31 @@ export const DEFAULT_SERVICES: DefaultServiceItem[] = [
     ],
     sub_services: [
       {
-        id: 'sub-1-1',
+        id: 'sub-aud-1',
         title: 'Statutory Audit',
         description:
-          'Mandatory audit of companies under Section 139 of the Companies Act, 2013, with financial statements prepared as per Schedule III and Ind AS / AS.',
+          'Audit under the Companies Act 2013 with compliance to applicable standards (SA/AS).',
       },
       {
-        id: 'sub-1-2',
+        id: 'sub-aud-2',
         title: 'Tax Audit (Sec. 44AB)',
         description:
-          'Audit for businesses crossing ₹10 crore turnover (₹1 crore where cash receipts and payments are above 5%) and professionals above ₹50 lakh, reported in Form 3CA/3CB and 3CD.',
+          'Audit for businesses exceeding prescribed turnover with reporting in Form 3CA/3CB and 3CD.',
       },
       {
-        id: 'sub-1-3',
+        id: 'sub-aud-3',
         title: 'Internal Audit',
         description:
-          'Risk-based review of processes and controls, mandatory for prescribed companies under Section 138 read with Rule 13 of the Companies (Accounts) Rules.',
+          'Risk-based internal audit processes to strengthen controls and governance.',
       },
       {
-        id: 'sub-1-4',
+        id: 'sub-aud-4',
         title: 'GST Audit & Reconciliation',
         description:
-          'Annual reconciliation of books with GSTR-1, GSTR-3B and GSTR-2B, and self-certified reconciliation in GSTR-9C where turnover exceeds ₹5 crore.',
-      },
-      {
-        id: 'sub-1-5',
-        title: 'Stock & Bank Audit',
-        description:
-          'Stock, receivables and concurrent audits for banks and NBFCs, including drawing-power and credit-monitoring reports.',
-      },
-      {
-        id: 'sub-1-6',
-        title: 'Trust, Society & NGO Audit',
-        description:
-          'Audit under Section 12A/10(23C) in Form 10B/10BB, along with FCRA and state trust-act compliance.',
-      },
-    ],
-    display_order: 1,
-    is_active: true,
-  },
-  {
-    id: '2',
-    title: 'GST Compliance',
-    slug: 'gst-compliance',
-    short_description:
-      'End-to-end Goods and Services Tax support under the CGST/SGST Acts, 2017 — from registration to departmental representation.',
-    long_description:
-      'Navigating Goods and Services Tax in India requires meticulous attention to deadlines, classification, and input tax credit (ITC) reconciliation. H&S Auditors provides comprehensive GST advisory, registration, periodic return filings, and handling of departmental notices.',
-    icon: 'Receipt',
-    image_url: null,
-    cta_text: 'Explore GST Compliance',
-    cta_url: '/contact',
-    benefits: [
-      'GST registration',
-      'Monthly / quarterly return filing',
-      'Reconciliation & advisory',
-      'Ongoing compliance support',
-    ],
-    process_steps: [
-      'Invoice & ledger collection',
-      'Input Tax Credit verification',
-      'Return preparation & validation',
-      'Client sign-off & electronic filing',
-    ],
-    sub_services: [
-      {
-        id: 'sub-2-1',
-        title: 'GST Registration',
-        description:
-          'Registration once turnover crosses ₹40 lakh for goods or ₹20 lakh for services (₹20 lakh / ₹10 lakh in special category states), plus voluntary and composition registrations.',
-      },
-      {
-        id: 'sub-2-2',
-        title: 'Return Filing',
-        description:
-          'GSTR-1, GSTR-3B, CMP-08, GSTR-4 and GSTR-9/9C filed on time, with input tax credit matched against GSTR-2B every month.',
-      },
-      {
-        id: 'sub-2-3',
-        title: 'Refunds & Exports',
-        description:
-          'Refund claims for exports, LUT filing, SEZ supplies and inverted duty structure under Section 54.',
-      },
-      {
-        id: 'sub-2-4',
-        title: 'Notices & Assessment',
-        description:
-          'Replies to ASMT-10, DRC-01 and audit notices, plus representation before GST officers and appellate authorities.',
-      },
-      {
-        id: 'sub-2-5',
-        title: 'E-Invoicing & E-way Bills',
-        description:
-          'Set-up and monitoring of e-invoicing (mandatory above ₹5 crore turnover) and e-way bill compliance.',
-      },
-    ],
-    display_order: 2,
-    is_active: true,
-  },
-  {
-    id: '3',
-    title: 'Income Tax & TDS',
-    slug: 'income-tax',
-    short_description:
-      'Planning, filing and representation under the Income Tax Act, 1961 for individuals, firms, LLPs, companies and trusts.',
-    long_description:
-      'Our direct tax consultancy assists corporate entities, partnerships, LLPs, and individuals in strategic tax planning, advance tax computation, tax-deducted-at-source (TDS) management, and annual return filings.',
-    icon: 'Calculator',
-    image_url: null,
-    cta_text: 'Explore Income Tax & TDS',
-    cta_url: '/contact',
-    benefits: [
-      'Income tax return filing',
-      'Tax planning & advisory',
-      'Response to tax notices',
-      'Individual & business taxation',
-    ],
-    process_steps: [
-      'Financial review & tax computations',
-      'Deductions & exemption optimisation',
-      'Draft return review',
-      'E-filing and acknowledgement verification',
-    ],
-    sub_services: [
-      {
-        id: 'sub-3-1',
-        title: 'Return Filing',
-        description:
-          'ITR-1 to ITR-7 filed with the right regime choice — old vs. new — and complete capital gains, house property and foreign asset disclosure.',
-      },
-      {
-        id: 'sub-3-2',
-        title: 'TDS & TCS',
-        description:
-          'Monthly deduction and deposit, quarterly 24Q/26Q/27Q returns, Form 16/16A issuance and correction of defaults on TRACES.',
-      },
-      {
-        id: 'sub-3-3',
-        title: 'Advance Tax & Planning',
-        description:
-          'Quarterly advance tax computation (15 June, 15 Sept, 15 Dec, 15 March) and lawful tax planning under Chapter VI-A and presumptive schemes 44AD/44ADA.',
-      },
-      {
-        id: 'sub-3-4',
-        title: 'Assessments & Appeals',
-        description:
-          'Responses to Section 143(1), 143(2), 148 and faceless assessment notices, and appeals before CIT (A) and ITAT.',
-      },
-      {
-        id: 'sub-3-5',
-        title: 'Form 15CA/15CB',
-        description:
-          'Certification for foreign remittances and DTAA benefit determination for non-resident payments.',
-      },
-    ],
-    display_order: 3,
-    is_active: true,
-  },
-  {
-    id: '4',
-    title: 'Accounting & Payroll',
-    slug: 'accounting-payroll',
-    short_description:
-      'Books that stay current, reconciled and ready for any statutory or lender review.',
-    long_description:
-      'Accurate bookkeeping is the bedrock of business vitality. We manage your day-to-day transaction records, bank reconciliations, accounts payable and receivable, payroll, and monthly Management Information System (MIS) reports.',
-    icon: 'BookOpen',
-    image_url: null,
-    cta_text: 'Explore Accounting & Payroll',
-    cta_url: '/contact',
-    benefits: [
-      'Day-to-day bookkeeping',
-      'Monthly & quarterly reports',
-      'Customised chart of accounts',
-      'Financial analysis & support',
-    ],
-    process_steps: [
-      'Document ingestion & voucher entry',
-      'Periodic reconciliation & journal adjustments',
-      'Management report generation',
-      'Strategic financial review',
-    ],
-    sub_services: [
-      {
-        id: 'sub-4-1',
-        title: 'Bookkeeping',
-        description:
-          'Tally / Zoho / Quickbooks accounting with GST-ready ledgers and monthly bank reconciliation.',
-      },
-      {
-        id: 'sub-4-2',
-        title: 'Accounting Supervision',
-        description:
-          'Chief-accountant-level oversight: chart of accounts design, accounting policy, review of books and preparation of financial statements.',
-      },
-      {
-        id: 'sub-4-3',
-        title: 'Payroll & Labour Compliance',
-        description:
-          'Salary processing with PF, ESI, professional tax and gratuity workings, plus monthly challans and returns.',
-      },
-      {
-        id: 'sub-4-4',
-        title: 'MIS & Management Reporting',
-        description:
-          'Monthly profitability, cash-flow and ratio reporting so decisions rest on current numbers.',
+          'Annual reconciliation of books with GSTR-1, GSTR-3B and GSTR-2A and certified reconciliation in GSTR-9C.',
       },
     ],
     display_order: 4,
-    is_active: true,
-  },
-  {
-    id: '5',
-    title: 'Business Set-up & ROC',
-    slug: 'business-setup-roc',
-    short_description:
-      'Incorporation and ongoing secretarial compliance under the Companies Act, 2013 and LLP Act, 2008.',
-    long_description:
-      'Turn your entrepreneurial vision into a legally established corporate entity. H&S Auditors facilitates complete registration for Private Limited Companies, One Person Companies (OPC), Limited Liability Partnerships (LLP), Partnership Firms, and Sole Proprietorships.',
-    icon: 'Landmark',
-    image_url: null,
-    cta_text: 'Explore Business Set-up & ROC',
-    cta_url: '/contact',
-    benefits: [
-      'Private Limited & LLP registration',
-      'Trade license and other registrations',
-      'Regulatory compliance support',
-      'Guidance on statutory requirements',
-    ],
-    process_steps: [
-      'Entity selection & name approval',
-      'Documentation & digital signature setup',
-      'MCA form submission',
-      'Certificate of Incorporation issuance',
-    ],
-    sub_services: [
-      {
-        id: 'sub-5-1',
-        title: 'Company & LLP Incorporation',
-        description:
-          'SPICe+ / FiLLiP filing with DSC, DIN, PAN, TAN, MOA and AOA — private limited, OPC, LLP and partnership firms.',
-      },
-      {
-        id: 'sub-5-2',
-        title: 'ROC Annual Filings',
-        description:
-          'AOC-4, MGT-7/7A, DIR-3 KYC, DPT-3 and MSME-1 filed within statutory due dates.',
-      },
-      {
-        id: 'sub-5-3',
-        title: 'Registrations',
-        description:
-          'MSME/Udyam, Import Export Code, Shops & Establishment, FSSAI, PF/ESI and 12A/80G for NGOs.',
-      },
-      {
-        id: 'sub-5-4',
-        title: 'Closure & Strike-off',
-        description:
-          'Voluntary strike-off under Section 248, LLP closure and liquidation support under IBC.',
-      },
-    ],
-    display_order: 5,
-    is_active: true,
-  },
-  {
-    id: '6',
-    title: 'Advisory',
-    slug: 'advisory',
-    short_description:
-      'Practical, sustainable advice for businesses navigating a fast-changing regulatory landscape.',
-    long_description:
-      'Navigating mergers, fundraising, or complex restructuring requires strategic insight. Our advisory arm supports growing firms with valuation, financial modeling, CMA reports, and transaction advisory.',
-    icon: 'Award',
-    image_url: null,
-    cta_text: 'Explore Advisory',
-    cta_url: '/contact',
-    benefits: [
-      'Transaction advisory',
-      'Financial projections & CMA',
-      'Valuation reports',
-      'Due diligence',
-    ],
-    process_steps: [
-      'Preliminary scope analysis',
-      'Financial modeling & verification',
-      'Report formulation',
-      'Executive debrief & recommendations',
-    ],
-    sub_services: [
-      {
-        id: 'sub-6-1',
-        title: 'Due Diligence',
-        description:
-          'Financial, tax and compliance due diligence for mergers, acquisitions and equity investments.',
-      },
-      {
-        id: 'sub-6-2',
-        title: 'Business Valuation',
-        description:
-          'Valuation reports for fundraising, share transfers, regulatory compliance and dispute resolution.',
-      },
-      {
-        id: 'sub-6-3',
-        title: 'Project Reports & Funding',
-        description:
-          'CMA data, project reports and financial projections for bank loans and working capital limits.',
-      },
-      {
-        id: 'sub-6-4',
-        title: 'Transaction Advisory',
-        description:
-          'Structuring contracts, cross-border transactions, agreements, and tax implications.',
-      },
-    ],
-    display_order: 6,
     is_active: true,
   },
 ];
@@ -556,7 +422,7 @@ export const DEFAULT_ABOUT = {
     'H&S Auditors is a premier Accounting & Tax consultancy firm. Our team of experienced professionals brings together deep expertise in GST, Income Tax, Bookkeeping, Audit & Assurance and Business Registration.',
   paragraph_2:
     'We believe every business deserves financial clarity without compromise. Our commitment to integrity, confidentiality, and timely delivery has made us the preferred partner for businesses across India.',
-  image_url: '/images/about-office.jpg',
+  image_url: '/images/H&S Auditors about section.png',
   image_alt: 'H&S Auditors Corporate Office Reception',
   cta_text: 'More About Us',
   cta_link: '/about',
