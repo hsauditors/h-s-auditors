@@ -107,22 +107,6 @@ export function HeroSection({ heroData }: HeroSectionProps) {
         </div>
       </div>
 
-      {/* 3. Floating Trust Badge (Bottom-Right, matching reference image) */}
-      <div className="absolute bottom-4 right-4 sm:bottom-7 sm:right-10 z-20">
-        <div className="bg-white/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3.5 shadow-lg border border-gray-100 flex items-center gap-2.5 sm:gap-3">
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0 text-blue-600">
-            <ShieldCheck className="w-4 h-4 sm:w-6 sm:h-6" />
-          </div>
-          <div>
-            <div className="text-sm sm:text-lg font-black text-brand-deepNavy leading-tight">
-              {trustBadgeValue}
-            </div>
-            <div className="text-[9px] sm:text-xs font-semibold text-gray-500">
-              {trustBadgeLabel}
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* 4. Content Container: Centered at top on Mobile, Left-aligned on Desktop */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-7 pb-10 md:py-12 lg:py-16">

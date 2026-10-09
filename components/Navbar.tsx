@@ -69,7 +69,6 @@ export function Navbar({ navItems, settings }: NavbarProps) {
               href={ctaItem?.href || '/contact'}
               className="inline-flex items-center gap-2 bg-[#07152E] hover:bg-[#0E2A5C] text-white px-5 py-2.5 rounded-full font-bold text-xs sm:text-[13px] shadow-sm hover:shadow-md transition-all duration-150 group border border-white/10"
             >
-              <span className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-xs">💬</span>
               <span>{ctaItem?.label || 'Talk to an Expert'}</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#F59E0B] transition-transform duration-150 group-hover:translate-x-1" />
             </Link>

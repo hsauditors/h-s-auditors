@@ -89,82 +89,7 @@ export default async function IndustriesPage() {
       <main className="flex-grow relative overflow-hidden pb-16 sm:pb-24">
         {/* Top Hero Section with Graphic Accents */}
         <section className="relative pt-12 sm:pt-16 lg:pt-20 pb-6 sm:pb-8">
-          {/* Background Decorative Tech Waves & Dot Grid Graphic */}
-          <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
-            {/* Soft Ambient Radial Light */}
-            <div className="absolute -top-24 right-0 w-[600px] h-[500px] bg-gradient-to-bl from-blue-100/60 via-blue-50/30 to-transparent rounded-full blur-3xl" />
 
-            {/* Geometric Vector Arcs & Curved Waves */}
-            <svg
-              className="absolute top-0 right-0 w-full max-w-[850px] h-[440px] pointer-events-none"
-              viewBox="0 0 850 440"
-              fill="none"
-              preserveAspectRatio="xMaxYMin meet"
-            >
-              {/* Soft Light-Blue Wave Fill */}
-              <path
-                d="M320 0 C 440 180, 560 280, 850 160 L 850 0 Z"
-                fill="url(#heroWaveGrad)"
-                opacity="0.5"
-              />
-              <path
-                d="M500 440 C 620 300, 720 220, 850 260 L 850 440 Z"
-                fill="url(#heroWaveGrad2)"
-                opacity="0.35"
-              />
-
-              {/* Sweeping Arc Stroke Lines */}
-              <path
-                d="M260 0 C 400 190, 580 260, 850 120"
-                stroke="#BFDBFE"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-              <path
-                d="M420 0 C 560 300, 720 360, 850 340"
-                stroke="#BFDBFE"
-                strokeWidth="1.2"
-                strokeLinecap="round"
-              />
-
-              {/* Connected Line & Node Circle Indicator */}
-              <line
-                x1="380"
-                y1="120"
-                x2="380"
-                y2="215"
-                stroke="#93C5FD"
-                strokeWidth="1.5"
-              />
-              <circle cx="380" cy="215" r="4.5" fill="#2563EB" />
-              <path
-                d="M380 215 C 480 240, 640 230, 850 180"
-                stroke="#BFDBFE"
-                strokeWidth="1.2"
-              />
-
-              <defs>
-                <linearGradient id="heroWaveGrad" x1="320" y1="0" x2="850" y2="160" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#DBEAFE" stopOpacity="0.45" />
-                  <stop stopColor="#EFF6FF" stopOpacity="0.05" />
-                </linearGradient>
-                <linearGradient id="heroWaveGrad2" x1="500" y1="440" x2="850" y2="260" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#DBEAFE" stopOpacity="0.5" />
-                  <stop stopColor="#FFFFFF" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-            </svg>
-
-            {/* Dot Matrix Grid (5 columns x 5 rows) on the Right */}
-            <div className="absolute top-16 sm:top-20 right-16 sm:right-28 lg:right-44 grid grid-cols-5 gap-3.5 opacity-80 pointer-events-none">
-              {Array.from({ length: 25 }).map((_, i) => (
-                <span
-                  key={i}
-                  className="w-1.5 h-1.5 rounded-full bg-[#60A5FA]"
-                />
-              ))}
-            </div>
-          </div>
 
           {/* Hero Content Left */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -226,25 +151,7 @@ export default async function IndustriesPage() {
 
             {/* Bottom CTA Callout Box */}
             <div className="mt-10 sm:mt-12 bg-gradient-to-r from-[#EFF6FF] via-[#F3F8FF] to-white border border-[#DBEAFE] rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-9 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
-              {/* Decorative background curves */}
-              <div className="absolute inset-0 pointer-events-none opacity-40 overflow-hidden">
-                <svg
-                  className="absolute -bottom-10 -right-10 w-96 h-48"
-                  viewBox="0 0 400 200"
-                  fill="none"
-                >
-                  <path
-                    d="M0 160 C 120 100, 260 210, 400 120 L 400 200 L 0 200 Z"
-                    fill="#BFDBFE"
-                    opacity="0.3"
-                  />
-                  <path
-                    d="M50 180 C 180 130, 280 200, 400 150"
-                    stroke="#93C5FD"
-                    strokeWidth="1.5"
-                  />
-                </svg>
-              </div>
+
 
               {/* Left Content */}
               <div className="relative z-10 max-w-xl">

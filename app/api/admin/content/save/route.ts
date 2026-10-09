@@ -6,6 +6,7 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { createClient } from '@/lib/supabase/server';
 import {
   DEFAULT_SERVICES,
+  DEFAULT_SERVICES_BANNER,
   DEFAULT_COMPLIANCE_DEADLINES,
   DEFAULT_WHY_CHOOSE,
   DEFAULT_STATS,
@@ -47,6 +48,11 @@ function getDefaultsForTable(table: string): any {
   switch (table) {
     case 'services':
       return DEFAULT_SERVICES;
+    case 'services_banner':
+      return {
+        banner: DEFAULT_SERVICES_BANNER,
+        default: DEFAULT_SERVICES_BANNER,
+      };
     case 'compliance_deadlines':
       return DEFAULT_COMPLIANCE_DEADLINES;
     case 'why_choose_items':
@@ -92,6 +98,15 @@ export async function GET(request: Request) {
 
     const tableOverrides = overrides[table] || {};
     const defaults = getDefaultsForTable(table);
+
+    if (table === 'services_banner') {
+      const bannerData =
+        tableOverrides['banner'] ||
+        tableOverrides['default'] ||
+        defaults?.banner ||
+        DEFAULT_SERVICES_BANNER;
+      return NextResponse.json(bannerData);
+    }
 
     // List tables (array of items)
     if (['services', 'compliance_deadlines', 'why_choose_items', 'homepage_stats', 'industries', 'testimonials', 'team_members', 'careers'].includes(table)) {

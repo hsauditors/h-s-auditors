@@ -46,7 +46,7 @@ export default async function AboutPage() {
     getSiteSettings(),
   ]);
 
-  const officeImage = about?.image_url || '/images/about-office.jpg';
+  const officeImage = about?.image_url || '/images/H&S Auditors about section.png';
 
   return (
     <div className="flex flex-col min-h-screen bg-white">

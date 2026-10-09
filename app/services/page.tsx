@@ -12,8 +12,15 @@ import {
   ShieldCheck,
   FileText,
   TrendingUp,
+  BarChart2,
+  Phone,
 } from 'lucide-react';
-import { getServices, getNavigationItems, getSiteSettings } from '@/lib/data';
+import {
+  getServices,
+  getServicesBanner,
+  getNavigationItems,
+  getSiteSettings,
+} from '@/lib/data';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { DynamicIcon } from '@/components/ui/DynamicIcon';
@@ -21,228 +28,254 @@ import { DynamicIcon } from '@/components/ui/DynamicIcon';
 export const metadata: Metadata = {
   title: 'Our Services | Professional Audit, Tax & Business Advisory',
   description:
-    'Comprehensive statutory audit, GST compliance, income tax, accounting, and business advisory services organized by specialized practice areas.',
+    'Explore our comprehensive accounting, audit, GST compliance, income tax, and advisory services delivered by seasoned Chartered Accountants and corporate consultants.',
 };
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-function CategoryIcon({ iconName }: { iconName?: string }) {
+function CategoryBadgeIcon({ iconName }: { iconName?: string }) {
   const norm = (iconName || '').toLowerCase().trim();
 
-  if (norm.includes('check') || norm.includes('audit')) {
-    return <FileCheck className="w-5 h-5 text-white" />;
+  if (norm.includes('receipt') || norm.includes('tax') || norm.includes('file')) {
+    return <FileText className="w-5 h-5 text-[#2563EB]" />;
   }
-  if (norm.includes('receipt') || norm.includes('gst')) {
-    return <Receipt className="w-5 h-5 text-white" />;
+  if (norm.includes('trend') || norm.includes('chart') || norm.includes('advisory')) {
+    return <TrendingUp className="w-5 h-5 text-[#2563EB]" />;
   }
-  if (norm.includes('calculator') || norm.includes('tax') || norm.includes('coins')) {
-    return <Calculator className="w-5 h-5 text-white" />;
+  if (norm.includes('calculator') || norm.includes('accounting') || norm.includes('book')) {
+    return <Calculator className="w-5 h-5 text-[#2563EB]" />;
   }
-  if (norm.includes('book') || norm.includes('accounting') || norm.includes('payroll')) {
-    return <BookOpen className="w-5 h-5 text-white" />;
+  if (norm.includes('shield') || norm.includes('check') || norm.includes('audit')) {
+    return <ShieldCheck className="w-5 h-5 text-[#2563EB]" />;
   }
   if (norm.includes('landmark') || norm.includes('roc') || norm.includes('business')) {
-    return <Landmark className="w-5 h-5 text-white" />;
-  }
-  if (norm.includes('award') || norm.includes('advisory')) {
-    return <Award className="w-5 h-5 text-white" />;
-  }
-  if (norm.includes('shield')) {
-    return <ShieldCheck className="w-5 h-5 text-white" />;
+    return <Landmark className="w-5 h-5 text-[#2563EB]" />;
   }
 
-  return <DynamicIcon name={iconName || 'FileText'} className="w-5 h-5 text-white" />;
+  return <DynamicIcon name={iconName || 'FileText'} className="w-5 h-5 text-[#2563EB]" />;
 }
 
 export default async function ServicesPage() {
-  const [categories, navItems, settings] = await Promise.all([
+  const [categories, banner, navItems, settings] = await Promise.all([
     getServices(),
+    getServicesBanner(),
     getNavigationItems(),
     getSiteSettings(),
   ]);
+
+  const bannerEyebrow = banner.eyebrow || 'OUR SERVICES';
+  const bannerHeadline = banner.headline || 'Accounting, Audit & Advisory Services';
+  const bannerDesc =
+    banner.description ||
+    'Explore our core domains below. Each service is delivered with expertise, accuracy and a deep understanding of regulatory requirements to support your business goals.';
+  const bannerImg = banner.image_url || '/images/service-accounting.jpg';
+
+  // Format headline with "Advisory" in light blue
+  const renderHeadline = () => {
+    if (bannerHeadline.includes('Advisory')) {
+      const parts = bannerHeadline.split('Advisory');
+      return (
+        <>
+          {parts[0]}
+          <span className="text-[#60A5FA]">Advisory</span>
+          {parts.slice(1).join('Advisory')}
+        </>
+      );
+    }
+    return bannerHeadline;
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F8FAFC]">
       <Navbar navItems={navItems} settings={settings} />
 
-      <main className="flex-grow relative overflow-hidden py-12 sm:py-16 lg:py-20">
-        {/* Background Decorative Tech Waves & Dot Matrix */}
-        <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
-          <svg
-            className="w-full h-full min-h-[900px] object-cover"
-            viewBox="0 0 1440 850"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-          >
-            {/* Top-Left Tech Node Connection */}
-            <line
-              x1="105"
-              y1="0"
-              x2="105"
-              y2="185"
-              stroke="#93C5FD"
-              strokeWidth="1.2"
+      {/* ========================================================================= */}
+      {/* 1. TOP HERO BANNER (Full-Width Background Image with Navy Overlay) */}
+      {/* ========================================================================= */}
+      <section className="relative w-full overflow-hidden py-16 sm:py-24 lg:py-28 text-white border-b border-blue-900/30">
+        {/* Full-Width Background Image */}
+        {bannerImg && (
+          <div className="absolute inset-0 z-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={bannerImg}
+              alt={bannerHeadline}
+              className="w-full h-full object-cover object-center"
             />
-            <circle cx="105" cy="185" r="4.5" fill="#2563EB" />
+          </div>
+        )}
 
-            {/* Tech Waves swooping across canvas */}
-            <path
-              d="M 0,25 C 160,85 240,240 105,185"
-              stroke="#BFDBFE"
-              strokeWidth="1.2"
-            />
-            <path
-              d="M 105,185 C 0,195 -30,290 380,270 C 820,245 1120,110 1440,230"
-              stroke="#93C5FD"
-              strokeWidth="1.2"
-            />
-            <path
-              d="M 125,0 C 230,170 540,430 1440,160"
-              stroke="#BFDBFE"
-              strokeWidth="1.1"
-            />
-            <path
-              d="M 1080,440 C 1220,320 1340,240 1440,210"
-              stroke="#BFDBFE"
-              strokeWidth="1"
-            />
+        {/* Multi-layer Dark Navy Overlays for Visual Balance & High Contrast Readability */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#040E20] via-[#061530]/95 md:via-[#061530]/90 to-[#071939]/70" />
+        <div className="absolute inset-0 z-0 bg-[#040E20]/45" />
 
-            {/* 5x5 Dot Matrix Grid on Upper-Right */}
-            <g transform="translate(1130, 65)" fill="#60A5FA" opacity="0.85">
-              <circle cx="0" cy="0" r="2.2" />
-              <circle cx="18" cy="0" r="2.2" />
-              <circle cx="36" cy="0" r="2.2" />
-              <circle cx="54" cy="0" r="2.2" />
-              <circle cx="72" cy="0" r="2.2" />
-
-              <circle cx="0" cy="18" r="2.2" />
-              <circle cx="18" cy="18" r="2.2" />
-              <circle cx="36" cy="18" r="2.2" />
-              <circle cx="54" cy="18" r="2.2" />
-              <circle cx="72" cy="18" r="2.2" />
-
-              <circle cx="0" cy="36" r="2.2" />
-              <circle cx="18" cy="36" r="2.2" />
-              <circle cx="36" cy="36" r="2.2" />
-              <circle cx="54" cy="36" r="2.2" />
-              <circle cx="72" cy="36" r="2.2" />
-
-              <circle cx="0" cy="54" r="2.2" />
-              <circle cx="18" cy="54" r="2.2" />
-              <circle cx="36" cy="54" r="2.2" />
-              <circle cx="54" cy="54" r="2.2" />
-              <circle cx="72" cy="54" r="2.2" />
-
-              <circle cx="0" cy="72" r="2.2" />
-              <circle cx="18" cy="72" r="2.2" />
-              <circle cx="36" cy="72" r="2.2" />
-              <circle cx="54" cy="72" r="2.2" />
-              <circle cx="72" cy="72" r="2.2" />
-            </g>
-          </svg>
-        </div>
-
+        {/* Content Container */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Header Title Section */}
-          <div className="mb-12 sm:mb-16 max-w-3xl">
-            <div className="inline-flex items-center gap-2.5 mb-3">
-              <span className="text-[11px] sm:text-xs font-bold tracking-[0.2em] text-[#F59E0B] uppercase">
-                PRACTICE AREAS &amp; CAPABILITIES
+          <div className="max-w-3xl">
+            {/* Eyebrow in Gold with dash */}
+            <div className="inline-flex items-center gap-2.5 mb-3.5">
+              <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#F59E0B] uppercase">
+                {bannerEyebrow}
               </span>
               <span className="w-8 h-[2px] bg-[#F59E0B] inline-block rounded-full" />
             </div>
 
-            <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#0B192C] leading-tight">
-              Accounting, Audit &amp;{' '}
-              <span className="text-[#2563EB]">Advisory Services</span>
+            {/* Title with Serif font */}
+            <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.16] mb-4">
+              {renderHeadline()}
             </h1>
 
-            <div className="w-12 h-1 bg-[#F59E0B] rounded-full my-4" />
-
-            <p className="text-sm sm:text-[15px] text-[#475569] leading-relaxed">
-              Explore our core domains below. Each vertical provides structured, regulatory-compliant execution tailored to enterprise operations and business goals.
+            {/* Description */}
+            <p className="text-sm sm:text-base text-slate-200/90 leading-relaxed font-normal max-w-2xl">
+              {bannerDesc}
             </p>
           </div>
+        </div>
+      </section>
 
-          {/* Category-Wise Services Container */}
-          <div className="space-y-12 sm:space-y-16">
-            {categories.map((category: any, catIdx: number) => {
-              const subServices = category.sub_services || [];
+      {/* ========================================================================= */}
+      {/* 2. CATEGORY-WISE SERVICES SECTIONS */}
+      {/* ========================================================================= */}
+      <main className="flex-grow py-12 sm:py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-20">
+          {categories.map((category: any, catIdx: number) => {
+            const subServices = category.sub_services || [];
+            const isTwoCards = subServices.length === 2;
 
-              return (
-                <section
-                  key={category.id || category.slug || catIdx}
-                  id={category.slug}
-                  className="scroll-mt-24"
-                >
-                  {/* Category Header (Icon + Heading + Subtitle) */}
-                  <div className="flex items-start gap-3.5 sm:gap-4 mb-5 sm:mb-6">
-                    {/* Small Dark Navy Square Icon */}
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#07152E] flex items-center justify-center flex-shrink-0 shadow-xs mt-0.5">
-                      <CategoryIcon iconName={category.icon} />
-                    </div>
-
-                    {/* Heading and Description */}
-                    <div>
-                      <h2 className="text-xl sm:text-2xl font-extrabold text-[#0B192C] tracking-tight leading-tight">
-                        {category.title}
-                      </h2>
-                      {category.short_description && (
-                        <p className="text-xs sm:text-[13px] text-[#64748B] max-w-3xl leading-relaxed mt-1 font-normal">
-                          {category.short_description}
-                        </p>
-                      )}
-                    </div>
+            return (
+              <section
+                key={category.id || category.slug || catIdx}
+                id={category.slug}
+                className="scroll-mt-24"
+              >
+                {/* Category Header (Circular Icon + Serif Title + Subtitle) */}
+                <div className="flex items-start gap-3.5 sm:gap-4 mb-6 sm:mb-7">
+                  {/* Circular Icon Badge */}
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#EBF3FE] flex items-center justify-center flex-shrink-0 shadow-2xs mt-0.5 border border-blue-100">
+                    <CategoryBadgeIcon iconName={category.icon} />
                   </div>
 
-                  {/* Sub-Cards 3-Column Grid (NO images, clean luxury cards) */}
-                  {subServices.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-                      {subServices.map((sub: any, subIdx: number) => (
-                        <div
-                          key={sub.id || subIdx}
-                          className="bg-white rounded-2xl p-5 sm:p-5.5 border border-blue-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-cardHover hover:border-blue-200 transition-all duration-200 flex flex-col justify-between group"
-                        >
-                          <div>
-                            <h3 className="text-sm sm:text-[15px] font-bold text-[#0B192C] group-hover:text-[#2563EB] transition-colors duration-150 leading-snug mb-2">
-                              {sub.title}
-                            </h3>
-                            <p className="text-xs text-[#64748B] leading-relaxed font-normal">
-                              {sub.description}
-                            </p>
-                          </div>
+                  <div>
+                    <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#0B192C] tracking-tight leading-snug">
+                      {category.title}
+                    </h2>
+                    {category.short_description && (
+                      <p className="text-xs sm:text-[13px] text-gray-500 max-w-3xl leading-relaxed mt-1 font-normal">
+                        {category.short_description}
+                      </p>
+                    )}
+                  </div>
+                </div>
 
-                          <div className="pt-3 mt-4 border-t border-slate-100 flex items-center justify-between">
-                            <span className="text-[11px] font-semibold text-gray-400 group-hover:text-[#2563EB] transition-colors">
-                              Sector Advisory
-                            </span>
-                            <Link
-                              href={`/contact?subject=${encodeURIComponent(sub.title)}`}
-                              className="inline-flex items-center gap-1 text-[11px] font-bold text-[#2563EB] hover:text-[#0B192C] transition-colors"
-                            >
-                              <span>Consult</span>
-                              <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                            </Link>
+                {/* Sub-Services Cards */}
+                {subServices.length > 0 ? (
+                  isTwoCards ? (
+                    /* 2-Card Horizontal Layout (e.g. Accounting & Business Support) */
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+                      {subServices.map((sub: any, subIdx: number) => {
+                        const hasImage = Boolean(sub.image_url && sub.image_url.trim());
+
+                        return (
+                          <div
+                            key={sub.id || subIdx}
+                            className="bg-white rounded-xl border border-gray-200/90 shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:shadow-lg hover:border-blue-200 transition-all duration-200 overflow-hidden flex flex-col sm:flex-row group"
+                          >
+                            {/* Optional Left Image if added from admin */}
+                            {hasImage && (
+                              <div className="w-full sm:w-5/12 h-44 sm:h-auto relative overflow-hidden bg-slate-100 flex-shrink-0">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                  src={sub.image_url}
+                                  alt={sub.title}
+                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                />
+                              </div>
+                            )}
+
+                            {/* Content */}
+                            <div className={`w-full ${hasImage ? 'sm:w-7/12' : ''} p-5 flex flex-col justify-between flex-grow`}>
+                              <div>
+                                <h3 className="text-sm sm:text-base font-bold text-[#0B192C] group-hover:text-blue-600 transition-colors leading-snug mb-2">
+                                  {sub.title}
+                                </h3>
+                                <p className="text-xs text-gray-500 leading-relaxed font-normal mb-4">
+                                  {sub.description}
+                                </p>
+                              </div>
+
+                              <Link
+                                href={`/contact?subject=${encodeURIComponent(sub.title)}`}
+                                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#2563EB] hover:text-[#0B192C] transition-colors mt-auto w-fit"
+                              >
+                                <span>Learn More</span>
+                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                              </Link>
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   ) : (
-                    /* Fallback if category has no sub_services */
-                    <div className="bg-white rounded-2xl p-6 border border-gray-200 text-center text-xs text-gray-400">
-                      Sub-services for this category are being updated.
-                    </div>
-                  )}
-                </section>
-              );
-            })}
-          </div>
+                    /* 4-Column Responsive Grid */
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-5.5">
+                      {subServices.map((sub: any, subIdx: number) => {
+                        const hasImage = Boolean(sub.image_url && sub.image_url.trim());
 
-          {/* Bottom Consultation Box */}
-          <div className="mt-16 sm:mt-20 bg-gradient-to-r from-[#EFF6FF] via-[#F3F8FF] to-white border border-[#DBEAFE] rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-9 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
+                        return (
+                          <div
+                            key={sub.id || subIdx}
+                            className="bg-white rounded-xl border border-gray-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-lg hover:border-blue-200 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden flex flex-col justify-between group"
+                          >
+                            {/* Card Top Image Header if added from admin */}
+                            {hasImage && (
+                              <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-100">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                  src={sub.image_url}
+                                  alt={sub.title}
+                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                />
+                              </div>
+                            )}
+
+                            {/* Card Body */}
+                            <div className="p-4 sm:p-5 flex flex-col flex-grow justify-between">
+                              <div>
+                                <h3 className="text-sm sm:text-[15px] font-bold text-[#0B192C] group-hover:text-blue-600 transition-colors leading-snug mb-2">
+                                  {sub.title}
+                                </h3>
+                                <p className="text-xs text-gray-500 leading-relaxed font-normal mb-4 line-clamp-4">
+                                  {sub.description}
+                                </p>
+                              </div>
+
+                              <Link
+                                href={`/contact?subject=${encodeURIComponent(sub.title)}`}
+                                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#2563EB] hover:text-[#0B192C] transition-colors mt-auto w-fit"
+                              >
+                                <span>Learn More</span>
+                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                              </Link>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )
+                ) : (
+                  <div className="bg-white rounded-xl p-8 border border-gray-200 text-center text-xs text-gray-400">
+                    Services for this category are being updated.
+                  </div>
+                )}
+              </section>
+            );
+          })}
+
+          {/* ========================================================================= */}
+          {/* 3. BOTTOM CONSULTATION CTA BANNER */}
+          {/* ========================================================================= */}
+          <div className="bg-gradient-to-r from-[#EFF6FF] via-[#F4F8FF] to-white border border-[#DBEAFE] rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-9 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
             <div className="relative z-10 max-w-xl">
               <span className="text-[11px] sm:text-xs font-bold tracking-wider text-[#2563EB] uppercase mb-1 block">
                 CUSTOM FINANCIAL STRUCTURING
@@ -267,7 +300,6 @@ export default async function ServicesPage() {
               </Link>
             </div>
           </div>
-
         </div>
       </main>
 
