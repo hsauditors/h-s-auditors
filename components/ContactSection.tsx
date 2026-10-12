@@ -16,9 +16,9 @@ export function ContactSection({ settings }: ContactSectionProps) {
     'Room No.48, Harisree Square, Ottapalam, Palakkad, Kerala - 679101';
 
   return (
-    <section className="w-full bg-[#F8FAFC] py-10 sm:py-12 lg:py-14 border-b border-gray-200/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+    <section className="w-full bg-[#F8FAFC] py-6 sm:py-12 lg:py-14 border-b border-gray-200/80">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center">
           
           {/* Left Column: Heading & Contact Details */}
           <div className="lg:col-span-5">

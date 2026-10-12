@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -15,7 +16,8 @@ export function ServicesSection({ services }: ServicesSectionProps) {
       id: '1',
       title: 'GST Filing',
       slug: 'gst-filing',
-      short_description: 'Accurate, hassle-free GST registration, monthly returns, and reconciliation.',
+      short_description:
+        'Accurate, hassle-free GST registration, monthly returns, and reconciliation.',
       long_description: null,
       icon: 'Receipt',
       image_url: null,
@@ -34,7 +36,8 @@ export function ServicesSection({ services }: ServicesSectionProps) {
       id: '2',
       title: 'Income Tax',
       slug: 'income-tax',
-      short_description: 'Maximize tax savings while staying fully compliant with the Income Tax Act.',
+      short_description:
+        'Maximize tax savings while staying fully compliant with the Income Tax Act.',
       long_description: null,
       icon: 'BarChart2',
       image_url: null,
@@ -53,7 +56,8 @@ export function ServicesSection({ services }: ServicesSectionProps) {
       id: '3',
       title: 'Bookkeeping & Accounting',
       slug: 'bookkeeping-and-accounting',
-      short_description: 'Clean, current financial records that help you make informed business decisions.',
+      short_description:
+        'Clean, current financial records that help you make informed business decisions.',
       long_description: null,
       icon: 'BookOpen',
       image_url: null,
@@ -72,7 +76,8 @@ export function ServicesSection({ services }: ServicesSectionProps) {
       id: '4',
       title: 'Business Registration',
       slug: 'business-registration',
-      short_description: 'End-to-end assistance for company, LLP and firm registration.',
+      short_description:
+        'End-to-end assistance for company, LLP and firm registration.',
       long_description: null,
       icon: 'Building2',
       image_url: null,
@@ -91,7 +96,8 @@ export function ServicesSection({ services }: ServicesSectionProps) {
       id: '5',
       title: 'Audit & Assurance',
       slug: 'audit-and-assurance',
-      short_description: 'Statutory, internal and tax audits that ensure compliance and transparency.',
+      short_description:
+        'Statutory, internal and tax audits that ensure compliance and transparency.',
       long_description: null,
       icon: 'ShieldCheck',
       image_url: null,
@@ -110,7 +116,8 @@ export function ServicesSection({ services }: ServicesSectionProps) {
       id: '6',
       title: 'Company Secretarial',
       slug: 'company-secretarial',
-      short_description: 'ROC filings, board compliance and secretarial support handled end to end.',
+      short_description:
+        'ROC filings, board compliance and secretarial support handled end to end.',
       long_description: null,
       icon: 'Users',
       image_url: null,
@@ -126,7 +133,11 @@ export function ServicesSection({ services }: ServicesSectionProps) {
       updated_at: '',
     },
   ];
-  const items = services && services.length > 0 ? services.slice(0, 6) : defaultServices;
+
+  const items =
+    services && services.length > 0
+      ? services.slice(0, 6)
+      : defaultServices;
 
   const highlightChecklist = [
     'Personalised Advisory',
@@ -137,79 +148,85 @@ export function ServicesSection({ services }: ServicesSectionProps) {
   ];
 
   return (
-    <section className="w-full bg-[#F8FAFC] py-10 sm:py-12 lg:py-14 border-b border-gray-200/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+    <section className="w-full border-b border-gray-200/80 bg-[#F8FAFC] py-5 sm:py-7 lg:py-9">
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8">
+        <div className="mb-4 flex items-center justify-between sm:mb-5">
           <div>
-            <span className="text-[11px] sm:text-xs font-bold tracking-widest text-blue-600 uppercase mb-1 block">
+            <span className="mb-1 block text-[10px] font-bold uppercase tracking-widest text-blue-600 sm:text-xs">
               WHAT WE DO
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-deepNavy tracking-tight">
+
+            <h2 className="text-lg font-extrabold tracking-tight text-brand-deepNavy sm:text-2xl lg:text-3xl">
               Our Core Services
             </h2>
-            <p className="text-xs sm:text-sm text-gray-500 mt-1 max-w-xl">
-              Each service is a pillar of your financial architecture. Move forward with clarity, compliance and confidence.
+
+            <p className="mt-1 hidden max-w-xl text-xs text-gray-500 sm:block sm:text-sm">
+              Expert accounting, taxation and compliance solutions to help
+              your business move forward with clarity and confidence.
             </p>
           </div>
 
-          <div className="mt-3 sm:mt-0 flex-shrink-0">
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-800 group transition-colors"
-            >
-              <span>View All Services</span>
-              <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
+          <Link
+            href="/services"
+            className="group inline-flex flex-shrink-0 items-center gap-1 text-[11px] font-bold text-blue-600 transition-colors hover:text-blue-800 sm:text-sm"
+          >
+            View All
+            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1 sm:h-4 sm:w-4" />
+          </Link>
         </div>
 
-        {/* Grid: 3 columns of 2 rows on left (col-span-9) + Feature Card on right (col-span-3) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5 items-stretch">
-          
-          {/* Left Grid: 3 columns x 2 rows */}
-          <div className="lg:col-span-9 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5 sm:gap-4">
+        {/* Services Grid + Feature Card */}
+        <div className="grid grid-cols-1 items-start gap-3 sm:gap-4 lg:grid-cols-12 lg:gap-4">
+          {/* Compact Service Cards */}
+          <div className="grid grid-cols-2 items-start gap-2 sm:gap-3 md:grid-cols-3 lg:col-span-9">
             {items.map((service) => (
               <ServiceCard key={service.id} service={service} />
             ))}
           </div>
 
-          {/* Right Feature Card */}
-          <div className="lg:col-span-3 bg-white rounded-xl border border-gray-200/80 overflow-hidden shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between">
-            {/* Top Image */}
-            <div className="relative w-full aspect-[16/11] bg-slate-900">
+          {/* Compact Feature Card */}
+          <div className="flex h-auto flex-row overflow-hidden rounded-lg border border-gray-200/80 bg-white shadow-sm transition-shadow hover:shadow-md lg:col-span-3 lg:flex-col">
+            {/* Feature Image */}
+            <div className="relative min-h-[150px] w-24 flex-shrink-0 bg-slate-900 sm:w-32 lg:h-32 lg:min-h-0 lg:w-full">
               <Image
                 src="/images/service-accounting.jpg"
-                alt="Reliable Financial Solutions for Your Business"
+                alt="Professional accounting and financial advisory"
                 fill
                 unoptimized
                 className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 25vw"
+                sizes="(max-width: 1024px) 128px, 25vw"
               />
             </div>
 
-            {/* Content & Checklist */}
-            <div className="p-4 sm:p-5 flex flex-col flex-grow justify-center">
-              <h3 className="text-[15px] sm:text-base font-bold text-brand-deepNavy mb-3.5 leading-snug">
-                Reliable Financial Solutions for Your Business
+            {/* Feature Content */}
+            <div className="flex flex-1 flex-col justify-center p-3 sm:p-4 lg:p-4">
+              <h3 className="mb-2 text-xs font-bold leading-snug text-brand-deepNavy sm:text-sm">
+                Reliable Financial Solutions
               </h3>
 
-              <ul className="space-y-2.5">
-                {highlightChecklist.map((item, idx) => (
-                  <li key={idx} className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-amber-500 flex-shrink-0" />
-                    <span className="text-xs sm:text-[13px] font-semibold text-gray-700">
+              <ul className="space-y-1.5">
+                {highlightChecklist.map((item) => (
+                  <li key={item} className="flex items-start gap-1.5">
+                    <CheckCircle2 className="mt-0.5 h-3 w-3 flex-shrink-0 text-amber-500 sm:h-3.5 sm:w-3.5" />
+
+                    <span className="text-[10px] leading-snug text-gray-600 sm:text-xs">
                       {item}
                     </span>
                   </li>
                 ))}
               </ul>
+
+              <Link
+                href="/contact"
+                className="mt-3 inline-flex items-center gap-1 text-[10px] font-bold text-blue-600 transition-colors hover:text-blue-800 sm:text-xs"
+              >
+                Talk to an Expert
+                <ArrowRight className="h-3 w-3" />
+              </Link>
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
   );

@@ -37,7 +37,7 @@ export function AdminLayoutClient({ children, userEmail }: AdminLayoutClientProp
           userEmail={userEmail}
           onOpenMobileMenu={() => setMobileMenuOpen(true)}
         />
-        <main className="flex-1 p-3.5 sm:p-5 md:p-6 lg:p-8 max-w-7xl w-full mx-auto">
+        <main className="flex-1 p-3 sm:p-5 md:p-6 lg:p-8 max-w-7xl w-full mx-auto">
           {children}
         </main>
       </div>

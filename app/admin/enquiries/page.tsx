@@ -106,13 +106,13 @@ export default function AdminEnquiriesPage() {
   });
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-xl font-extrabold text-brand-deepNavy">
+          <h1 className="text-lg sm:text-xl font-extrabold text-brand-deepNavy">
             Client Enquiries &amp; Leads
           </h1>
-          <p className="text-xs text-brand-muted">
+          <p className="text-[11px] sm:text-xs text-brand-muted">
             Incoming consultation requests from the public contact form
           </p>
         </div>
@@ -175,7 +175,7 @@ export default function AdminEnquiriesPage() {
           filteredEnquiries.map((enq) => (
             <div
               key={enq.id}
-              className="bg-white rounded-2xl p-5 sm:p-6 border border-brand-border/80 shadow-subtle hover:shadow-card transition-all space-y-4"
+              className="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-5 md:p-6 border border-brand-border/80 shadow-subtle hover:shadow-card transition-all space-y-3 sm:space-y-4"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-brand-border/60 pb-3">
                 <div className="flex items-center gap-3">

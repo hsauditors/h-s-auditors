@@ -18,9 +18,9 @@ export function WhyChooseSection({ items }: WhyChooseSectionProps) {
   const list = items && items.length > 0 ? items : defaultItems;
 
   return (
-    <section className="w-full bg-[#08152E] text-white py-10 sm:py-12 lg:py-14 border-b border-white/10 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+    <section className="w-full bg-[#08152E] text-white py-6 sm:py-12 lg:py-14 border-b border-white/10 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 lg:gap-10 items-center">
           
           {/* Left Column: Heading & Philosophy */}
           <div className="lg:col-span-5">
@@ -40,19 +40,19 @@ export function WhyChooseSection({ items }: WhyChooseSectionProps) {
             </p>
           </div>
 
-          {/* Right Column: 2 columns on mobile and desktop of 6 Distinctive Feature Items */}
+          {/* Right Column: 2 columns of 6 Distinctive Feature Items */}
           <div className="lg:col-span-7 grid grid-cols-2 gap-2 sm:gap-3.5 lg:gap-4">
             {list.map((item) => (
               <div
                 key={item.id}
-                className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3.5 rounded-xl bg-white/[0.06] border border-white/10 hover:border-brand-gold/40 transition-all duration-200"
+                className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3.5 rounded-xl bg-white/[0.06] border border-white/10 hover:border-brand-gold/40 transition-all duration-200"
               >
                 {/* Circular Gold Outlined Icon container */}
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-brand-gold/70 flex items-center justify-center flex-shrink-0 text-brand-gold bg-brand-gold/5">
-                  <DynamicIcon name={item.icon_name} className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border border-brand-gold/70 flex items-center justify-center flex-shrink-0 text-brand-gold bg-brand-gold/5">
+                  <DynamicIcon name={item.icon_name} className="w-3 h-3 sm:w-4 sm:h-4" />
                 </div>
 
-                <h3 className="text-[11px] sm:text-xs md:text-[13px] font-semibold text-white leading-snug">
+                <h3 className="text-[10px] sm:text-xs md:text-[13px] font-semibold text-white leading-snug">
                   {item.title}
                 </h3>
               </div>

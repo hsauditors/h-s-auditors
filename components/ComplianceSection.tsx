@@ -23,43 +23,44 @@ export function ComplianceSection({ deadlines }: ComplianceSectionProps) {
   const items = deadlines && deadlines.length > 0 ? deadlines : defaultDeadlines;
 
   return (
-    <section className="w-full bg-white py-10 sm:py-12 lg:py-14 border-b border-gray-200/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full bg-white py-6 sm:py-12 lg:py-14 border-b border-gray-200/80">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8">
+        <div className="flex flex-row items-center justify-between mb-4 sm:mb-8">
           <div>
-            <span className="text-[11px] sm:text-xs font-bold tracking-widest text-blue-600 uppercase mb-1 block">
+            <span className="text-[10px] sm:text-xs font-bold tracking-widest text-blue-600 uppercase mb-0.5 block">
               STAY AHEAD OF DUE DATES
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-deepNavy tracking-tight">
-              Key Indian compliance deadlines
+            <h2 className="text-lg sm:text-3xl font-extrabold text-brand-deepNavy tracking-tight">
+              Key Compliance Deadlines
             </h2>
           </div>
 
-          <div className="mt-3 sm:mt-0 flex-shrink-0">
+          <div className="flex-shrink-0">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-800 group transition-colors"
+              className="inline-flex items-center gap-1 text-[11px] sm:text-sm font-bold text-blue-600 hover:text-blue-800 group transition-colors"
             >
-              <span>View Full Calendar</span>
-              <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
+              <span className="hidden sm:inline">View Full Calendar</span>
+              <span className="sm:hidden">Calendar</span>
+              <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 transform group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>
 
-        {/* Content Grid: Responsive Table on Left + Calendar Promo Card on Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-start">
+        {/* Content Grid: Table on Left + Calendar Promo Card on Right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 lg:gap-6 items-start">
           
           {/* Left: Table Container */}
           <div className="lg:col-span-8 bg-white rounded-xl border border-gray-200/80 shadow-xs overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs sm:text-[13px] border-collapse">
+              <table className="w-full text-left text-[11px] sm:text-[13px] border-collapse">
                 <thead>
-                  <tr className="bg-gray-50 border-b border-gray-200 text-brand-deepNavy font-bold uppercase text-[10px] sm:text-[11px] tracking-wider">
-                    <th scope="col" className="py-2.5 px-4 sm:px-5">Compliance</th>
-                    <th scope="col" className="py-2.5 px-4 sm:px-5">Form</th>
-                    <th scope="col" className="py-2.5 px-4 sm:px-5">Due Date</th>
+                  <tr className="bg-gray-50 border-b border-gray-200 text-brand-deepNavy font-bold uppercase text-[9px] sm:text-[11px] tracking-wider">
+                    <th scope="col" className="py-2 px-2.5 sm:py-2.5 sm:px-5">Compliance</th>
+                    <th scope="col" className="py-2 px-2.5 sm:py-2.5 sm:px-5">Form</th>
+                    <th scope="col" className="py-2 px-2.5 sm:py-2.5 sm:px-5">Due Date</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 text-brand-text">
@@ -70,15 +71,15 @@ export function ComplianceSection({ deadlines }: ComplianceSectionProps) {
                         index % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'
                       }`}
                     >
-                      <td className="py-2.5 px-4 sm:px-5 font-semibold text-brand-deepNavy">
+                      <td className="py-2 px-2.5 sm:py-2.5 sm:px-5 font-semibold text-brand-deepNavy text-[11px] sm:text-[13px]">
                         {item.compliance}
                       </td>
-                      <td className="py-2.5 px-4 sm:px-5 text-gray-500 font-medium">
-                        <span className="inline-block bg-gray-100 px-2 py-0.5 rounded text-[11px] text-gray-600">
+                      <td className="py-2 px-2.5 sm:py-2.5 sm:px-5 text-gray-500 font-medium">
+                        <span className="inline-block bg-gray-100 px-1.5 py-0.5 rounded text-[10px] sm:text-[11px] text-gray-600">
                           {item.form}
                         </span>
                       </td>
-                      <td className="py-2.5 px-4 sm:px-5 font-semibold text-blue-600">
+                      <td className="py-2 px-2.5 sm:py-2.5 sm:px-5 font-semibold text-blue-600 text-[11px] sm:text-[13px]">
                         {item.due_date}
                       </td>
                     </tr>
