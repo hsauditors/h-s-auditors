@@ -25,36 +25,36 @@ export function IndustriesSection({ industries }: IndustriesSectionProps) {
   const items = industries && industries.length > 0 ? industries : defaultIndustries;
 
   return (
-    <section className="w-full bg-white py-10 sm:py-12 lg:py-14 border-b border-gray-200/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+    <section className="w-full bg-white py-6 sm:py-12 lg:py-14 border-b border-gray-200/80">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 items-center">
           
           {/* Left Column: Heading & Description */}
           <div className="lg:col-span-4">
-            <span className="text-[11px] sm:text-xs font-bold tracking-widest text-blue-600 uppercase mb-1 block">
+            <span className="text-[10px] sm:text-xs font-bold tracking-widest text-blue-600 uppercase mb-0.5 block">
               SECTOR EXPERIENCE
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-deepNavy tracking-tight leading-tight mb-2">
+            <h2 className="text-lg sm:text-3xl font-extrabold text-brand-deepNavy tracking-tight leading-tight mb-1 sm:mb-2">
               Industries We Work With
             </h2>
-            <p className="text-xs sm:text-sm text-gray-500 max-w-sm">
+            <p className="text-[11px] sm:text-sm text-gray-500 max-w-sm">
               Delivering tailored compliance and advisory solutions across sectors.
             </p>
           </div>
 
-          {/* Right Column: 4 Columns x 3 Rows Pill Grid */}
-          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 sm:gap-3">
+          {/* Right Column: 3 Columns on mobile, 4 on desktop Pill Grid */}
+          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
             {items.map((ind) => (
               <Link
                 key={ind.id}
                 href={`/industries#${ind.slug}`}
-                className="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-[#F8FAFC] hover:bg-blue-50/60 border border-gray-200/80 hover:border-blue-300 transition-all duration-150 group shadow-2xs"
+                className="flex items-center gap-1.5 sm:gap-2 px-2 py-2 sm:px-3 sm:py-2.5 rounded-lg bg-[#F8FAFC] hover:bg-blue-50/60 border border-gray-200/80 hover:border-blue-300 transition-all duration-150 group shadow-2xs"
               >
                 <div className="text-blue-600 flex-shrink-0">
-                  <DynamicIcon name={ind.icon_name} className="w-4 h-4" />
+                  <DynamicIcon name={ind.icon_name} className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>
 
-                <span className="text-[11px] sm:text-xs font-bold text-brand-deepNavy group-hover:text-blue-600 transition-colors leading-tight truncate">
+                <span className="text-[10px] sm:text-xs font-bold text-brand-deepNavy group-hover:text-blue-600 transition-colors leading-tight truncate">
                   {ind.title}
                 </span>
               </Link>

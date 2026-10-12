@@ -150,17 +150,17 @@ export default async function AdminDashboardPage() {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-5 sm:space-y-8">
       {/* Top Welcome Card */}
-      <div className="bg-gradient-to-r from-brand-deepNavy to-brand-navy rounded-2xl p-6 sm:p-8 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm">
+      <div className="bg-gradient-to-r from-brand-deepNavy to-brand-navy rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 shadow-sm">
         <div>
-          <span className="text-xs font-bold text-brand-gold uppercase tracking-wider">
+          <span className="text-[10px] sm:text-xs font-bold text-brand-gold uppercase tracking-wider">
             Enterprise CMS Overview
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight mt-1">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight mt-1">
             H&amp;S Auditors Control Center
           </h2>
-          <p className="text-sm text-gray-300 mt-1 max-w-xl">
+          <p className="text-xs sm:text-sm text-gray-300 mt-1 max-w-xl">
             Live database records are synchronized across the public website and Supabase storage.
           </p>
         </div>
@@ -168,34 +168,34 @@ export default async function AdminDashboardPage() {
         <Link
           href="/"
           target="_blank"
-          className="inline-flex items-center gap-2 bg-brand-gold hover:bg-brand-goldHover text-brand-deepNavy text-xs font-bold px-4 py-2.5 rounded-lg shadow transition-colors whitespace-nowrap"
+          className="inline-flex items-center gap-2 bg-brand-gold hover:bg-brand-goldHover text-brand-deepNavy text-xs font-bold px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg shadow transition-colors whitespace-nowrap"
         >
           <span>View Live Site</span>
-          <ArrowRight className="w-4 h-4" />
+          <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         </Link>
       </div>
 
       {/* Real Statistics Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
         {statsCards.map((card, idx) => {
           const Icon = card.icon;
           return (
             <Link
               key={idx}
               href={card.href}
-              className="bg-white rounded-xl p-4 border border-brand-border/80 shadow-subtle hover:shadow-card transition-all flex flex-col justify-between group"
+              className="bg-white rounded-xl p-3 sm:p-4 border border-brand-border/80 shadow-subtle hover:shadow-card transition-all flex flex-col justify-between group"
             >
-              <div className="flex items-center justify-between mb-3">
-                <div className={`w-9 h-9 rounded-lg flex items-center justify-center border ${card.color}`}>
-                  <Icon className="w-5 h-5" />
+              <div className="flex items-center justify-between mb-2 sm:mb-3">
+                <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center border ${card.color}`}>
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
-                <ArrowRight className="w-3.5 h-3.5 text-gray-400 group-hover:text-brand-blue group-hover:translate-x-0.5 transition-transform" />
+                <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-gray-400 group-hover:text-brand-blue group-hover:translate-x-0.5 transition-transform" />
               </div>
               <div>
-                <div className="text-2xl font-black text-brand-deepNavy leading-tight">
+                <div className="text-xl sm:text-2xl font-black text-brand-deepNavy leading-tight">
                   {card.count}
                 </div>
-                <div className="text-xs font-semibold text-brand-muted mt-0.5">
+                <div className="text-[10px] sm:text-xs font-semibold text-brand-muted mt-0.5 leading-tight">
                   {card.label}
                 </div>
               </div>
@@ -206,39 +206,39 @@ export default async function AdminDashboardPage() {
 
       {/* Website Sections & Editors Hub */}
       <div>
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
           <div>
-            <h3 className="text-lg font-bold text-brand-deepNavy">
+            <h3 className="text-base sm:text-lg font-bold text-brand-deepNavy">
               Website Content &amp; Section Editors
             </h3>
-            <p className="text-xs text-brand-muted">
+            <p className="text-[11px] sm:text-xs text-brand-muted">
               Select any section below or use the left sidebar to edit live website content
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
           {sectionEditors.map((sec, idx) => {
             const Icon = sec.icon;
             return (
               <Link
                 key={idx}
                 href={sec.href}
-                className="bg-white rounded-xl p-5 border border-brand-border/80 shadow-subtle hover:shadow-card hover:border-brand-blue/40 transition-all flex flex-col justify-between group"
+                className="bg-white rounded-xl p-3.5 sm:p-5 border border-brand-border/80 shadow-subtle hover:shadow-card hover:border-brand-blue/40 transition-all flex flex-col justify-between group"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${sec.color}`}>
-                      <Icon className="w-5 h-5" />
+                  <div className="flex items-center justify-between mb-2.5 sm:mb-3">
+                    <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center border ${sec.color}`}>
+                      <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
                     <span className="text-[11px] font-bold text-brand-blue opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
                       Edit <ArrowRight className="w-3 h-3" />
                     </span>
                   </div>
-                  <h4 className="text-sm font-bold text-brand-deepNavy group-hover:text-brand-blue transition-colors">
+                  <h4 className="text-xs sm:text-sm font-bold text-brand-deepNavy group-hover:text-brand-blue transition-colors">
                     {sec.title}
                   </h4>
-                  <p className="text-xs text-brand-muted mt-1 leading-relaxed">
+                  <p className="text-[11px] sm:text-xs text-brand-muted mt-1 leading-relaxed">
                     {sec.description}
                   </p>
                 </div>
@@ -249,52 +249,53 @@ export default async function AdminDashboardPage() {
       </div>
 
       {/* Recent Enquiries Section */}
-      <div className="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
-        <div className="p-5 border-b border-brand-border flex items-center justify-between">
+      <div className="bg-white rounded-xl sm:rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+        <div className="p-3.5 sm:p-5 border-b border-brand-border flex items-center justify-between">
           <div>
-            <h3 className="text-base font-bold text-brand-deepNavy">
+            <h3 className="text-sm sm:text-base font-bold text-brand-deepNavy">
               Recent Client Enquiries
             </h3>
-            <p className="text-xs text-brand-muted">
+            <p className="text-[11px] sm:text-xs text-brand-muted">
               Inquiries submitted through the public website contact form
             </p>
           </div>
 
           <Link
             href="/admin/enquiries"
-            className="text-xs font-bold text-brand-blue hover:underline flex items-center gap-1"
+            className="text-xs font-bold text-brand-blue hover:underline flex items-center gap-1 whitespace-nowrap ml-2"
           >
-            <span>View All Enquiries</span>
+            <span className="hidden sm:inline">View All Enquiries</span>
+            <span className="sm:hidden">View All</span>
             <ArrowRight className="w-3 h-3" />
           </Link>
         </div>
 
         {recentEnquiries && recentEnquiries.length > 0 ? (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs border-collapse">
+            <table className="w-full text-left text-xs border-collapse" style={{minWidth: '600px'}}>
               <thead>
                 <tr className="bg-[#F8FAFC] border-b border-brand-border text-brand-deepNavy font-bold uppercase tracking-wider text-[10px]">
-                  <th className="py-3 px-5">Client Name</th>
-                  <th className="py-3 px-5">Contact Details</th>
-                  <th className="py-3 px-5">Message Snippet</th>
-                  <th className="py-3 px-5">Status</th>
-                  <th className="py-3 px-5">Received At</th>
+                  <th className="py-2.5 px-3 sm:px-5">Client Name</th>
+                  <th className="py-2.5 px-3 sm:px-5">Contact Details</th>
+                  <th className="py-2.5 px-3 sm:px-5">Message Snippet</th>
+                  <th className="py-2.5 px-3 sm:px-5">Status</th>
+                  <th className="py-2.5 px-3 sm:px-5">Received At</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-brand-border/60">
                 {((recentEnquiries as any[]) || []).map((enq: any) => (
                   <tr key={enq.id} className="hover:bg-slate-50 transition-colors">
-                    <td className="py-3 px-5 font-bold text-brand-deepNavy">
+                    <td className="py-2.5 px-3 sm:px-5 font-bold text-brand-deepNavy">
                       {enq.name}
                     </td>
-                    <td className="py-3 px-5 text-brand-text">
+                    <td className="py-2.5 px-3 sm:px-5 text-brand-text">
                       <div>{enq.email}</div>
                       <div className="text-brand-muted">{enq.phone}</div>
                     </td>
-                    <td className="py-3 px-5 text-brand-muted max-w-xs truncate">
+                    <td className="py-2.5 px-3 sm:px-5 text-brand-muted max-w-[180px] truncate">
                       {enq.message}
                     </td>
-                    <td className="py-3 px-5">
+                    <td className="py-2.5 px-3 sm:px-5">
                       <span
                         className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${
                           enq.status === 'new'
@@ -307,7 +308,7 @@ export default async function AdminDashboardPage() {
                         {enq.status}
                       </span>
                     </td>
-                    <td className="py-3 px-5 text-brand-muted">
+                    <td className="py-2.5 px-3 sm:px-5 text-brand-muted">
                       {formatDate(enq.created_at)}
                     </td>
                   </tr>

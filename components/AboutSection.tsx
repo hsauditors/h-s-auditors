@@ -31,9 +31,9 @@ export function AboutSection({ about, features }: AboutSectionProps) {
   const featureList = features && features.length > 0 ? features : defaultFeatures;
 
   return (
-    <section className="w-full bg-white py-10 sm:py-12 lg:py-16 border-b border-gray-200/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+    <section className="w-full bg-white py-6 sm:py-12 lg:py-16 border-b border-gray-200/80">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Narrative & CTA */}
           <div className="lg:col-span-7 flex flex-col justify-center">

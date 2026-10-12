@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {
   ArrowRight,
-  Phone,
   Mail,
   Users,
   Layers,
@@ -224,9 +223,9 @@ export function OurTeamClient({ settings }: { settings: SiteSettings | null }) {
             className="object-cover object-[72%_center] sm:object-[65%_center] lg:object-right"
             sizes="(max-width: 1024px) 100vw, 68vw"
           />
-          {/* Seamless gradient fade overlays */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 sm:via-white/70 lg:via-white/20 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/40 to-transparent sm:hidden" />
+          {/* Lighter gradient overlays — reduced fade on mobile */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 sm:via-white/40 lg:via-white/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent sm:hidden" />
           <div className="hidden lg:block absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent" />
         </div>
 
@@ -347,34 +346,34 @@ export function OurTeamClient({ settings }: { settings: SiteSettings | null }) {
           </div>
 
           {/* 6 Practice Area Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-7">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-7">
             {displayedAreas.map((area) => (
               <Link
                 key={area.id}
                 href={`/services/${area.slug}`}
-                className="group bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 border border-blue-100 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-lg hover:border-blue-200 transition-all duration-200 flex flex-col justify-between"
+                className="group bg-white rounded-xl sm:rounded-2xl lg:rounded-3xl p-4 sm:p-6 lg:p-7 border border-blue-100 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-lg hover:border-blue-200 transition-all duration-200 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 rounded-2xl bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center transition-transform group-hover:scale-105">
-                      <AreaIcon type={area.icon} />
+                    <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center transition-transform group-hover:scale-105">
+                      <span className="scale-75 sm:scale-100"><AreaIcon type={area.icon} /></span>
                     </div>
-                    <span className="text-[#F59E0B] font-bold text-base tracking-wide font-sans">
+                    <span className="text-[#F59E0B] font-bold text-sm sm:text-base tracking-wide font-sans">
                       {area.number}
                     </span>
                   </div>
 
-                  <h3 className="font-serif text-lg sm:text-xl font-bold text-[#0B192C] mt-5 mb-2 group-hover:text-[#2563EB] transition-colors">
+                  <h3 className="font-serif text-sm sm:text-lg lg:text-xl font-bold text-[#0B192C] mt-3 sm:mt-5 mb-1 sm:mb-2 group-hover:text-[#2563EB] transition-colors leading-tight">
                     {area.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+                  <p className="text-[11px] sm:text-xs lg:text-sm text-gray-500 leading-relaxed hidden sm:block">
                     {area.description}
                   </p>
                 </div>
 
-                <div className="mt-6 flex justify-end">
-                  <div className="w-8 h-8 rounded-full border border-blue-200 flex items-center justify-center text-[#2563EB] group-hover:bg-[#2563EB] group-hover:text-white group-hover:border-[#2563EB] transition-all shadow-xs">
-                    <ArrowRight className="w-3.5 h-3.5" />
+                <div className="mt-3 sm:mt-6 flex justify-end">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-blue-200 flex items-center justify-center text-[#2563EB] group-hover:bg-[#2563EB] group-hover:text-white group-hover:border-[#2563EB] transition-all shadow-xs">
+                    <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                   </div>
                 </div>
               </Link>
@@ -390,55 +389,55 @@ export function OurTeamClient({ settings }: { settings: SiteSettings | null }) {
               <div className="w-12 h-1 bg-[#F59E0B] rounded-full mt-3 mb-8 sm:mb-10" />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-slate-200/80">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 divide-y-0 divide-x-0 sm:divide-y-0 sm:divide-x sm:divide-slate-200/80">
               {/* Pillar 1 */}
-              <div className="text-center px-3 pt-4 sm:pt-0">
-                <div className="w-12 h-12 rounded-full bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-[#2563EB] mx-auto mb-3.5 shadow-xs">
-                  <Users className="w-5 h-5 stroke-[1.8]" />
+              <div className="text-center px-2 sm:px-3 py-4 sm:py-0 bg-white sm:bg-transparent rounded-xl sm:rounded-none border border-blue-50 sm:border-0 shadow-sm sm:shadow-none">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-[#2563EB] mx-auto mb-2.5 sm:mb-3.5 shadow-xs">
+                  <Users className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
                 </div>
-                <h4 className="font-bold text-[#0B192C] text-sm sm:text-base mb-1">
+                <h4 className="font-bold text-[#0B192C] text-xs sm:text-sm lg:text-base mb-1">
                   Qualified Oversight
                 </h4>
-                <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+                <p className="text-[11px] sm:text-xs lg:text-sm text-gray-500 leading-relaxed">
                   Every report is reviewed by a qualified chartered accountant.
                 </p>
               </div>
 
               {/* Pillar 2 */}
-              <div className="text-center px-3 pt-6 sm:pt-0">
-                <div className="w-12 h-12 rounded-full bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-[#2563EB] mx-auto mb-3.5 shadow-xs">
-                  <GraduationCap className="w-5 h-5 stroke-[1.8]" />
+              <div className="text-center px-2 sm:px-3 py-4 sm:py-0 bg-white sm:bg-transparent rounded-xl sm:rounded-none border border-blue-50 sm:border-0 shadow-sm sm:shadow-none">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-[#2563EB] mx-auto mb-2.5 sm:mb-3.5 shadow-xs">
+                  <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
                 </div>
-                <h4 className="font-bold text-[#0B192C] text-sm sm:text-base mb-1">
+                <h4 className="font-bold text-[#0B192C] text-xs sm:text-sm lg:text-base mb-1">
                   Continuous Training
                 </h4>
-                <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+                <p className="text-[11px] sm:text-xs lg:text-sm text-gray-500 leading-relaxed">
                   Our team stays updated on the latest laws and regulations.
                 </p>
               </div>
 
               {/* Pillar 3 */}
-              <div className="text-center px-3 pt-6 sm:pt-0">
-                <div className="w-12 h-12 rounded-full bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-[#2563EB] mx-auto mb-3.5 shadow-xs">
-                  <Lock className="w-5 h-5 stroke-[1.8]" />
+              <div className="text-center px-2 sm:px-3 py-4 sm:py-0 bg-white sm:bg-transparent rounded-xl sm:rounded-none border border-blue-50 sm:border-0 shadow-sm sm:shadow-none">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-[#2563EB] mx-auto mb-2.5 sm:mb-3.5 shadow-xs">
+                  <Lock className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
                 </div>
-                <h4 className="font-bold text-[#0B192C] text-sm sm:text-base mb-1">
+                <h4 className="font-bold text-[#0B192C] text-xs sm:text-sm lg:text-base mb-1">
                   Strict Confidentiality
                 </h4>
-                <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+                <p className="text-[11px] sm:text-xs lg:text-sm text-gray-500 leading-relaxed">
                   Your information is handled with the highest security.
                 </p>
               </div>
 
               {/* Pillar 4 */}
-              <div className="text-center px-3 pt-6 sm:pt-0">
-                <div className="w-12 h-12 rounded-full bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-[#2563EB] mx-auto mb-3.5 shadow-xs">
-                  <Star className="w-5 h-5 stroke-[1.8]" />
+              <div className="text-center px-2 sm:px-3 py-4 sm:py-0 bg-white sm:bg-transparent rounded-xl sm:rounded-none border border-blue-50 sm:border-0 shadow-sm sm:shadow-none">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-[#2563EB] mx-auto mb-2.5 sm:mb-3.5 shadow-xs">
+                  <Star className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
                 </div>
-                <h4 className="font-bold text-[#0B192C] text-sm sm:text-base mb-1">
+                <h4 className="font-bold text-[#0B192C] text-xs sm:text-sm lg:text-base mb-1">
                   Client-Focused
                 </h4>
-                <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+                <p className="text-[11px] sm:text-xs lg:text-sm text-gray-500 leading-relaxed">
                   Committed to practical solutions and long-term growth.
                 </p>
               </div>
@@ -466,15 +465,8 @@ export function OurTeamClient({ settings }: { settings: SiteSettings | null }) {
                 </p>
               </div>
 
-              {/* 3 Action Buttons */}
+              {/* 2 Action Buttons */}
               <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 w-full lg:w-auto">
-                <a
-                  href={`tel:${phone.replace(/\s+/g, '')}`}
-                  className="bg-white hover:bg-slate-100 text-[#07152E] font-bold text-xs sm:text-sm px-5 py-2.5 sm:py-3 rounded-xl transition-all shadow-xs inline-flex items-center justify-center gap-2"
-                >
-                  <Phone className="w-4 h-4 text-[#F59E0B] fill-current" />
-                  <span>Call us</span>
-                </a>
 
                 <a
                   href={`mailto:${email}`}
