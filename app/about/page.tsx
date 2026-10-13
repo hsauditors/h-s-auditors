@@ -277,45 +277,134 @@ export default async function AboutPage() {
         </section>
 
         {/* 4. "Integrity · Confidentiality · Timely Delivery" Values Section */}
-        <section className="w-full bg-[#F0F6FF] py-16 sm:py-20 border-b border-blue-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B192C] text-center tracking-tight mb-10 sm:mb-12">
-              Integrity · Confidentiality · Timely Delivery
-            </h2>
+        <section className="w-full bg-[#F0F6FF] py-10 sm:py-16 lg:py-20 border-b border-blue-50">
+          <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+            {/* Header: Gold line + Headline */}
+            <div className="text-center mb-6 sm:mb-10 lg:mb-12">
+              <div className="w-10 sm:w-14 h-[2.5px] sm:h-[3px] bg-[#F59E0B] mx-auto mb-2.5 sm:mb-3 rounded-full" />
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#071A3D] font-serif tracking-tight leading-tight">
+                Integrity · Confidentiality · Timely Delivery
+              </h2>
+            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-              {/* Integrity */}
-              <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-xs border border-gray-100 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 rounded-xl bg-blue-50/80 border border-blue-100 flex items-center justify-center text-blue-600 mb-4">
-                  <ShieldCheck className="w-6 h-6" />
-                </div>
-                <h3 className="text-base sm:text-lg font-bold text-[#0B192C] mb-2">Integrity</h3>
-                <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
-                  We uphold the highest ethical standards in everything we do.
-                </p>
-              </div>
+            {/* 1. Mobile View (< md): 3 cards little small and next to each other */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 md:hidden">
+              {[
+                {
+                  number: '01',
+                  title: 'Integrity',
+                  description: 'We uphold the highest ethical standards in everything we do.',
+                  imageUrl: '/images/value-integrity.jpg',
+                  icon: ShieldCheck,
+                },
+                {
+                  number: '02',
+                  title: 'Confidentiality',
+                  description: 'Your information is always secure with us.',
+                  imageUrl: '/images/value-confidentiality.jpg',
+                  icon: Lock,
+                },
+                {
+                  number: '03',
+                  title: 'Timely Delivery',
+                  description: 'We value your time and ensure on-time solutions.',
+                  imageUrl: '/images/value-timely.jpg',
+                  icon: Clock,
+                },
+              ].map((val) => {
+                const Icon = val.icon;
+                return (
+                  <div
+                    key={val.number}
+                    className="bg-white rounded-xl p-2 sm:p-3 border border-gray-100 shadow-[0_2px_8px_rgba(7,26,61,0.04)] flex flex-col items-center text-center justify-start min-h-[128px]"
+                  >
+                    {/* Compact Icon Badge */}
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-blue-50/90 border border-blue-100 flex items-center justify-center text-blue-600 mb-1.5 flex-shrink-0">
+                      <Icon className="w-3.5 h-3.5 stroke-[2]" />
+                    </div>
 
-              {/* Confidentiality */}
-              <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-xs border border-gray-100 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 rounded-xl bg-blue-50/80 border border-blue-100 flex items-center justify-center text-blue-600 mb-4">
-                  <Lock className="w-6 h-6" />
-                </div>
-                <h3 className="text-base sm:text-lg font-bold text-[#0B192C] mb-2">Confidentiality</h3>
-                <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
-                  Your information is always secure with us.
-                </p>
-              </div>
+                    {/* Title */}
+                    <h3 className="text-[11px] sm:text-xs font-bold text-[#071A3D] leading-tight mb-1">
+                      {val.title}
+                    </h3>
 
-              {/* Timely Delivery */}
-              <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-xs border border-gray-100 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 rounded-xl bg-blue-50/80 border border-blue-100 flex items-center justify-center text-blue-600 mb-4">
-                  <Clock className="w-6 h-6" />
+                    {/* Description */}
+                    <p className="text-[9px] sm:text-[10px] text-gray-500 leading-snug line-clamp-3 font-normal">
+                      {val.description}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* 2. Laptop & Desktop View (>= md): Homepage Design with Image */}
+            <div className="hidden md:grid md:grid-cols-3 gap-6 sm:gap-7 lg:gap-8">
+              {[
+                {
+                  number: '01',
+                  title: 'Integrity',
+                  description: 'We uphold the highest ethical standards in everything we do.',
+                  imageUrl: '/images/value-integrity.jpg',
+                },
+                {
+                  number: '02',
+                  title: 'Confidentiality',
+                  description: 'Your information is always secure with us.',
+                  imageUrl: '/images/value-confidentiality.jpg',
+                },
+                {
+                  number: '03',
+                  title: 'Timely Delivery',
+                  description: 'We value your time and ensure on-time solutions.',
+                  imageUrl: '/images/value-timely.jpg',
+                },
+              ].map((val) => (
+                <div
+                  key={val.number}
+                  className="bg-white rounded-2xl border border-gray-100 shadow-[0_4px_20px_rgba(7,26,61,0.05)] hover:shadow-md transition-shadow overflow-hidden flex flex-col"
+                >
+                  {/* Image Container with subtle wave scoop at bottom */}
+                  <div className="relative w-full aspect-[16/10] bg-gray-100 overflow-hidden">
+                    <Image
+                      src={val.imageUrl}
+                      alt={val.title}
+                      fill
+                      className="object-cover"
+                      sizes="33vw"
+                    />
+
+                    {/* Gentle Wave Arc scooped into the bottom of the photo */}
+                    <div className="absolute -bottom-px left-0 right-0 w-full overflow-hidden leading-none pointer-events-none">
+                      <svg
+                        viewBox="0 0 500 24"
+                        preserveAspectRatio="none"
+                        className="relative block w-full h-4 sm:h-5 text-white fill-current"
+                      >
+                        <path d="M0,24 Q250,2 500,24 L500,24 L0,24 Z" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Card Body */}
+                  <div className="px-5 sm:px-6 pt-3 pb-6 sm:pb-7 flex flex-col flex-1">
+                    {/* Number + Gold Line + Title */}
+                    <div className="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3">
+                      <span className="text-2xl sm:text-3xl font-extrabold text-blue-200/90 tracking-tight font-sans select-none">
+                        {val.number}
+                      </span>
+                      <span className="w-[1.5px] h-6 sm:h-7 bg-[#F59E0B] flex-shrink-0" />
+                      <h3 className="text-base sm:text-lg font-bold font-serif text-[#071A3D] tracking-tight">
+                        {val.title}
+                      </h3>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-xs sm:text-[13px] text-gray-500 leading-relaxed font-normal">
+                      {val.description}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-[#0B192C] mb-2">Timely Delivery</h3>
-                <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
-                  We value your time and ensure on-time solutions.
-                </p>
-              </div>
+              ))}
             </div>
           </div>
         </section>

@@ -200,16 +200,17 @@ export default async function IndustriesPage() {
               alt="Industries We Work With"
               fill
               priority
-              className="object-cover object-right lg:object-center"
+              className="object-cover object-[95%_center] sm:object-right w-full h-full"
               sizes="100vw"
             />
-            {/* Mobile gradient to guarantee text contrast on small screens */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/85 via-45% to-transparent sm:hidden pointer-events-none" />
           </div>
 
           {/* Left Hero Content */}
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-            <div className="max-w-xl lg:max-w-2xl">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+            <div className="max-w-xl lg:max-w-2xl relative">
+              {/* Soft fade effect strictly behind text in mobile view */}
+              <div className="absolute -inset-3 -left-4 sm:hidden bg-gradient-to-r from-white/95 via-white/80 to-transparent rounded-2xl pointer-events-none -z-10 backdrop-blur-[1.5px]" />
+
               {/* Eyebrow with gold line */}
               <div className="flex items-center gap-2 mb-2 sm:mb-3">
                 <span className="text-xs sm:text-[13px] font-bold tracking-wider text-[#071A3D] uppercase">
@@ -221,14 +222,14 @@ export default async function IndustriesPage() {
               {/* Headline */}
               <h1 className="font-serif text-3xl sm:text-5xl lg:text-[56px] font-bold tracking-tight text-[#071A3D] leading-[1.12] mb-3">
                 Industries We{' '}
-                <span className="text-[#1D4ED8] block">Work With</span>
+                <span className="text-[#F59E0B] block">Work With</span>
               </h1>
 
               {/* Gold Accent Bar */}
               <div className="w-12 h-1 bg-[#F59E0B] rounded-full my-3 sm:my-4" />
 
               {/* Subtitle */}
-              <p className="text-xs sm:text-sm lg:text-[15px] text-gray-600 leading-relaxed max-w-lg font-normal">
+              <p className="text-xs sm:text-sm lg:text-[15px] text-gray-700 leading-relaxed max-w-lg font-medium">
                 Every industry has unique regulatory requirements. We deliver
                 specialised accounting, audit, tax, and advisory services tailored
                 to the operational needs of your sector.
@@ -237,35 +238,35 @@ export default async function IndustriesPage() {
           </div>
         </section>
 
-        {/* 2. 12 Industries Grid (4 Columns x 3 Rows) */}
-        <section className="relative z-10 mt-10 sm:mt-12 lg:mt-14">
+        {/* 2. 12 Industries Grid (3 Columns on mobile to reduce space, 4 Columns on desktop) */}
+        <section className="relative z-10 mt-8 sm:mt-12 lg:mt-14">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+            <div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-5">
               {industriesList.map((ind) => {
                 const Icon = ind.icon;
                 return (
                   <Link
                     key={ind.id}
                     href={`/contact?subject=${encodeURIComponent(ind.title)}`}
-                    className="group bg-white rounded-2xl p-4 sm:p-5 border border-gray-100 shadow-[0_2px_12px_rgba(7,26,61,0.03)] hover:shadow-md hover:border-blue-200 transition-all duration-200 flex items-start gap-3.5 relative"
+                    className="group bg-white rounded-xl sm:rounded-2xl p-2 sm:p-5 border border-gray-100 shadow-[0_2px_12px_rgba(7,26,61,0.03)] hover:shadow-md hover:border-blue-200 transition-all duration-200 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-1.5 sm:gap-3.5 relative min-h-[92px] sm:min-h-0"
                   >
-                    {/* Left Circular Icon Badge */}
-                    <div className="w-11 h-11 rounded-full bg-blue-50/90 border border-blue-100 flex items-center justify-center flex-shrink-0 text-blue-600 group-hover:scale-105 group-hover:bg-blue-600 group-hover:text-white transition-all duration-200 shadow-2xs">
-                      <Icon className="w-5 h-5 stroke-[1.85]" />
+                    {/* Circular Icon Badge */}
+                    <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-blue-50/90 border border-blue-100 flex items-center justify-center flex-shrink-0 text-blue-600 group-hover:scale-105 group-hover:bg-blue-600 group-hover:text-white transition-all duration-200 shadow-2xs">
+                      <Icon className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.85]" />
                     </div>
 
                     {/* Middle Content */}
-                    <div className="flex-1 min-w-0 pr-1">
-                      <h2 className="text-sm font-bold text-[#071A3D] group-hover:text-blue-600 transition-colors leading-snug mb-1">
+                    <div className="flex-1 min-w-0 pr-0 sm:pr-1">
+                      <h2 className="text-[10.5px] sm:text-sm font-bold text-[#071A3D] group-hover:text-blue-600 transition-colors leading-tight sm:leading-snug mb-0 sm:mb-1">
                         {ind.title}
                       </h2>
-                      <p className="text-[11.5px] sm:text-xs text-gray-500 leading-snug font-normal line-clamp-2">
+                      <p className="hidden sm:block text-[11.5px] sm:text-xs text-gray-500 leading-snug font-normal line-clamp-2">
                         {ind.description}
                       </p>
                     </div>
 
-                    {/* Right Circular Arrow Button */}
-                    <div className="w-6 h-6 rounded-full border border-blue-200 text-blue-500 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all duration-200 self-center ml-auto">
+                    {/* Right Circular Arrow Button (Desktop / Tablet only) */}
+                    <div className="hidden sm:flex w-6 h-6 rounded-full border border-blue-200 text-blue-500 items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all duration-200 self-center ml-auto">
                       <ArrowRight className="w-3.5 h-3.5" />
                     </div>
                   </Link>
