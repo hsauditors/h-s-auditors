@@ -96,7 +96,6 @@ export function ComplianceSection({ deadlines }: ComplianceSectionProps) {
                 src="/images/compliance-calendar.jpg"
                 alt="Compliance Calendar Reminder"
                 fill
-                unoptimized
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 33vw"
               />

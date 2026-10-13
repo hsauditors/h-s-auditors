@@ -11,6 +11,7 @@ import {
   getAboutFeatures,
   getIndustries,
 } from '@/lib/data';
+import { syncHomepageImages } from '@/lib/syncImages';
 import { Navbar } from '@/components/Navbar';
 import { HeroSection } from '@/components/HeroSection';
 import { StatsBar } from '@/components/StatsBar';
@@ -28,6 +29,9 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export default async function HomePage() {
+  // Synchronize generated images to public directory
+  syncHomepageImages();
+
   // Fetch live CMS data in parallel
   const [
     settings,
@@ -62,7 +66,7 @@ export default async function HomePage() {
         {/* 2. Full-Width Hero Section */}
         <HeroSection heroData={heroData} />
 
-        {/* 3. Statistics Strip */}
+        {/* 3. Value Proposition / Trust Features Strip */}
         <StatsBar stats={stats} />
 
         {/* 4. Core Services */}
@@ -71,7 +75,7 @@ export default async function HomePage() {
         {/* 5. Key Indian Compliance Deadlines */}
         <ComplianceSection deadlines={deadlines} />
 
-        {/* 6. Why Choose H&S (Dark Navy Section) */}
+        {/* 6. Why Businesses Choose Us */}
         <WhyChooseSection items={whyChooseItems} />
 
         {/* 7. About The Firm Split Layout */}
@@ -80,10 +84,10 @@ export default async function HomePage() {
         {/* 8. Core Values (Integrity, Confidentiality, Timely) */}
         <ValuesSection />
 
-        {/* 9. Sector Experience / Industries */}
+        {/* 9. Industries We Serve */}
         <IndustriesSection industries={industries} />
 
-        {/* 10. Contact Information & Message Form */}
+        {/* 10. Contact Information & Enquiry */}
         <ContactSection settings={settings} />
       </main>
 

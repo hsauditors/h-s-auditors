@@ -1,231 +1,110 @@
-
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Service } from '@/types';
-import { ServiceCard } from './ServiceCard';
 
 interface ServicesSectionProps {
-  services: Service[];
+  services?: Service[];
 }
 
 export function ServicesSection({ services }: ServicesSectionProps) {
-  const defaultServices: Service[] = [
+  // Reference items matching the exact design provided
+  const featuredServices = [
     {
-      id: '1',
-      title: 'GST Filing',
-      slug: 'gst-filing',
-      short_description:
-        'Accurate, hassle-free GST registration, monthly returns, and reconciliation.',
-      long_description: null,
-      icon: 'Receipt',
-      image_url: null,
-      cta_text: 'Explore Service',
-      cta_url: '/services/gst-filing',
-      benefits: null,
-      process_steps: null,
-      display_order: 1,
-      is_active: true,
-      seo_title: null,
-      seo_description: null,
-      created_at: '',
-      updated_at: '',
+      id: 'accounting-bookkeeping',
+      title: 'Accounting & Bookkeeping',
+      description:
+        'Accurate and up-to-date financial records to help you make informed decisions.',
+      imageUrl: '/images/service-accounting.jpg',
+      link: '/services/bookkeeping-and-accounting',
     },
     {
-      id: '2',
-      title: 'Income Tax',
-      slug: 'income-tax',
-      short_description:
-        'Maximize tax savings while staying fully compliant with the Income Tax Act.',
-      long_description: null,
-      icon: 'BarChart2',
-      image_url: null,
-      cta_text: 'Explore Service',
-      cta_url: '/services/income-tax',
-      benefits: null,
-      process_steps: null,
-      display_order: 2,
-      is_active: true,
-      seo_title: null,
-      seo_description: null,
-      created_at: '',
-      updated_at: '',
+      id: 'tax-planning-gst',
+      title: 'Tax Planning & GST',
+      description:
+        'Strategic tax planning and end-to-end GST compliance for businesses and individuals.',
+      imageUrl: '/images/service-tax-gst.jpg',
+      link: '/services/gst-filing',
     },
     {
-      id: '3',
-      title: 'Bookkeeping & Accounting',
-      slug: 'bookkeeping-and-accounting',
-      short_description:
-        'Clean, current financial records that help you make informed business decisions.',
-      long_description: null,
-      icon: 'BookOpen',
-      image_url: null,
-      cta_text: 'Explore Service',
-      cta_url: '/services/bookkeeping-and-accounting',
-      benefits: null,
-      process_steps: null,
-      display_order: 3,
-      is_active: true,
-      seo_title: null,
-      seo_description: null,
-      created_at: '',
-      updated_at: '',
-    },
-    {
-      id: '4',
-      title: 'Business Registration',
-      slug: 'business-registration',
-      short_description:
-        'End-to-end assistance for company, LLP and firm registration.',
-      long_description: null,
-      icon: 'Building2',
-      image_url: null,
-      cta_text: 'Explore Service',
-      cta_url: '/services/business-registration',
-      benefits: null,
-      process_steps: null,
-      display_order: 4,
-      is_active: true,
-      seo_title: null,
-      seo_description: null,
-      created_at: '',
-      updated_at: '',
-    },
-    {
-      id: '5',
+      id: 'audit-assurance',
       title: 'Audit & Assurance',
-      slug: 'audit-and-assurance',
-      short_description:
-        'Statutory, internal and tax audits that ensure compliance and transparency.',
-      long_description: null,
-      icon: 'ShieldCheck',
-      image_url: null,
-      cta_text: 'Explore Service',
-      cta_url: '/services/audit-and-assurance',
-      benefits: null,
-      process_steps: null,
-      display_order: 5,
-      is_active: true,
-      seo_title: null,
-      seo_description: null,
-      created_at: '',
-      updated_at: '',
+      description:
+        'Independent audit and assurance services to ensure transparency and trust.',
+      imageUrl: '/images/service-audit-assurance.jpg',
+      link: '/services/audit-and-assurance',
     },
-    {
-      id: '6',
-      title: 'Company Secretarial',
-      slug: 'company-secretarial',
-      short_description:
-        'ROC filings, board compliance and secretarial support handled end to end.',
-      long_description: null,
-      icon: 'Users',
-      image_url: null,
-      cta_text: 'Explore Service',
-      cta_url: '/services/company-secretarial',
-      benefits: null,
-      process_steps: null,
-      display_order: 6,
-      is_active: true,
-      seo_title: null,
-      seo_description: null,
-      created_at: '',
-      updated_at: '',
-    },
-  ];
-
-  const items =
-    services && services.length > 0
-      ? services.slice(0, 6)
-      : defaultServices;
-
-  const highlightChecklist = [
-    'Personalised Advisory',
-    'Domain Expertise',
-    'End-to-End Support',
-    'Technology Driven',
-    'Confidential & Secure',
   ];
 
   return (
-    <section className="w-full border-b border-gray-200/80 bg-[#F8FAFC] py-5 sm:py-7 lg:py-9">
-      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+    <section className="w-full bg-[#FFFFFF] py-8 sm:py-12 lg:py-16 border-b border-gray-200/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-4 flex items-center justify-between sm:mb-5">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-10">
           <div>
-            <span className="mb-1 block text-[10px] font-bold uppercase tracking-widest text-blue-600 sm:text-xs">
-              WHAT WE DO
-            </span>
+            {/* Eyebrow with gold accent line */}
+            <div className="flex items-center gap-2 mb-2 sm:mb-2.5">
+              <span className="text-[10.5px] sm:text-xs font-bold uppercase tracking-wider text-[#D97706]">
+                OUR SERVICES
+              </span>
+              <span className="w-7 sm:w-10 h-[1.5px] bg-[#D97706]" />
+            </div>
 
-            <h2 className="text-lg font-extrabold tracking-tight text-brand-deepNavy sm:text-2xl lg:text-3xl">
-              Our Core Services
+            {/* Headline */}
+            <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-bold text-[#071A3D] font-serif tracking-tight leading-tight">
+              How we help your business
             </h2>
-
-            <p className="mt-1 hidden max-w-xl text-xs text-gray-500 sm:block sm:text-sm">
-              Expert accounting, taxation and compliance solutions to help
-              your business move forward with clarity and confidence.
-            </p>
           </div>
 
+          {/* View All Services Link */}
           <Link
             href="/services"
-            className="group inline-flex flex-shrink-0 items-center gap-1 text-[11px] font-bold text-blue-600 transition-colors hover:text-blue-800 sm:text-sm"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors group flex-shrink-0 self-start sm:self-auto"
           >
-            View All
-            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1 sm:h-4 sm:w-4" />
+            <span>View all services</span>
+            <ArrowRight className="w-4 h-4 transition-transform duration-150 group-hover:translate-x-1" />
           </Link>
         </div>
 
-        {/* Services Grid + Feature Card */}
-        <div className="grid grid-cols-1 items-start gap-3 sm:gap-4 lg:grid-cols-12 lg:gap-4">
-          {/* Compact Service Cards */}
-          <div className="grid grid-cols-2 items-start gap-2 sm:gap-3 md:grid-cols-3 lg:col-span-9">
-            {items.map((service) => (
-              <ServiceCard key={service.id} service={service} />
-            ))}
-          </div>
+        {/* 3 Featured Service Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-7 lg:gap-8">
+          {featuredServices.map((service) => (
+            <div
+              key={service.id}
+              className="group bg-white rounded-2xl border border-gray-200/80 shadow-xs hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col"
+            >
+              {/* Image Container with smooth hover zoom */}
+              <div className="relative w-full aspect-[16/10] bg-gray-100 overflow-hidden">
+                <Image
+                  src={service.imageUrl}
+                  alt={service.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
 
-          {/* Compact Feature Card */}
-          <div className="flex h-auto flex-row overflow-hidden rounded-lg border border-gray-200/80 bg-white shadow-sm transition-shadow hover:shadow-md lg:col-span-3 lg:flex-col">
-            {/* Feature Image */}
-            <div className="relative min-h-[150px] w-24 flex-shrink-0 bg-slate-900 sm:w-32 lg:h-32 lg:min-h-0 lg:w-full">
-              <Image
-                src="/images/service-accounting.jpg"
-                alt="Professional accounting and financial advisory"
-                fill
-                unoptimized
-                className="object-cover"
-                sizes="(max-width: 1024px) 128px, 25vw"
-              />
+              {/* Card Body */}
+              <div className="p-5 sm:p-6 flex flex-col flex-1">
+                <h3 className="text-base sm:text-lg font-bold text-[#071A3D] mb-2 leading-snug">
+                  {service.title}
+                </h3>
+
+                <p className="text-xs sm:text-[13.5px] text-gray-600 leading-relaxed mb-4 flex-1">
+                  {service.description}
+                </p>
+
+                <Link
+                  href={service.link}
+                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors group/link mt-auto"
+                >
+                  <span>Learn More</span>
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform duration-150 group-hover/link:translate-x-1" />
+                </Link>
+              </div>
             </div>
-
-            {/* Feature Content */}
-            <div className="flex flex-1 flex-col justify-center p-3 sm:p-4 lg:p-4">
-              <h3 className="mb-2 text-xs font-bold leading-snug text-brand-deepNavy sm:text-sm">
-                Reliable Financial Solutions
-              </h3>
-
-              <ul className="space-y-1.5">
-                {highlightChecklist.map((item) => (
-                  <li key={item} className="flex items-start gap-1.5">
-                    <CheckCircle2 className="mt-0.5 h-3 w-3 flex-shrink-0 text-amber-500 sm:h-3.5 sm:w-3.5" />
-
-                    <span className="text-[10px] leading-snug text-gray-600 sm:text-xs">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                href="/contact"
-                className="mt-3 inline-flex items-center gap-1 text-[10px] font-bold text-blue-600 transition-colors hover:text-blue-800 sm:text-xs"
-              >
-                Talk to an Expert
-                <ArrowRight className="h-3 w-3" />
-              </Link>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import fs from 'fs';
 import path from 'path';
-import { ArrowRight, Users, FileText, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Users, FileText, ShieldCheck, Award, Handshake } from 'lucide-react';
 import { HomepageSection } from '@/types';
 import { HeroImage } from './HeroImage';
 
@@ -88,7 +88,7 @@ export function HeroSection({ heroData }: HeroSectionProps) {
   };
 
   return (
-    <section className="relative w-full min-h-[690px] sm:min-h-[560px] md:min-h-[580px] lg:min-h-[620px] flex items-start md:items-center overflow-hidden border-b border-gray-200/80 bg-white">
+    <section className="relative w-full min-h-[730px] sm:min-h-[560px] md:min-h-[580px] lg:min-h-[620px] flex items-start md:items-center overflow-hidden border-b border-gray-200/80 bg-white">
       {/* 1. Full-Width Edge-to-Edge Background Image Banner */}
       <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
         <HeroImage
@@ -109,31 +109,47 @@ export function HeroSection({ heroData }: HeroSectionProps) {
 
 
       {/* 4. Content Container: Centered at top on Mobile, Left-aligned on Desktop */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-7 pb-10 md:py-12 lg:py-16">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-7 sm:pt-9 pb-6 md:py-12 lg:py-16">
         <div className="max-w-xl lg:max-w-2xl mx-auto md:mx-0 text-center md:text-left">
           
-          {/* Eyebrow */}
-          <div className="mb-2 sm:mb-2.5">
-            <span className="inline-block text-[10.5px] sm:text-xs font-bold tracking-wider text-[#D97706] uppercase">
-              {eyebrow}
+          {/* Eyebrow: Exact mockup with gold line on left & right in mobile */}
+          <div className="flex items-center justify-center md:justify-start gap-2 sm:gap-2.5 mb-2 sm:mb-3">
+            <span className="w-6 sm:w-8 h-[1.5px] bg-[#F59E0B] block md:hidden" />
+            <span className="text-[9.5px] sm:text-[11px] font-bold tracking-wider sm:tracking-widest text-[#071A3D] md:text-[#D97706] uppercase">
+              PREMIER ACCOUNTING &amp; TAX CONSULTANCY • INDIA
             </span>
+            <span className="w-6 sm:w-8 h-[1.5px] bg-[#F59E0B] block md:hidden" />
           </div>
 
-          {/* Headline */}
-          <h1 className="text-[27px] sm:text-4xl lg:text-[42px] xl:text-[46px] font-black text-[#071A3D] leading-[1.18] sm:leading-[1.14] tracking-tight mb-2.5 sm:mb-3.5">
+          {/* Mobile Headline - Larger, impactful font matching user request */}
+          <h1 className="md:hidden text-[26px] sm:text-[31px] font-black text-[#071A3D] leading-[1.15] tracking-tight mb-2.5 max-w-[350px] mx-auto text-center">
+            Your Trusted Partner in<br />
+            <span className="text-[#0066FF] text-[36px] sm:text-[42px] leading-tight block my-0.5 font-black">
+              Financial Growth
+            </span>
+            <span>and Compliance</span>
+          </h1>
+
+          {/* Desktop Headline */}
+          <h1 className="hidden md:block text-4xl lg:text-[42px] xl:text-[46px] font-black text-[#071A3D] leading-[1.14] tracking-tight mb-4 text-left">
             {renderHeadline(headline)}
           </h1>
 
-          {/* Description */}
-          <p className="text-xs sm:text-[14px] lg:text-[15px] text-gray-700 leading-relaxed mb-4 sm:mb-6 max-w-sm sm:max-w-xl mx-auto md:mx-0 font-normal">
+          {/* Minimal Subtext on Mobile */}
+          <p className="block md:hidden text-[13px] font-medium text-slate-700 leading-snug mb-4 max-w-[300px] mx-auto text-center">
+            Expert accounting, taxation and compliance solutions for your business.
+          </p>
+
+          {/* Full Detailed Subtext on Desktop */}
+          <p className="hidden md:block text-[14.5px] lg:text-[15px] font-normal text-slate-700 leading-relaxed mb-6 max-w-xl text-left">
             {description}
           </p>
 
-          {/* CTA Buttons: Side-by-Side 2 columns on mobile, row on desktop */}
-          <div className="grid grid-cols-2 gap-2.5 max-w-[320px] sm:max-w-none mx-auto md:mx-0 sm:flex sm:flex-wrap sm:items-center sm:gap-3.5 mb-4 sm:mb-6">
+          {/* CTA Buttons: Exact mockup rounded pills */}
+          <div className="flex items-center justify-center md:justify-start gap-2.5 sm:gap-3.5 mb-4 sm:mb-5">
             <Link
               href={primaryCtaLink}
-              className="inline-flex items-center justify-center gap-1.5 bg-[#F59E0B] hover:bg-[#D97706] text-[#07152E] font-bold px-3 py-2.5 sm:px-5 sm:py-2.5 rounded-xl sm:rounded-md shadow-xs transition-all text-xs sm:text-sm group"
+              className="inline-flex items-center justify-center gap-1.5 bg-[#F59E0B] hover:bg-[#D97706] text-[#07152E] font-bold px-4 py-2 sm:px-5 sm:py-2.5 rounded-full shadow-xs transition-all text-xs sm:text-sm whitespace-nowrap group"
             >
               <span>{primaryCtaText}</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#07152E] transition-transform duration-150 group-hover:translate-x-1" />
@@ -141,42 +157,76 @@ export function HeroSection({ heroData }: HeroSectionProps) {
 
             <Link
               href={secondaryCtaLink}
-              className="inline-flex items-center justify-center gap-1.5 bg-white hover:bg-gray-50 text-[#07152E] font-bold px-3 py-2.5 sm:px-5 sm:py-2.5 rounded-xl sm:rounded-md border border-gray-300 shadow-xs transition-all text-xs sm:text-sm group"
+              className="inline-flex items-center justify-center gap-1.5 bg-white hover:bg-gray-50 text-[#07152E] font-bold px-4 py-2 sm:px-5 sm:py-2.5 rounded-full border border-slate-300 shadow-xs transition-all text-xs sm:text-sm whitespace-nowrap group"
             >
               <span>{secondaryCtaText}</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#07152E] transition-transform duration-150 group-hover:translate-x-1" />
             </Link>
           </div>
 
-          {/* Trust Badges: 3 circular badges with gold rings matching reference image */}
-          <div className="flex items-center justify-center md:justify-start gap-3 sm:gap-5 pt-1">
-            {/* Badge 1: Expert Guidance */}
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#07152E] border border-[#F59E0B] flex items-center justify-center flex-shrink-0 text-[#F59E0B]">
+          {/* Mobile Trust Badges - Exact 3 circular light-blue badges with dividers */}
+          <div className="flex md:hidden items-center justify-center gap-1.5 sm:gap-2 px-1 py-1">
+            {/* 1. Expert Guidance */}
+            <div className="flex items-center gap-1.5 text-left">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center flex-shrink-0 text-blue-600 shadow-2xs">
+                <Award className="w-3.5 h-3.5 stroke-[1.8]" />
+              </div>
+              <div className="text-[10px] sm:text-[11px] font-bold text-[#071A3D] leading-tight">
+                Expert<br />Guidance
+              </div>
+            </div>
+
+            <div className="w-[1px] h-6 bg-gray-200/90 mx-1" />
+
+            {/* 2. Tailored Solutions */}
+            <div className="flex items-center gap-1.5 text-left">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center flex-shrink-0 text-blue-600 shadow-2xs">
+                <Handshake className="w-3.5 h-3.5 stroke-[1.8]" />
+              </div>
+              <div className="text-[10px] sm:text-[11px] font-bold text-[#071A3D] leading-tight">
+                Tailored<br />Solutions
+              </div>
+            </div>
+
+            <div className="w-[1px] h-6 bg-gray-200/90 mx-1" />
+
+            {/* 3. Reliable Support */}
+            <div className="flex items-center gap-1.5 text-left">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center flex-shrink-0 text-blue-600 shadow-2xs">
+                <ShieldCheck className="w-3.5 h-3.5 stroke-[1.8]" />
+              </div>
+              <div className="text-[10px] sm:text-[11px] font-bold text-[#071A3D] leading-tight">
+                Reliable<br />Support
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop Trust Badges */}
+          <div className="hidden md:inline-flex items-center justify-start gap-5">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-[#07152E] border border-[#F59E0B] flex items-center justify-center flex-shrink-0 text-[#F59E0B]">
                 <Users className="w-3.5 h-3.5" />
               </div>
-              <div className="text-[10px] sm:text-xs font-semibold text-gray-800 leading-tight text-left">
-                Expert<br className="block sm:hidden" /> Guidance
+              <div className="text-xs font-semibold text-gray-800 leading-tight">
+                Expert Guidance
               </div>
             </div>
 
-            {/* Badge 2: Tailored Solutions */}
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#07152E] border border-[#F59E0B] flex items-center justify-center flex-shrink-0 text-[#F59E0B]">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-[#07152E] border border-[#F59E0B] flex items-center justify-center flex-shrink-0 text-[#F59E0B]">
                 <FileText className="w-3.5 h-3.5" />
               </div>
-              <div className="text-[10px] sm:text-xs font-semibold text-gray-800 leading-tight text-left">
-                Tailored<br className="block sm:hidden" /> Solutions
+              <div className="text-xs font-semibold text-gray-800 leading-tight">
+                Tailored Solutions
               </div>
             </div>
 
-            {/* Badge 3: Reliable Support */}
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#07152E] border border-[#F59E0B] flex items-center justify-center flex-shrink-0 text-[#F59E0B]">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-[#07152E] border border-[#F59E0B] flex items-center justify-center flex-shrink-0 text-[#F59E0B]">
                 <ShieldCheck className="w-3.5 h-3.5" />
               </div>
-              <div className="text-[10px] sm:text-xs font-semibold text-gray-800 leading-tight text-left">
-                Reliable<br className="block sm:hidden" /> Support
+              <div className="text-xs font-semibold text-gray-800 leading-tight">
+                Reliable Support
               </div>
             </div>
           </div>

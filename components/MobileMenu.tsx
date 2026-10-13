@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X, ArrowRight, Phone, Mail } from 'lucide-react';
 import { NavigationItem, SiteSettings } from '@/types';
-import { BrandLogo } from './BrandLogo';
 
 interface MobileMenuProps {
   navItems: NavigationItem[];
@@ -33,10 +32,6 @@ export function MobileMenu({ navItems, settings }: MobileMenuProps) {
       {isOpen && (
         <div className="fixed inset-0 top-[68px] sm:top-[72px] z-50 bg-brand-deepNavy/70 backdrop-blur-sm transition-opacity">
           <div className="bg-white border-b border-brand-border px-5 py-5 sm:px-6 sm:py-6 shadow-xl flex flex-col space-y-4 max-h-[85vh] overflow-y-auto">
-            <div className="pb-3 border-b border-gray-100 flex items-center justify-between">
-              <BrandLogo size="sm" />
-            </div>
-
             <nav className="flex flex-col space-y-1.5">
               {regularLinks.map((item) => (
                 <Link

@@ -48,7 +48,6 @@ export function HeroImage({ desktopSrc, mobileSrc, alt }: HeroImageProps) {
           alt={alt}
           fill
           priority
-          unoptimized
           onError={handleDesktopError}
           className="object-cover object-right lg:object-[80%_center] xl:object-[center_right] w-full h-full"
           sizes="100vw"
@@ -62,13 +61,14 @@ export function HeroImage({ desktopSrc, mobileSrc, alt }: HeroImageProps) {
           alt={alt}
           fill
           priority
-          unoptimized
           onError={handleMobileError}
           className="object-cover object-bottom w-full h-full"
           sizes="100vw"
         />
-        {/* Soft top gradient to ensure text readability over sky */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/50 via-40% to-transparent pointer-events-none" />
+        {/* Richer, deeper fade gradient behind the text ensuring comfortable readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-white/95 via-54% to-transparent pointer-events-none" />
+        {/* Soft top-right ambient circular accent from mockup */}
+        <div className="absolute -top-10 -right-10 w-44 h-44 rounded-full bg-blue-100/40 blur-xl pointer-events-none" />
       </div>
     </>
   );
