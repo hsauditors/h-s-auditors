@@ -69,7 +69,6 @@ export function BrandLogo({
             width={shouldUseLogo2 ? 72 : 60}
             height={60}
             priority
-            unoptimized
             className={`${logoHeightClass} object-contain ${
               shouldUseLogo2 ? 'drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)]' : ''
             }`}

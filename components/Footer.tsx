@@ -63,8 +63,8 @@ export function Footer({ settings }: FooterProps) {
           src="/images/H&S Auditors logo3.png"
           alt="H&S Auditors Watermark"
           fill
-          unoptimized
           className="object-contain"
+          sizes="256px"
         />
       </div>
 
@@ -237,7 +237,7 @@ export function Footer({ settings }: FooterProps) {
             &copy; {new Date().getFullYear()} H&amp;S Auditors. All rights reserved.
           </div>
 
-          <div className="flex items-center space-x-4 sm:space-x-6">
+          <div className="flex items-center space-x-3 sm:space-x-5">
             <Link href="/privacy-policy" className="hover:text-white transition-colors">
               Privacy Policy
             </Link>
@@ -246,9 +246,17 @@ export function Footer({ settings }: FooterProps) {
               Terms of Service
             </Link>
             <span className="text-gray-600">|</span>
-            <Link href="/sitemap.xml" className="hover:text-white transition-colors">
-              Sitemap
-            </Link>
+            <span className="text-gray-400">
+              Crafted by{' '}
+              <a
+                href="https://ekodrix.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-gold hover:text-yellow-400 font-medium transition-colors"
+              >
+                ekodrix
+              </a>
+            </span>
           </div>
         </div>
 

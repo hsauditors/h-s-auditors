@@ -1,0 +1,103 @@
+'use client';
+
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { ArrowRight, ChevronDown } from 'lucide-react';
+
+interface SubService {
+  id?: string;
+  title: string;
+  description?: string;
+  image_url?: string;
+}
+
+interface ServiceCategoryGridProps {
+  subServices: SubService[];
+  /** Number of cards visible on mobile before "View More" (default: 4 = 2 rows) */
+  mobileLimit?: number;
+}
+
+export function ServiceCategoryGrid({ subServices, mobileLimit = 4 }: ServiceCategoryGridProps) {
+  const [expanded, setExpanded] = useState(false);
+  const hasMore = subServices.length > mobileLimit;
+  const isTwoCards = subServices.length === 2;
+
+  // Desktop columns: 2-card categories keep the wide 2-col layout, others use 4-col
+  const desktopCols = isTwoCards ? 'md:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-4';
+
+  return (
+    <div>
+      <div className={`grid grid-cols-2 ${desktopCols} gap-3 sm:gap-5`}>
+        {subServices.map((sub, subIdx) => {
+          const hasImage = Boolean(sub.image_url && sub.image_url.trim());
+          // On mobile, hide cards beyond the limit unless expanded. Always visible on sm+.
+          const hiddenOnMobile = !expanded && subIdx >= mobileLimit;
+
+          return (
+            <div
+              key={sub.id || subIdx}
+              className={`${hiddenOnMobile ? 'hidden sm:flex' : 'flex'} bg-white rounded-xl border border-gray-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-lg hover:border-blue-200 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden flex-col justify-between group`}
+            >
+              {/* Card Top Image (if added from admin) */}
+              {hasImage && (
+                <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-100">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={sub.image_url}
+                    alt={sub.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              )}
+
+              {/* Card Body */}
+              <div className="p-3 sm:p-5 flex flex-col flex-grow justify-between">
+                <div>
+                  <h3 className="text-[12.5px] sm:text-[15px] font-bold text-[#0B192C] group-hover:text-blue-600 transition-colors leading-snug mb-1 sm:mb-2">
+                    {sub.title}
+                  </h3>
+                  {sub.description && (
+                    <p className="text-[11px] sm:text-xs text-gray-500 leading-relaxed font-normal mb-2.5 sm:mb-4 line-clamp-2 sm:line-clamp-4">
+                      {sub.description}
+                    </p>
+                  )}
+                </div>
+
+                <Link
+                  href={`/contact?subject=${encodeURIComponent(sub.title)}`}
+                  className="inline-flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs font-bold text-[#2563EB] hover:text-[#0B192C] transition-colors mt-auto w-fit"
+                >
+                  <span>Learn More</span>
+                  <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* View More / View Less toggle (mobile only) */}
+      {hasMore && (
+        <div className="flex justify-center mt-4 sm:hidden">
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            aria-expanded={expanded}
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-blue-200 text-[#2563EB] text-xs font-bold shadow-2xs hover:bg-blue-50 active:scale-[0.98] transition-all"
+          >
+            <span>
+              {expanded
+                ? 'View Less'
+                : `View More (${subServices.length - mobileLimit})`}
+            </span>
+            <ChevronDown
+              className={`w-3.5 h-3.5 transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
+            />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}

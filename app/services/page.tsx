@@ -24,6 +24,7 @@ import {
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { DynamicIcon } from '@/components/ui/DynamicIcon';
+import { ServiceCategoryGrid } from '@/components/ServiceCategoryGrid';
 
 export const metadata: Metadata = {
   title: 'Our Services | Professional Audit, Tax & Business Advisory',
@@ -138,10 +139,9 @@ export default async function ServicesPage() {
       {/* 2. CATEGORY-WISE SERVICES SECTIONS */}
       {/* ========================================================================= */}
       <main className="flex-grow py-12 sm:py-16 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-20">
           {categories.map((category: any, catIdx: number) => {
             const subServices = category.sub_services || [];
-            const isTwoCards = subServices.length === 2;
 
             return (
               <section
@@ -168,101 +168,9 @@ export default async function ServicesPage() {
                   </div>
                 </div>
 
-                {/* Sub-Services Cards */}
+                {/* Sub-Services Cards: 2 per row on mobile with View More / View Less */}
                 {subServices.length > 0 ? (
-                  isTwoCards ? (
-                    /* 2-Card Horizontal Layout (e.g. Accounting & Business Support) */
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
-                      {subServices.map((sub: any, subIdx: number) => {
-                        const hasImage = Boolean(sub.image_url && sub.image_url.trim());
-
-                        return (
-                          <div
-                            key={sub.id || subIdx}
-                            className="bg-white rounded-xl border border-gray-200/90 shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:shadow-lg hover:border-blue-200 transition-all duration-200 overflow-hidden flex flex-col sm:flex-row group"
-                          >
-                            {/* Optional Left Image if added from admin */}
-                            {hasImage && (
-                              <div className="w-full sm:w-5/12 h-44 sm:h-auto relative overflow-hidden bg-slate-100 flex-shrink-0">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                  src={sub.image_url}
-                                  alt={sub.title}
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                />
-                              </div>
-                            )}
-
-                            {/* Content */}
-                            <div className={`w-full ${hasImage ? 'sm:w-7/12' : ''} p-5 flex flex-col justify-between flex-grow`}>
-                              <div>
-                                <h3 className="text-sm sm:text-base font-bold text-[#0B192C] group-hover:text-blue-600 transition-colors leading-snug mb-2">
-                                  {sub.title}
-                                </h3>
-                                <p className="text-xs text-gray-500 leading-relaxed font-normal mb-4">
-                                  {sub.description}
-                                </p>
-                              </div>
-
-                              <Link
-                                href={`/contact?subject=${encodeURIComponent(sub.title)}`}
-                                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#2563EB] hover:text-[#0B192C] transition-colors mt-auto w-fit"
-                              >
-                                <span>Learn More</span>
-                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                              </Link>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    /* 4-Column Responsive Grid */
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-5.5">
-                      {subServices.map((sub: any, subIdx: number) => {
-                        const hasImage = Boolean(sub.image_url && sub.image_url.trim());
-
-                        return (
-                          <div
-                            key={sub.id || subIdx}
-                            className="bg-white rounded-xl border border-gray-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-lg hover:border-blue-200 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden flex flex-col justify-between group"
-                          >
-                            {/* Card Top Image Header if added from admin */}
-                            {hasImage && (
-                              <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-100">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                  src={sub.image_url}
-                                  alt={sub.title}
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                />
-                              </div>
-                            )}
-
-                            {/* Card Body */}
-                            <div className="p-4 sm:p-5 flex flex-col flex-grow justify-between">
-                              <div>
-                                <h3 className="text-sm sm:text-[15px] font-bold text-[#0B192C] group-hover:text-blue-600 transition-colors leading-snug mb-2">
-                                  {sub.title}
-                                </h3>
-                                <p className="text-xs text-gray-500 leading-relaxed font-normal mb-4 line-clamp-4">
-                                  {sub.description}
-                                </p>
-                              </div>
-
-                              <Link
-                                href={`/contact?subject=${encodeURIComponent(sub.title)}`}
-                                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#2563EB] hover:text-[#0B192C] transition-colors mt-auto w-fit"
-                              >
-                                <span>Learn More</span>
-                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                              </Link>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )
+                  <ServiceCategoryGrid subServices={subServices} />
                 ) : (
                   <div className="bg-white rounded-xl p-8 border border-gray-200 text-center text-xs text-gray-400">
                     Services for this category are being updated.
