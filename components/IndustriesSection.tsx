@@ -115,7 +115,7 @@ export function IndustriesSection({ industries }: IndustriesSectionProps) {
 
             {/* Headline */}
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#071A3D] font-serif tracking-tight leading-[1.18] mb-3 sm:mb-4">
-              Expertise across <span className="text-[#1D4ED8]">industries</span>
+              Expertise across <span className="text-[#F59E0B]">industries</span>
             </h2>
 
             {/* Description */}
@@ -136,7 +136,7 @@ export function IndustriesSection({ industries }: IndustriesSectionProps) {
             </div>
           </div>
 
-          {/* Cards Grid: 3 columns on mobile, 2 columns on tablet/desktop */}
+          {/* Cards Grid: 3 columns on mobile next to each other to reduce space */}
           <div className="lg:col-span-8 grid grid-cols-3 sm:grid-cols-2 gap-2 sm:gap-3.5">
             {industryList.map((ind) => {
               const Icon = ind.icon;
@@ -144,7 +144,7 @@ export function IndustriesSection({ industries }: IndustriesSectionProps) {
                 <Link
                   key={ind.id}
                   href={`/industries#${ind.slug}`}
-                  className="group flex flex-col sm:flex-row items-center justify-start sm:justify-between text-center sm:text-left gap-1.5 sm:gap-3 px-1.5 py-2.5 sm:px-4 sm:py-3.5 rounded-xl sm:rounded-2xl bg-white hover:bg-blue-50/50 border border-gray-200/70 hover:border-blue-300 transition-all duration-200 shadow-[0_2px_8px_rgba(7,26,61,0.03)] hover:shadow-md hover:-translate-y-0.5 min-h-[92px] sm:min-h-[62px]"
+                  className="group flex flex-col sm:flex-row items-center justify-start sm:justify-between text-center sm:text-left gap-1.5 sm:gap-3 p-2 sm:p-3.5 rounded-xl sm:rounded-2xl bg-white hover:bg-blue-50/50 border border-gray-200/70 hover:border-blue-300 transition-all duration-200 shadow-[0_2px_8px_rgba(7,26,61,0.03)] hover:shadow-md hover:-translate-y-0.5 min-h-[92px] sm:min-h-[62px]"
                 >
                   <div className="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-3 min-w-0">
                     {/* Icon Badge */}
@@ -153,12 +153,12 @@ export function IndustriesSection({ industries }: IndustriesSectionProps) {
                     </div>
 
                     {/* Title */}
-                    <span className="text-[10.5px] sm:text-[13px] md:text-sm font-bold text-[#071A3D] group-hover:text-blue-600 transition-colors leading-tight sm:leading-snug sm:truncate">
+                    <span className="text-[10.5px] sm:text-[13px] md:text-sm font-bold text-[#071A3D] group-hover:text-blue-600 transition-colors leading-tight sm:leading-snug">
                       {ind.title}
                     </span>
                   </div>
 
-                  {/* Subtle Right Arrow (tablet/desktop only) */}
+                  {/* Right Arrow Button (Desktop / Tablet only) */}
                   <div className="hidden sm:flex w-6 h-6 rounded-full border border-gray-100 bg-gray-50/80 group-hover:bg-blue-100/60 group-hover:border-blue-200 items-center justify-center text-gray-400 group-hover:text-blue-600 transition-all duration-200 flex-shrink-0">
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
                   </div>

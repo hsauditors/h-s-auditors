@@ -72,14 +72,14 @@ export function HeroSection({ heroData }: HeroSectionProps) {
 
   const imageAlt = heroData?.image_alt || 'H&S Auditors Team of Accounting & Tax Professionals';
 
-  // Render headline highlighting "Financial Growth" in vibrant blue
+  // Render headline highlighting "Financial Growth" in brand light golden
   const renderHeadline = (text: string) => {
     if (text.includes('Financial Growth')) {
       const [before, after] = text.split('Financial Growth');
       return (
         <>
           <span>{before}</span>
-          <span className="text-[#0066FF] block sm:inline">Financial Growth</span>
+          <span className="text-[#F59E0B] block sm:inline">Financial Growth</span>
           <span>{after}</span>
         </>
       );
@@ -88,7 +88,7 @@ export function HeroSection({ heroData }: HeroSectionProps) {
   };
 
   return (
-    <section className="relative w-full min-h-[730px] sm:min-h-[560px] md:min-h-[580px] lg:min-h-[620px] flex items-start md:items-center overflow-hidden border-b border-gray-200/80 bg-white">
+    <section className="relative w-full min-h-[640px] sm:min-h-[670px] md:min-h-[580px] lg:min-h-[620px] flex items-start md:items-center overflow-hidden border-b border-gray-200/80 bg-white">
       {/* 1. Full-Width Edge-to-Edge Background Image Banner */}
       <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
         <HeroImage
@@ -107,9 +107,8 @@ export function HeroSection({ heroData }: HeroSectionProps) {
         </div>
       </div>
 
-
-      {/* 4. Content Container: Centered at top on Mobile, Left-aligned on Desktop */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-7 sm:pt-9 pb-6 md:py-12 lg:py-16">
+      {/* 3. Content Container: Centered at top on Mobile, Left-aligned on Desktop */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-5 md:py-12 lg:py-16">
         <div className="max-w-xl lg:max-w-2xl mx-auto md:mx-0 text-center md:text-left">
           
           {/* Eyebrow: Exact mockup with gold line on left & right in mobile */}
@@ -124,7 +123,7 @@ export function HeroSection({ heroData }: HeroSectionProps) {
           {/* Mobile Headline - Larger, impactful font matching user request */}
           <h1 className="md:hidden text-[26px] sm:text-[31px] font-black text-[#071A3D] leading-[1.15] tracking-tight mb-2.5 max-w-[350px] mx-auto text-center">
             Your Trusted Partner in<br />
-            <span className="text-[#0066FF] text-[36px] sm:text-[42px] leading-tight block my-0.5 font-black">
+            <span className="text-[#F59E0B] text-[36px] sm:text-[42px] leading-tight block my-0.5 font-black">
               Financial Growth
             </span>
             <span>and Compliance</span>
