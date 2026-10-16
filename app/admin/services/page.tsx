@@ -37,6 +37,7 @@ interface ServiceCategory {
   slug: string;
   short_description: string;
   icon?: string;
+  image_url?: string;
   display_order: number;
   is_active: boolean;
   sub_services?: SubService[];
@@ -86,6 +87,9 @@ export default function AdminServicesPage() {
   // Category Modal State
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<ServiceCategory | null>(null);
+  const [categoryUploading, setCategoryUploading] = useState(false);
+  const [isDraggingCategory, setIsDraggingCategory] = useState(false);
+  const categoryFileInputRef = useRef<HTMLInputElement>(null);
 
   // Sub-Card Modal State
   const [isSubCardModalOpen, setIsSubCardModalOpen] = useState(false);
@@ -221,6 +225,14 @@ export default function AdminServicesPage() {
   // Category Handlers
   // =========================================================================
 
+  const slugify = (text: string) => {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+  };
+
   const handleOpenCreateCategory = () => {
     setEditingCategory({
       id: '',
@@ -228,6 +240,7 @@ export default function AdminServicesPage() {
       slug: '',
       short_description: '',
       icon: 'FileText',
+      image_url: '',
       display_order: categories.length + 1,
       is_active: true,
       sub_services: [],
@@ -236,12 +249,50 @@ export default function AdminServicesPage() {
   };
 
   const handleOpenEditCategory = (cat: ServiceCategory) => {
-    setEditingCategory({ ...cat });
+    setEditingCategory({
+      ...cat,
+      image_url: cat.image_url || '',
+    });
     setIsCategoryModalOpen(true);
   };
 
+  const handleUploadCategoryFile = async (file: File) => {
+    if (!editingCategory) return;
+    setCategoryUploading(true);
+    setMessage(null);
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('folder', 'hs_auditors/services');
+
+    try {
+      const res = await fetch('/api/admin/media/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const resData = await res.json();
+      if (!res.ok) throw new Error(resData.error || 'Upload failed');
+
+      const uploadedUrl = resData.media?.secure_url;
+      if (uploadedUrl) {
+        setEditingCategory((prev) => (prev ? { ...prev, image_url: uploadedUrl } : null));
+      }
+    } catch (err: any) {
+      setMessage({ type: 'error', text: err.message || 'Error uploading service image' });
+    } finally {
+      setCategoryUploading(false);
+      if (categoryFileInputRef.current) categoryFileInputRef.current.value = '';
+    }
+  };
+
+  const handleCategoryFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) await handleUploadCategoryFile(file);
+  };
+
   const handleDeleteCategory = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this service category and all its cards?')) {
+    if (!confirm('Are you sure you want to delete this service and all its cards?')) {
       return;
     }
 
@@ -255,11 +306,11 @@ export default function AdminServicesPage() {
         }),
       });
 
-      if (!res.ok) throw new Error('Failed to delete category');
-      setMessage({ type: 'success', text: 'Category removed successfully' });
+      if (!res.ok) throw new Error('Failed to delete service');
+      setMessage({ type: 'success', text: 'Service removed successfully' });
       fetchServices();
     } catch (err: any) {
-      setMessage({ type: 'error', text: err.message || 'Error deleting category' });
+      setMessage({ type: 'error', text: err.message || 'Error deleting service' });
     }
   };
 
@@ -271,16 +322,15 @@ export default function AdminServicesPage() {
 
     const catId = editingCategory.id || `cat_${Date.now()}`;
     const slug =
+      slugify(editingCategory.title) ||
       editingCategory.slug ||
-      editingCategory.title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/(^-|-$)/g, '');
+      catId;
 
     const payload = {
       ...editingCategory,
       id: catId,
       slug,
+      image_url: editingCategory.image_url || '',
       sub_services: editingCategory.sub_services || [],
       updated_at: new Date().toISOString(),
     };
@@ -298,13 +348,13 @@ export default function AdminServicesPage() {
       });
 
       const resData = await res.json();
-      if (!res.ok) throw new Error(resData.error || 'Failed to save category');
+      if (!res.ok) throw new Error(resData.error || 'Failed to save service');
 
       setIsCategoryModalOpen(false);
-      setMessage({ type: 'success', text: 'Category saved successfully!' });
+      setMessage({ type: 'success', text: 'Service saved successfully!' });
       fetchServices();
     } catch (err: any) {
-      setMessage({ type: 'error', text: err.message || 'Error saving category' });
+      setMessage({ type: 'error', text: err.message || 'Error saving service' });
     } finally {
       setSaving(false);
     }
@@ -336,7 +386,7 @@ export default function AdminServicesPage() {
           items: newCats.map((c, idx) => ({ id: c.id, display_order: idx + 1 })),
         }),
       });
-      setMessage({ type: 'success', text: 'Category order updated' });
+      setMessage({ type: 'success', text: 'Service order updated' });
     } catch (err) {
       console.error('Reorder error:', err);
     }
@@ -558,10 +608,10 @@ export default function AdminServicesPage() {
           <button
             type="button"
             onClick={handleOpenCreateCategory}
-            className="inline-flex items-center gap-2 bg-[#07152E] hover:bg-[#0E2A5C] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition-colors"
+            className="inline-flex items-center gap-2 bg-[#2b2d54] hover:bg-[#222443] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition-colors"
           >
             <Plus className="w-4 h-4" />
-            <span>Add Category</span>
+            <span>Add Service</span>
           </button>
         </div>
       </div>
@@ -600,11 +650,11 @@ export default function AdminServicesPage() {
           className="p-5 bg-gradient-to-r from-blue-50/60 to-white border-b border-blue-100 flex items-center justify-between cursor-pointer select-none"
         >
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#07152E] text-white flex items-center justify-center flex-shrink-0">
-              <ImageIcon className="w-4 h-4 text-[#F59E0B]" />
+            <div className="w-8 h-8 rounded-lg bg-[#2b2d54] text-white flex items-center justify-center flex-shrink-0">
+              <ImageIcon className="w-4 h-4 text-[#fcdd5e]" />
             </div>
             <div>
-              <h2 className="text-sm font-bold text-[#0B192C]">
+              <h2 className="text-sm font-bold text-[#2b2d54]">
                 Services Page Hero Banner Settings
               </h2>
               <p className="text-[11px] text-gray-500">
@@ -778,9 +828,9 @@ export default function AdminServicesPage() {
               <button
                 type="submit"
                 disabled={bannerSaving}
-                className="inline-flex items-center gap-2 bg-[#07152E] hover:bg-[#0E2A5C] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-xs transition-colors disabled:opacity-50"
+                className="inline-flex items-center gap-2 bg-[#2b2d54] hover:bg-[#222443] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-xs transition-colors disabled:opacity-50"
               >
-                {bannerSaving ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5 text-[#F59E0B]" />}
+                {bannerSaving ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5 text-[#fcdd5e]" />}
                 <span>Save Banner Settings</span>
               </button>
             </div>
@@ -810,7 +860,7 @@ export default function AdminServicesPage() {
                       disabled={catIndex === 0}
                       onClick={() => handleMoveCategory(catIndex, 'up')}
                       className="p-1 text-gray-400 hover:text-blue-600 disabled:opacity-30 disabled:pointer-events-none rounded transition-colors"
-                      title="Move Category Up"
+                      title="Move Service Up"
                     >
                       <ArrowUp className="w-3.5 h-3.5" />
                     </button>
@@ -819,16 +869,27 @@ export default function AdminServicesPage() {
                       disabled={catIndex === categories.length - 1}
                       onClick={() => handleMoveCategory(catIndex, 'down')}
                       className="p-1 text-gray-400 hover:text-blue-600 disabled:opacity-30 disabled:pointer-events-none rounded transition-colors"
-                      title="Move Category Down"
+                      title="Move Service Down"
                     >
                       <ArrowDown className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
-                  {/* Icon Preview */}
-                  <div className="w-10 h-10 rounded-xl bg-[#07152E] text-white flex items-center justify-center flex-shrink-0 shadow-xs">
-                    <DynamicIcon name={category.icon || 'FileText'} className="w-5 h-5 text-[#93C5FD]" />
-                  </div>
+                  {/* Icon / Image Preview */}
+                  {category.image_url ? (
+                    <div className="w-10 h-10 rounded-xl overflow-hidden bg-slate-900 border border-slate-200 flex-shrink-0 shadow-xs relative">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={category.image_url}
+                        alt={category.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-10 h-10 rounded-xl bg-[#2b2d54] text-white flex items-center justify-center flex-shrink-0 shadow-xs">
+                      <DynamicIcon name={category.icon || 'FileText'} className="w-5 h-5 text-[#fcdd5e]" />
+                    </div>
+                  )}
 
                   <div>
                     <div className="flex items-center gap-2">
@@ -847,7 +908,7 @@ export default function AdminServicesPage() {
                   </div>
                 </div>
 
-                {/* Category Action Buttons */}
+                {/* Service Action Buttons */}
                 <div className="flex items-center gap-2 self-end md:self-auto">
                   <button
                     type="button"
@@ -861,7 +922,7 @@ export default function AdminServicesPage() {
                     type="button"
                     onClick={() => handleOpenEditCategory(category)}
                     className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors border border-gray-200"
-                    title="Edit Category Info"
+                    title="Edit Service Info"
                   >
                     <Edit className="w-4 h-4" />
                   </button>
@@ -869,19 +930,19 @@ export default function AdminServicesPage() {
                     type="button"
                     onClick={() => handleDeleteCategory(category.id)}
                     className="p-2 text-gray-500 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors border border-gray-200"
-                    title="Delete Category"
+                    title="Delete Service"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
               </div>
 
-              {/* Category Sub-Cards Grid (Inside Category Card) */}
+              {/* Service Sub-Cards Grid */}
               <div className="p-5 sm:p-6 bg-white">
                 {subServices.length === 0 ? (
                   <div className="p-6 rounded-xl border border-dashed border-gray-200 text-center bg-gray-50/50">
                     <p className="text-xs text-gray-400">
-                      No service cards added to this category yet.
+                      No service cards added to this service yet.
                     </p>
                     <button
                       type="button"
@@ -984,14 +1045,14 @@ export default function AdminServicesPage() {
       </div>
 
       {/* ========================================================================= */}
-      {/* 3. CATEGORY MODAL (Create / Edit Category Heading) */}
+      {/* 3. SERVICE MODAL (Create / Edit Service Heading) */}
       {/* ========================================================================= */}
       {isCategoryModalOpen && editingCategory && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/50 backdrop-blur-xs">
           <div className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-5 sm:p-6 shadow-xl border border-gray-200">
             <div className="flex items-center justify-between pb-3 border-b border-gray-100">
               <h3 className="text-base font-bold text-[#0B192C]">
-                {editingCategory.id ? 'Edit Category' : 'Create New Category'}
+                {editingCategory.id ? 'Edit Service' : 'Create New Service'}
               </h3>
               <button
                 type="button"
@@ -1005,34 +1066,26 @@ export default function AdminServicesPage() {
             <form onSubmit={handleSaveCategory} className="space-y-4 pt-4">
               <div>
                 <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  Category Title *
+                  Service Title *
                 </label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Taxation Services"
+                  placeholder="Enter service title"
                   value={editingCategory.title}
-                  onChange={(e) =>
-                    setEditingCategory({ ...editingCategory, title: e.target.value })
-                  }
+                  onChange={(e) => {
+                    const newTitle = e.target.value;
+                    setEditingCategory({
+                      ...editingCategory,
+                      title: newTitle,
+                      slug: slugify(newTitle),
+                    });
+                  }}
                   className="w-full text-xs px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none"
                 />
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  URL Slug
-                </label>
-                <input
-                  type="text"
-                  placeholder="e.g. taxation-services (auto-generated if empty)"
-                  value={editingCategory.slug || ''}
-                  onChange={(e) =>
-                    setEditingCategory({ ...editingCategory, slug: e.target.value })
-                  }
-                  className="w-full text-xs px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none"
-                />
-              </div>
+              {/* URL Slug is auto-generated in the background from title and hidden from the modal */}
 
               <div>
                 <label className="block text-xs font-semibold text-gray-700 mb-1">
@@ -1040,7 +1093,7 @@ export default function AdminServicesPage() {
                 </label>
                 <textarea
                   rows={2}
-                  placeholder="e.g. Comprehensive direct and indirect tax solutions for individuals, businesses and corporates."
+                  placeholder="Enter short description"
                   value={editingCategory.short_description || ''}
                   onChange={(e) =>
                     setEditingCategory({ ...editingCategory, short_description: e.target.value })
@@ -1049,9 +1102,112 @@ export default function AdminServicesPage() {
                 />
               </div>
 
+              {/* SERVICE IMAGE SECTION (Drag & Drop + URL) */}
+              <div className="p-3.5 bg-slate-50/80 rounded-xl border border-slate-200 space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <label className="block text-xs font-bold text-gray-800">
+                    Service Image (Optional)
+                  </label>
+                  {editingCategory.image_url && (
+                    <button
+                      type="button"
+                      onClick={() => setEditingCategory({ ...editingCategory, image_url: '' })}
+                      className="text-[11px] font-semibold text-rose-600 hover:text-rose-800"
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
+
+                {/* Drag and Drop Service Image Box */}
+                <div
+                  onDragOver={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setIsDraggingCategory(true);
+                  }}
+                  onDragLeave={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setIsDraggingCategory(false);
+                  }}
+                  onDrop={async (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setIsDraggingCategory(false);
+                    const file = e.dataTransfer.files?.[0];
+                    if (file) await handleUploadCategoryFile(file);
+                  }}
+                  onClick={() => categoryFileInputRef.current?.click()}
+                  className={`relative rounded-xl border-2 border-dashed p-4 transition-all duration-200 cursor-pointer flex flex-col items-center justify-center text-center ${
+                    isDraggingCategory
+                      ? 'border-blue-500 bg-blue-50/70 scale-[1.01]'
+                      : 'border-gray-300 hover:border-blue-400 hover:bg-blue-50/20 bg-white'
+                  }`}
+                >
+                  <input
+                    type="file"
+                    ref={categoryFileInputRef}
+                    onChange={handleCategoryFileUpload}
+                    accept="image/*"
+                    className="hidden"
+                  />
+
+                  {categoryUploading ? (
+                    <div className="py-2 flex flex-col items-center">
+                      <RefreshCw className="w-6 h-6 text-blue-600 animate-spin mb-1" />
+                      <p className="text-xs font-bold text-blue-600">Uploading service image...</p>
+                    </div>
+                  ) : editingCategory.image_url ? (
+                    <div className="w-full flex items-center gap-3">
+                      <div className="w-20 h-14 rounded-lg overflow-hidden bg-slate-900 border border-slate-200 flex-shrink-0 relative group/cimg">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={editingCategory.image_url}
+                          alt="Service Preview"
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/cimg:opacity-100 transition-opacity flex items-center justify-center text-white text-[9px] font-bold">
+                          Replace
+                        </div>
+                      </div>
+                      <div className="text-left flex-grow">
+                        <span className="text-xs font-bold text-gray-900 block">Image Selected</span>
+                        <p className="text-[10px] text-gray-400 truncate max-w-[220px]">{editingCategory.image_url}</p>
+                        <p className="text-[10px] text-blue-600 font-semibold mt-1">Drop image or click to change</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="py-2 flex flex-col items-center">
+                      <Upload className="w-6 h-6 text-blue-600 mb-1" />
+                      <p className="text-xs font-bold text-gray-800">
+                        Drag &amp; drop service image here
+                      </p>
+                      <p className="text-[10px] text-gray-500">
+                        or click to browse from device
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Direct URL input alternative */}
+                <div className="flex items-center gap-2 pt-0.5">
+                  <span className="text-[10px] text-gray-400 whitespace-nowrap">Or URL:</span>
+                  <input
+                    type="text"
+                    placeholder="Paste image URL (https://...)"
+                    value={editingCategory.image_url || ''}
+                    onChange={(e) =>
+                      setEditingCategory({ ...editingCategory, image_url: e.target.value })
+                    }
+                    className="flex-grow text-xs px-2.5 py-1.5 rounded-lg border border-gray-300 focus:border-blue-600 outline-none w-full bg-white text-gray-700"
+                  />
+                </div>
+              </div>
+
               <div>
                 <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  Category Icon
+                  Service Icon
                 </label>
                 <div className="flex flex-wrap gap-2 mb-2">
                   {COMMON_ICONS.map((icon) => (
@@ -1094,10 +1250,10 @@ export default function AdminServicesPage() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold bg-[#07152E] hover:bg-[#0E2A5C] text-white rounded-xl shadow-xs disabled:opacity-50"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold bg-[#2b2d54] hover:bg-[#222443] text-white rounded-xl shadow-xs disabled:opacity-50"
                 >
-                  {saving ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
-                  <span>Save Category</span>
+                  {saving ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5 text-[#fcdd5e]" />}
+                  <span>Save Service</span>
                 </button>
               </div>
             </form>
@@ -1278,9 +1434,9 @@ export default function AdminServicesPage() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-xs disabled:opacity-50"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold bg-[#2b2d54] hover:bg-[#222443] text-white rounded-xl shadow-xs disabled:opacity-50"
                 >
-                  {saving ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
+                  {saving ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5 text-[#fcdd5e]" />}
                   <span>Save Service Card</span>
                 </button>
               </div>

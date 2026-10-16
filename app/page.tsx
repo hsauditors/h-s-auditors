@@ -9,6 +9,7 @@ import {
   getWhyChooseItems,
   getAboutContent,
   getAboutFeatures,
+  getValues,
   getIndustries,
 } from '@/lib/data';
 import { syncHomepageImages } from '@/lib/syncImages';
@@ -43,6 +44,7 @@ export default async function HomePage() {
     whyChooseItems,
     aboutContent,
     aboutFeatures,
+    values,
     industries,
   ] = await Promise.all([
     getSiteSettings(),
@@ -54,6 +56,7 @@ export default async function HomePage() {
     getWhyChooseItems(),
     getAboutContent(),
     getAboutFeatures(),
+    getValues(),
     getIndustries(),
   ]);
 
@@ -82,7 +85,7 @@ export default async function HomePage() {
         <AboutSection about={aboutContent} features={aboutFeatures} />
 
         {/* 8. Core Values (Integrity, Confidentiality, Timely) */}
-        <ValuesSection />
+        <ValuesSection values={values} />
 
         {/* 9. Industries We Serve */}
         <IndustriesSection industries={industries} />

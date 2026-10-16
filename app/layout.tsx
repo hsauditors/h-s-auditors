@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { getSiteSettings } from '@/lib/data';
+import { ConsultationModal } from '@/components/ConsultationModal';
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
@@ -22,8 +23,8 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description,
     icons: {
-      icon: '/images/hs-logo.png',
-      apple: '/images/hs-logo.png',
+      icon: '/logo.png',
+      apple: '/logo.png',
     },
     keywords: [
       'H&S Auditors',
@@ -106,12 +107,12 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/images/hs-logo.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/images/hs-logo.png" />
+        <link rel="icon" href="/logo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/logo.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Caveat:wght@600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Lora:ital,wght@0,500;0,600;1,400;1,500&display=swap"
           rel="stylesheet"
         />
         <script
@@ -121,6 +122,7 @@ export default async function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col bg-white text-brand-text">
         {children}
+        <ConsultationModal />
       </body>
     </html>
   );
