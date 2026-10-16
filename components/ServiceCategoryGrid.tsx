@@ -36,7 +36,7 @@ export function ServiceCategoryGrid({ subServices, mobileLimit = 4 }: ServiceCat
           return (
             <div
               key={sub.id || subIdx}
-              className={`${hiddenOnMobile ? 'hidden sm:flex' : 'flex'} bg-white rounded-xl border border-gray-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-lg hover:border-blue-200 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden flex-col justify-between group`}
+              className={`${hiddenOnMobile ? 'hidden sm:flex' : 'flex'} bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 overflow-hidden flex-col justify-between group`}
             >
               {/* Card Top Image (if added from admin) */}
               {hasImage && (
@@ -53,13 +53,13 @@ export function ServiceCategoryGrid({ subServices, mobileLimit = 4 }: ServiceCat
               )}
 
               {/* Card Body */}
-              <div className="p-3 sm:p-5 flex flex-col flex-grow justify-between">
+              <div className="p-3.5 sm:p-5 flex flex-col flex-grow justify-between">
                 <div>
-                  <h3 className="text-[12.5px] sm:text-[15px] font-bold text-[#0B192C] group-hover:text-blue-600 transition-colors leading-snug mb-1 sm:mb-2">
+                  <h3 className="text-[12.5px] sm:text-[15px] font-bold text-[#2b2d54] group-hover:opacity-80 transition-colors leading-snug mb-1 sm:mb-2">
                     {sub.title}
                   </h3>
                   {sub.description && (
-                    <p className="text-[11px] sm:text-xs text-gray-500 leading-relaxed font-normal mb-2.5 sm:mb-4 line-clamp-2 sm:line-clamp-4">
+                    <p className="text-[11px] sm:text-xs text-slate-500 leading-relaxed font-normal mb-2.5 sm:mb-4 line-clamp-2 sm:line-clamp-4">
                       {sub.description}
                     </p>
                   )}
@@ -67,7 +67,7 @@ export function ServiceCategoryGrid({ subServices, mobileLimit = 4 }: ServiceCat
 
                 <Link
                   href={`/contact?subject=${encodeURIComponent(sub.title)}`}
-                  className="inline-flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs font-bold text-[#2563EB] hover:text-[#0B192C] transition-colors mt-auto w-fit"
+                  className="inline-flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs font-semibold text-[#2b2d54] hover:opacity-75 transition-colors mt-auto w-fit"
                 >
                   <span>Learn More</span>
                   <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -85,7 +85,7 @@ export function ServiceCategoryGrid({ subServices, mobileLimit = 4 }: ServiceCat
             type="button"
             onClick={() => setExpanded((v) => !v)}
             aria-expanded={expanded}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-blue-200 text-[#2563EB] text-xs font-bold shadow-2xs hover:bg-blue-50 active:scale-[0.98] transition-all"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-[#2b2d54] text-xs font-semibold shadow-sm hover:bg-stone-50 active:scale-[0.98] transition-all"
           >
             <span>
               {expanded
@@ -93,7 +93,7 @@ export function ServiceCategoryGrid({ subServices, mobileLimit = 4 }: ServiceCat
                 : `View More (${subServices.length - mobileLimit})`}
             </span>
             <ChevronDown
-              className={`w-3.5 h-3.5 transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
+              className={`w-3.5 h-3.5 text-[#2b2d54] transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
             />
           </button>
         </div>

@@ -4,23 +4,25 @@
 
 @layer base {
   :root {
-    --brand-deepNavy: #071A3D;
-    --brand-navy: #102A56;
-    --brand-blue: #2563EB;
-    --brand-softBlue: #EFF6FF;
-    --brand-gold: #F4C542;
+    --brand-deepNavy: #2b2d54;
+    --brand-navy: #2b2d54;
+    --brand-blue: #2b2d54;
+    --brand-softBlue: #F4F5FA;
+    --brand-gold: #fcdd5e;
+    --brand-goldHover: #e6c645;
+    --brand-goldLight: #FEFCE8;
     --brand-white: #FFFFFF;
-    --brand-lightGray: #F7F9FC;
-    --brand-text: #15264A;
-    --brand-muted: #667085;
-    --brand-border: #E5EAF0;
+    --brand-warmStone: #FAF9F6;
+    --brand-text: #2b2d54;
+    --brand-muted: #526071;
+    --brand-border: #E8E6E1;
   }
 
   html {
     scroll-behavior: smooth;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: var(--brand-text);
-    background-color: #FFFFFF;
+    background-color: #FAF9F6;
   }
 
   body {
@@ -28,24 +30,31 @@
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    selection-background-color: #fcdd5e;
+    selection-color: #2b2d54;
+  }
+
+  ::selection {
+    background-color: #fcdd5e;
+    color: #2b2d54;
   }
 }
 
-/* Custom scrollbar */
+/* Bespoke subtle scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: #F4F1EA;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #D5CFC3;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #fcdd5e;
 }

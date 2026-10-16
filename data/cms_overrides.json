@@ -36,10 +36,10 @@
       "id": "00000000-0000-0000-0004-000000000005",
       "title": "Audit & Assurance",
       "slug": "audit-assurance",
-      "short_description": "Statutory, internal and tax audits that ensure compliance and transparency.",
+      "short_description": "Statutory audits under the Companies Act, tax audits under Section 44AB, internal audits and stock audits that strengthen controls and stakeholder confidence.",
       "long_description": "Independent audits provide lenders, shareholders, and regulatory authorities with absolute confidence in your financial statements. We conduct statutory audits under the Companies Act, tax audits under Section 44AB of the Income Tax Act, internal audits to strengthen internal controls, and inventory/stock verifications.",
       "icon": "ShieldCheck",
-      "image_url": "/images/service-audit.png",
+      "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1792154801/hs_auditors/services/z66gyux7owbcevtvxbsb.jpg",
       "cta_text": "Learn More",
       "cta_url": "/services/audit-assurance",
       "benefits": [
@@ -59,7 +59,7 @@
       "seo_title": "Audit & Assurance Services | H&S Auditors",
       "seo_description": "Statutory, internal and tax audits that ensure complete compliance and financial transparency.",
       "created_at": "2026-10-07T12:18:51.14279+00:00",
-      "updated_at": "2026-10-09T11:35:42.901Z",
+      "updated_at": "2026-10-16T12:49:25.516Z",
       "sub_services": [
         {
           "id": "sub-aud-1",
@@ -92,10 +92,10 @@
       "id": "00000000-0000-0000-0004-000000000001",
       "title": "GST Filing",
       "slug": "gst-filing",
-      "short_description": "Accurate, hassle-free GST registration, monthly returns and reconciliation.",
+      "short_description": "We architect your GST compliance end-to-end — from registration and classification to return filing, reconciliation and notice resolution — so you never miss an input credit or due date.",
       "long_description": "Navigating Goods and Services Tax in India requires meticulous attention to deadlines, classification, and input tax credit (ITC) reconciliation. H&S Auditors provides comprehensive GST advisory, registration, periodic return filings (GSTR-1, GSTR-3B, GSTR-9/9C), departmental audit support, and handling of departmental notices to ensure 100% statutory compliance without business disruption.",
       "icon": "FileText",
-      "image_url": "/images/service-gst.png",
+      "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1792154432/hs_auditors/services/ha3p8uxqyajbmykitaeg.jpg",
       "cta_text": "Learn More",
       "cta_url": "/services/gst-filing",
       "benefits": [
@@ -115,7 +115,7 @@
       "seo_title": "GST Filing & Compliance Services | H&S Auditors",
       "seo_description": "Accurate, hassle-free GST registration, monthly returns and reconciliation by experienced tax professionals.",
       "created_at": "2026-10-07T12:18:51.14279+00:00",
-      "updated_at": "2026-10-09T11:51:59.840Z",
+      "updated_at": "2026-10-16T12:48:35.411Z",
       "sub_services": [
         {
           "id": "sub_1791545805921",
@@ -148,10 +148,10 @@
       "id": "00000000-0000-0000-0004-000000000002",
       "title": "Income Tax",
       "slug": "income-tax",
-      "short_description": "Maximise tax savings while staying fully compliant with the Income Tax Act.",
+      "short_description": "Strategic tax planning, return filing, advance-tax projections and assessment representation under the Income Tax Act 1961, designed to optimise liability while keeping you fully compliant.",
       "long_description": "Our direct tax consultancy assists corporate entities, partnerships, LLPs, and individuals in strategic tax planning, advance tax computation, tax-deducted-at-source (TDS) management, and annual return filings. We provide sound representation in scrutiny assessments and appeals before tax authorities, keeping your tax liability optimised and fully legitimate.",
       "icon": "BarChart3",
-      "image_url": "/images/service-tax.png",
+      "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1792155476/hs_auditors/services/my7fnupfnmrrkhazhzvb.jpg",
       "cta_text": "Learn More",
       "cta_url": "/services/income-tax",
       "benefits": [
@@ -171,7 +171,7 @@
       "seo_title": "Income Tax Planning & Filing Services | H&S Auditors",
       "seo_description": "Maximise tax savings while staying fully compliant with the Income Tax Act with expert advisory from H&S Auditors.",
       "created_at": "2026-10-07T12:18:51.14279+00:00",
-      "updated_at": "2026-10-09T12:14:58.419Z",
+      "updated_at": "2026-10-16T12:57:59.187Z",
       "sub_services": [
         {
           "id": "sub_1791546843150",
@@ -211,6 +211,45 @@
     "00000000-0000-0000-0004-000000000006": {
       "_deleted": true,
       "updated_at": "2026-10-09T12:18:37.577Z"
+    },
+    "cat_1792153252257": {
+      "id": "cat_1792153252257",
+      "title": "Bookkeeping & Accounting",
+      "slug": "bookkeeping-accounting",
+      "short_description": "Tally- and Zoho-based bookkeeping, bank reconciliation, debtor/creditor tracking and MIS reports that give you a real-time view of your financial position.",
+      "icon": "FileText",
+      "display_order": 4,
+      "is_active": true,
+      "sub_services": [],
+      "updated_at": "2026-10-16T12:48:11.498Z",
+      "_deleted": false,
+      "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1792154728/hs_auditors/services/xb5hlp5immc5yet3bnng.jpg"
+    },
+    "cat_1792155246231": {
+      "id": "cat_1792155246231",
+      "title": "Business Registration",
+      "slug": "business-registration",
+      "short_description": "Entity selection, name approval, incorporation filings, PAN/TAN, GSTIN and shop-licence assistance under the Companies Act 2013 and LLP Act 2008.",
+      "icon": "FileText",
+      "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1792155241/hs_auditors/services/lnngwophchmnhawcissa.jpg",
+      "display_order": 5,
+      "is_active": true,
+      "sub_services": [],
+      "updated_at": "2026-10-16T12:54:06.299Z",
+      "_deleted": false
+    },
+    "cat_1792155378086": {
+      "id": "cat_1792155378086",
+      "title": "Company Secretarial",
+      "slug": "company-secretarial",
+      "short_description": "Annual ROC filings (AOC-4, MGT-7), board minutes, change-of-director filings and compliance calendars to keep your company in good standing.",
+      "icon": "Users",
+      "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1792155373/hs_auditors/services/qbdpcwfwosqilk5lxebu.jpg",
+      "display_order": 6,
+      "is_active": true,
+      "sub_services": [],
+      "updated_at": "2026-10-16T12:56:18.203Z",
+      "_deleted": false
     }
   },
   "services_banner": {
@@ -222,52 +261,6 @@
       "image_url": "/images/service-accounting.jpg"
     }
   },
-  "testimonials": {
-    "test_1791455063679": {
-      "id": "test_1791455063679",
-      "name": "biju",
-      "company": "fishfarm",
-      "designation": "fighter",
-      "quote": "i want a big aquarium for my fighter\n",
-      "image_url": null,
-      "rating": 5,
-      "display_order": 1,
-      "is_active": true,
-      "created_at": "2026-10-08T10:23:40.009Z",
-      "updated_at": "2026-10-08T10:24:23.708Z",
-      "_deleted": false
-    },
-    "test_1791455301948": {
-      "id": "test_1791455301948",
-      "name": "bikji",
-      "company": "vshgieubker",
-      "designation": "akvugvhjfudiljv",
-      "quote": "dgiyiswveirepjid vkkml",
-      "image_url": null,
-      "rating": 5,
-      "display_order": 1,
-      "is_active": true,
-      "created_at": "2026-10-08T10:28:09.721Z",
-      "updated_at": "2026-10-08T10:28:21.986Z",
-      "_deleted": false
-    }
-  },
-  "careers": {
-    "career_1791536666142": {
-      "id": "career_1791536666142",
-      "job_title": "senior developer",
-      "department": "Audit & Assurance",
-      "location": "Ottapalam, Kerala",
-      "employment_type": "Full-time",
-      "description": "wertyuioppfdsasdfghjkl",
-      "requirements": [
-        "oiuytreskl;iuytrdcvbnmluyfcvbnml;iuyf"
-      ],
-      "display_order": 1,
-      "is_active": true,
-      "created_at": "2026-10-09T09:03:39.447Z",
-      "updated_at": "2026-10-09T09:15:12.712Z",
-      "_deleted": false
-    }
-  }
+  "testimonials": {},
+  "careers": {}
 }

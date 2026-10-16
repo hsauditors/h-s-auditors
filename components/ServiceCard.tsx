@@ -8,15 +8,15 @@ interface ServiceCardProps {
 
 export function ServiceCard({ service }: ServiceCardProps) {
   return (
-    <div className="relative flex flex-col p-3 sm:p-4 bg-white rounded-xl border border-gray-200/80 shadow-xs hover:shadow-md hover:border-blue-200 transition-all duration-200">
+    <div className="relative flex flex-col p-3 sm:p-4 bg-white rounded-xl shadow-[0_2px_12px_rgba(7,26,61,0.04)] hover:shadow-lg transition-all duration-200">
       <div>
         {/* Icon in soft colored container */}
-        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 mb-2 sm:mb-2.5">
+        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#fcdd5e]/25 flex items-center justify-center text-[#2b2d54] mb-2 sm:mb-2.5">
           <DynamicIcon name={service.icon} className="w-4 h-4" />
         </div>
 
         {/* Title */}
-        <h3 className="text-xs sm:text-sm font-bold text-brand-deepNavy mb-1 leading-snug">
+        <h3 className="text-xs sm:text-sm font-bold text-[#2b2d54] mb-1 leading-snug">
           {service.title}
         </h3>
 

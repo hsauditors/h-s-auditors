@@ -10,28 +10,35 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          deepNavy: '#071A3D',
-          navy: '#102A56',
-          blue: '#2563EB',
-          softBlue: '#EFF6FF',
-          gold: '#F4C542',
-          goldHover: '#E5B730',
+          deepNavy: '#2b2d54',      // Primary Theme Blue
+          navy: '#2b2d54',          // Rich Executive Theme Blue
+          navyLight: '#393c6e',     // Soft Navy Variant
+          blue: '#2b2d54',          // Primary Theme Blue
+          softBlue: '#F4F5FA',      // Soft Tint
+          gold: '#fcdd5e',          // Theme Yellow
+          goldHover: '#e6c645',     // Theme Yellow Hover
+          goldLight: '#FEFCE8',     // Soft Yellow Tint
+          goldBorder: '#FDE68A',    // Fine Accent
           white: '#FFFFFF',
-          lightGray: '#F7F9FC',
-          text: '#15264A',
-          muted: '#667085',
-          border: '#E5EAF0',
-          darkBg: '#05132C',
+          warmStone: '#FAF9F6',     // Alabaster Stone Surface
+          warmCream: '#F4F1EA',     // Soft Warm Parchment
+          text: '#2b2d54',          // Theme Primary Ink
+          muted: '#526071',         // Editorial Neutral Slate
+          border: '#E8E6E1',        // Warm Hairline Border
+          darkBg: '#1e203c',        // Deepest Theme Navy
         },
       },
       fontFamily: {
-        sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'sans-serif'],
-        serif: ["'Playfair Display'", 'Georgia', 'serif'],
+        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        serif: ['"Playfair Display"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+        editorial: ['"Cormorant Garamond"', '"Playfair Display"', 'Georgia', 'serif'],
+        lora: ['"Lora"', 'Georgia', 'serif'],
       },
       boxShadow: {
-        subtle: '0 1px 3px 0 rgba(7, 26, 61, 0.05), 0 1px 2px 0 rgba(7, 26, 61, 0.03)',
-        card: '0 4px 20px -2px rgba(7, 26, 61, 0.06), 0 2px 6px -1px rgba(7, 26, 61, 0.04)',
-        cardHover: '0 10px 30px -4px rgba(7, 26, 61, 0.12), 0 4px 10px -2px rgba(7, 26, 61, 0.06)',
+        subtle: '0 1px 3px 0 rgba(43, 45, 84, 0.04), 0 1px 2px 0 rgba(43, 45, 84, 0.02)',
+        card: '0 2px 14px -2px rgba(43, 45, 84, 0.05), 0 1px 4px -1px rgba(43, 45, 84, 0.03)',
+        cardHover: '0 12px 32px -4px rgba(43, 45, 84, 0.09), 0 4px 12px -2px rgba(43, 45, 84, 0.04)',
+        goldGlow: '0 4px 20px -2px rgba(252, 221, 94, 0.35)',
       },
     },
   },

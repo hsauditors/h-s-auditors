@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Save, CheckCircle, AlertCircle, RefreshCw } from 'lucide-react';
+import { Save, CheckCircle, AlertCircle, RefreshCw, Upload, Image as ImageIcon } from 'lucide-react';
+import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import { SiteSettings } from '@/types';
 
@@ -14,6 +15,7 @@ export default function AdminSettingsPage() {
   const [formData, setFormData] = useState({
     company_name: '',
     tagline: '',
+    logo_url: '/logo.png',
     phone: '',
     landline: '',
     email: '',
@@ -24,6 +26,7 @@ export default function AdminSettingsPage() {
     default_seo_title: '',
     default_seo_description: '',
   });
+  const [uploadingLogo, setUploadingLogo] = useState(false);
 
   useEffect(() => {
     fetchSettings();
@@ -53,6 +56,7 @@ export default function AdminSettingsPage() {
       setFormData({
         company_name: sData.company_name || '',
         tagline: sData.tagline || '',
+        logo_url: sData.logo_url || '/logo.png',
         phone: sData.phone || '',
         landline: sData.landline || '',
         email: sData.email || '',
@@ -97,6 +101,33 @@ export default function AdminSettingsPage() {
       setMessage({ type: 'error', text: err.message || 'Error saving settings' });
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingLogo(true);
+    setMessage(null);
+
+    const body = new FormData();
+    body.append('file', file);
+    body.append('folder', 'hs_auditors/logo');
+
+    try {
+      const res = await fetch('/api/admin/media/upload', {
+        method: 'POST',
+        body,
+      });
+      const data = await res.json();
+      if (!res.ok || data.error) throw new Error(data.error || 'Upload failed');
+      setFormData((prev) => ({ ...prev, logo_url: data.url }));
+      setMessage({ type: 'success', text: 'New logo uploaded! Click "Save Settings" to publish site-wide.' });
+    } catch (err: any) {
+      setMessage({ type: 'error', text: err.message || 'Failed to upload logo' });
+    } finally {
+      setUploadingLogo(false);
     }
   };
 
@@ -178,6 +209,80 @@ export default function AdminSettingsPage() {
               onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
               className="w-full px-3.5 py-2.5 rounded-lg border border-brand-border text-xs sm:text-sm text-brand-text outline-none focus:border-brand-blue"
             />
+          </div>
+        </div>
+
+        {/* Corporate Brand Logo Configuration */}
+        <div className="border-t border-brand-border pt-6 space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-xs font-bold text-brand-deepNavy uppercase tracking-wider flex items-center gap-2">
+                <ImageIcon className="w-4 h-4 text-brand-blue" />
+                <span>Firm Logo Asset</span>
+              </h3>
+              <p className="text-[11px] text-brand-muted mt-0.5">
+                Primary logo displayed across Header, Footer, Admin, and Browser Favicon
+              </p>
+            </div>
+            <label className="inline-flex items-center gap-2 bg-brand-lightBlue hover:bg-blue-100 text-brand-blue px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-colors shadow-sm">
+              {uploadingLogo ? (
+                <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+              ) : (
+                <Upload className="w-3.5 h-3.5" />
+              )}
+              <span>{uploadingLogo ? 'Uploading...' : 'Upload New Logo'}</span>
+              <input
+                type="file"
+                accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                onChange={handleLogoUpload}
+                disabled={uploadingLogo}
+                className="hidden"
+              />
+            </label>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-[11px] font-semibold text-brand-muted mb-1">
+                Logo URL or Path (Default: /logo.png)
+              </label>
+              <input
+                type="text"
+                value={formData.logo_url}
+                onChange={(e) => setFormData({ ...formData, logo_url: e.target.value })}
+                placeholder="/logo.png"
+                className="w-full px-3.5 py-2.5 rounded-lg border border-brand-border text-xs sm:text-sm text-brand-text outline-none focus:border-brand-blue"
+              />
+            </div>
+
+            {/* Live Dual Preview */}
+            <div className="flex items-center gap-3">
+              <div className="flex-1 bg-gray-50 border border-gray-200 rounded-xl p-2.5 flex flex-col items-center justify-center min-h-[64px]">
+                <span className="text-[10px] uppercase font-bold text-gray-400 mb-1">Header (Light)</span>
+                <div className="relative h-9 w-full flex items-center justify-center">
+                  <Image
+                    src={formData.logo_url || '/logo.png'}
+                    alt="Logo Preview Light"
+                    width={180}
+                    height={40}
+                    className="max-h-9 w-auto object-contain"
+                  />
+                </div>
+              </div>
+
+              <div className="flex-1 bg-[#2b2d54] border border-white/10 rounded-xl p-2.5 flex flex-col items-center justify-center min-h-[64px]">
+                <span className="text-[10px] uppercase font-bold text-gray-300 mb-1">Footer/Admin (Dark)</span>
+                <div className="relative h-9 w-full flex items-center justify-center">
+                  <Image
+                    src={formData.logo_url && formData.logo_url !== '/logo.png' ? formData.logo_url : '/images/hs-logo-dark.svg'}
+                    alt="Logo Preview Dark"
+                    width={180}
+                    height={40}
+                    className="max-h-9 w-auto object-contain"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

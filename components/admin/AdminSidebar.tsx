@@ -43,7 +43,7 @@ export function AdminSidebar({ isOpen = false, onClose }: AdminSidebarProps) {
   ];
 
   const sidebarContent = (
-    <aside className="w-64 bg-[#071A3D] text-white flex flex-col h-full border-r border-[#1E293B] select-none">
+    <aside className="w-64 bg-[#2b2d54] text-white flex flex-col h-full border-r border-white/10 select-none">
       {/* Brand Header */}
       <div className="p-4 border-b border-white/10 flex items-center justify-between">
         <BrandLogo variant="dark" size="sm" href="/admin" />
@@ -76,11 +76,11 @@ export function AdminSidebar({ isOpen = false, onClose }: AdminSidebarProps) {
               onClick={() => onClose?.()}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs sm:text-[13px] font-semibold transition-all duration-150 ${
                 isActive
-                  ? 'bg-blue-600 text-white shadow-sm font-bold'
+                  ? 'bg-[#fcdd5e] text-[#2b2d54] shadow-sm font-bold'
                   : 'text-gray-300 hover:text-white hover:bg-white/5'
               }`}
             >
-              <Icon className="w-4 h-4 flex-shrink-0 text-brand-gold" />
+              <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-[#2b2d54]' : 'text-[#fcdd5e]'}`} />
               <span>{item.label}</span>
             </Link>
           );

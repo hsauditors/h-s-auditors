@@ -1,19 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import cloudinary from './cloudinary';
 import { createClient } from './supabase/server';
-import {
-  DEFAULT_SERVICES,
-  DEFAULT_SERVICES_BANNER,
-  DEFAULT_COMPLIANCE_DEADLINES,
-  DEFAULT_WHY_CHOOSE,
-  DEFAULT_STATS,
-  DEFAULT_HERO,
-  DEFAULT_ABOUT,
-  DEFAULT_SETTINGS,
-  DEFAULT_TESTIMONIALS,
-  DEFAULT_INDUSTRIES,
-} from './defaultData';
 import {
   SiteSettings,
   NavigationItem,
@@ -31,88 +18,6 @@ import {
   Testimonial,
   Career,
 } from '@/types';
-
-const ARTIFACT_DIR = 'C:\\Users\\muham\\.gemini\\antigravity-ide\\brain\\ce0b4e2c-2cfb-4289-b5b3-db171af02d6a';
-const CURRENT_ARTIFACT_DIR = 'C:\\Users\\muham\\.gemini\\antigravity-ide\\brain\\a8efad44-b0d6-4618-9d1f-ad2f8e97210f';
-
-function ensureLocalImages() {
-  try {
-    const pubImages = path.join(process.cwd(), 'public', 'images');
-    if (!fs.existsSync(pubImages)) fs.mkdirSync(pubImages, { recursive: true });
-
-    const heroDest = path.join(pubImages, 'hero-team.jpg');
-    if (!fs.existsSync(heroDest)) {
-      const heroSrc = path.join(ARTIFACT_DIR, 'hero_accounting_team_1791368389781.jpg');
-      if (fs.existsSync(heroSrc)) {
-        fs.copyFileSync(heroSrc, heroDest);
-      }
-    }
-
-    const compDest = path.join(pubImages, 'compliance-calendar.jpg');
-    if (!fs.existsSync(compDest)) {
-      const compSrc = path.join(ARTIFACT_DIR, 'compliance_calendar_1791368440104.jpg');
-      if (fs.existsSync(compSrc)) {
-        fs.copyFileSync(compSrc, compDest);
-      }
-    }
-
-    const srvDest = path.join(pubImages, 'service-accounting.jpg');
-    if (!fs.existsSync(srvDest)) {
-      const srvSrc = path.join(ARTIFACT_DIR, 'calculator_financial_1791368415493.jpg');
-      if (fs.existsSync(srvSrc)) {
-        fs.copyFileSync(srvSrc, srvDest);
-      }
-    }
-
-    const officeDest = path.join(pubImages, 'about-office.jpg');
-    const customAboutPng = path.join(pubImages, 'H&S Auditors about section.png');
-    if (fs.existsSync(customAboutPng)) {
-      fs.copyFileSync(customAboutPng, officeDest);
-      fs.copyFileSync(customAboutPng, path.join(pubImages, 'about-office.png'));
-    } else {
-      const newOfficeSrc = path.join(ARTIFACT_DIR, 'about_reception_lounge_1791449919209.jpg');
-      if (fs.existsSync(newOfficeSrc)) {
-        fs.copyFileSync(newOfficeSrc, officeDest);
-      } else {
-        const officeSrc = path.join(CURRENT_ARTIFACT_DIR, 'about_office_reception_1791439743586.jpg');
-        if (fs.existsSync(officeSrc)) {
-          fs.copyFileSync(officeSrc, officeDest);
-        }
-      }
-    }
-
-    const plantDest = path.join(pubImages, 'contact-plant.jpg');
-    if (!fs.existsSync(plantDest)) {
-      const plantSrc = path.join(CURRENT_ARTIFACT_DIR, 'contact_desk_plant_1791439782184.jpg');
-      if (fs.existsSync(plantSrc)) {
-        fs.copyFileSync(plantSrc, plantDest);
-      }
-    }
-
-    const customOurTeam = path.join(pubImages, 'H&S ourteam page.png');
-    if (fs.existsSync(customOurTeam)) {
-      fs.copyFileSync(customOurTeam, path.join(pubImages, 'hero-ourteam.png'));
-    }
-
-    const uploadedLogoText = path.join(CURRENT_ARTIFACT_DIR, '.user_uploaded', 'media_1791550388798.png');
-    if (fs.existsSync(uploadedLogoText)) {
-      fs.copyFileSync(uploadedLogoText, path.join(pubImages, 'H&S Auditors logo text.png'));
-      fs.copyFileSync(uploadedLogoText, path.join(pubImages, 'hs-brand-text.png'));
-    }
-
-    const uploadedLogo = path.join(CURRENT_ARTIFACT_DIR, '.user_uploaded', 'media_1791441565319.png');
-    if (fs.existsSync(uploadedLogo)) {
-      fs.copyFileSync(uploadedLogo, path.join(pubImages, 'hs-logo.png'));
-      fs.copyFileSync(uploadedLogo, path.join(process.cwd(), 'public', 'logo.png'));
-      fs.copyFileSync(uploadedLogo, path.join(process.cwd(), 'public', 'favicon.png'));
-    }
-  } catch (err) {
-    console.warn('ensureLocalImages note:', err);
-  }
-}
-
-// Ensure images on server init
-ensureLocalImages();
 
 function getOverridesForTable(table: string): Record<string, any> {
   try {
@@ -133,7 +38,7 @@ function getOverride(table: string, key: string): any {
 
 export async function getSiteSettings(): Promise<SiteSettings | null> {
   const override = getOverride('site_settings', 'settings') || getOverride('site_settings', 'default');
-  let base: any = DEFAULT_SETTINGS;
+  let base: any = null;
   try {
     const supabase = createClient();
     const { data } = await supabase
@@ -147,7 +52,8 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
     }
   } catch {}
 
-  return { ...base, ...(override || {}) } as SiteSettings;
+  if (!base && !override) return null;
+  return { ...(base || {}), ...(override || {}) } as SiteSettings;
 }
 
 export async function getNavigationItems(): Promise<NavigationItem[]> {
@@ -167,9 +73,8 @@ export async function getNavigationItems(): Promise<NavigationItem[]> {
 }
 
 export async function getHomepageSection(sectionKey: string): Promise<HomepageSection | null> {
-  ensureLocalImages();
   const override = getOverride('homepage_sections', sectionKey);
-  let base: any = sectionKey === 'hero' ? DEFAULT_HERO : null;
+  let base: any = null;
 
   try {
     const supabase = createClient();
@@ -191,12 +96,19 @@ export async function getHomepageSection(sectionKey: string): Promise<HomepageSe
 }
 
 export async function getServicesBanner(): Promise<ServicesBannerData> {
-  ensureLocalImages();
   const override =
     getOverride('services_banner', 'banner') ||
     getOverride('services_banner', 'default');
+
+  const defaultBanner: ServicesBannerData = {
+    eyebrow: 'OUR SERVICES',
+    headline: 'Accounting, Audit & Advisory Services',
+    description: 'Explore our core domains below. Each service is delivered with expertise, accuracy and a deep understanding of regulatory requirements to support your business goals.',
+    image_url: '/images/service-accounting.jpg',
+  };
+
   return {
-    ...DEFAULT_SERVICES_BANNER,
+    ...defaultBanner,
     ...(override || {}),
   };
 }
@@ -213,10 +125,6 @@ export async function getHomepageStats(): Promise<HomepageStat[]> {
       .order('display_order', { ascending: true });
     if (data && data.length > 0) baseList = data as HomepageStat[];
   } catch {}
-
-  if (baseList.length === 0) {
-    baseList = [...DEFAULT_STATS] as unknown as HomepageStat[];
-  }
 
   const map = new Map<string, HomepageStat>();
   baseList.forEach((item) => map.set(item.id, item));
@@ -252,20 +160,8 @@ export async function getServices(): Promise<Service[]> {
     if (data && data.length > 0) baseList = data as Service[];
   } catch {}
 
-  if (baseList.length === 0) {
-    baseList = [...DEFAULT_SERVICES] as unknown as Service[];
-  }
-
   const map = new Map<string, Service>();
   baseList.forEach((s: any) => {
-    if (!s.sub_services || s.sub_services.length === 0) {
-      const def = DEFAULT_SERVICES.find(
-        (d) => d.slug === s.slug || d.title?.toLowerCase() === s.title?.toLowerCase()
-      );
-      if (def?.sub_services) {
-        s.sub_services = def.sub_services;
-      }
-    }
     map.set(String(s.id || s.slug), s);
   });
 
@@ -301,7 +197,6 @@ export async function getServiceBySlug(slug: string): Promise<Service | null> {
   const direct = all.find((s) => s.slug === slug || s.id === slug);
   if (direct) return direct;
 
-  // Gracefully handle common legacy slug aliases
   if (slug === 'gst-filing') return all.find((s) => s.slug === 'gst-compliance') || null;
   if (slug === 'bookkeeping-accounting' || slug === 'bookkeeping-and-accounting') {
     return all.find((s) => s.slug === 'accounting-payroll') || null;
@@ -325,10 +220,6 @@ export async function getComplianceDeadlines(): Promise<ComplianceDeadline[]> {
       .order('display_order', { ascending: true });
     if (data && data.length > 0) baseList = data as ComplianceDeadline[];
   } catch {}
-
-  if (baseList.length === 0) {
-    baseList = [...DEFAULT_COMPLIANCE_DEADLINES] as unknown as ComplianceDeadline[];
-  }
 
   const map = new Map<string, ComplianceDeadline>();
   baseList.forEach((item) => map.set(String(item.id), item));
@@ -363,10 +254,6 @@ export async function getWhyChooseItems(): Promise<WhyChooseItem[]> {
     if (data && data.length > 0) baseList = data as WhyChooseItem[];
   } catch {}
 
-  if (baseList.length === 0) {
-    baseList = [...DEFAULT_WHY_CHOOSE] as unknown as WhyChooseItem[];
-  }
-
   const map = new Map<string, WhyChooseItem>();
   baseList.forEach((item) => map.set(String(item.id), item));
 
@@ -388,9 +275,8 @@ export async function getWhyChooseItems(): Promise<WhyChooseItem[]> {
 }
 
 export async function getAboutContent(): Promise<AboutContent | null> {
-  ensureLocalImages();
   const override = getOverride('about_content', 'about') || getOverride('about_content', 'default');
-  let base: any = DEFAULT_ABOUT;
+  let base: any = null;
   try {
     const supabase = createClient();
     const { data } = await supabase
@@ -404,7 +290,8 @@ export async function getAboutContent(): Promise<AboutContent | null> {
     }
   } catch {}
 
-  return { ...base, ...(override || {}) } as AboutContent;
+  if (!base && !override) return null;
+  return { ...(base || {}), ...(override || {}) } as AboutContent;
 }
 
 export async function getAboutFeatures(): Promise<AboutFeature[]> {
@@ -452,10 +339,6 @@ export async function getIndustries(): Promise<Industry[]> {
 
     if (data && data.length > 0) baseList = data as Industry[];
   } catch {}
-
-  if (baseList.length === 0) {
-    baseList = [...DEFAULT_INDUSTRIES] as unknown as Industry[];
-  }
 
   const map = new Map<string, Industry>();
   baseList.forEach((item) => map.set(String(item.id || item.slug), item));
@@ -526,10 +409,6 @@ export async function getTestimonials(): Promise<Testimonial[]> {
 
     if (data && data.length > 0) baseList = data as Testimonial[];
   } catch {}
-
-  if (baseList.length === 0) {
-    baseList = [...DEFAULT_TESTIMONIALS] as Testimonial[];
-  }
 
   const map = new Map<string, Testimonial>();
   baseList.forEach((item) => map.set(String(item.id), item));

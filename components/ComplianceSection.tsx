@@ -1,85 +1,80 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Calendar } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { ComplianceDeadline } from '@/types';
 
 interface ComplianceSectionProps {
-  deadlines: ComplianceDeadline[];
+  deadlines?: ComplianceDeadline[];
 }
 
-export function ComplianceSection({ deadlines }: ComplianceSectionProps) {
-  const defaultDeadlines: ComplianceDeadline[] = [
-    { id: '1', compliance: 'GST outward supplies', form: 'GSTR-1', due_date: '11th of the following month', display_order: 1, is_active: true, created_at: '', updated_at: '' },
-    { id: '2', compliance: 'GST summary return & payment', form: 'GSTR-3B', due_date: '20th of the following month', display_order: 2, is_active: true, created_at: '', updated_at: '' },
-    { id: '3', compliance: 'TDS payment', form: 'Challan ITNS-281', due_date: '7th of the following month', display_order: 3, is_active: true, created_at: '', updated_at: '' },
-    { id: '4', compliance: 'Quarterly TDS return', form: '24Q / 26Q', due_date: '31st of the month after each quarter', display_order: 4, is_active: true, created_at: '', updated_at: '' },
-    { id: '5', compliance: 'Advance tax instalments', form: 'Challan 280', due_date: '15 Jun, 15 Sep, 15 Dec, 15 Mar', display_order: 5, is_active: true, created_at: '', updated_at: '' },
-    { id: '6', compliance: 'Income tax return (non-audit)', form: 'ITR', due_date: '31 July', display_order: 6, is_active: true, created_at: '', updated_at: '' },
-    { id: '7', compliance: 'Tax audit report', form: 'Form 3CA/3CB+3CD', due_date: '30 September', display_order: 7, is_active: true, created_at: '', updated_at: '' },
-    { id: '8', compliance: 'GST annual return', form: 'GSTR-9 / 9C', due_date: '31 December', display_order: 8, is_active: true, created_at: '', updated_at: '' },
-    { id: '9', compliance: 'ROC annual filings', form: 'AOC-4 / MGT-7', due_date: '30 Oct / 29 Nov', display_order: 9, is_active: true, created_at: '', updated_at: '' },
-  ];
-  const items = deadlines && deadlines.length > 0 ? deadlines : defaultDeadlines;
+export function ComplianceSection({ deadlines = [] }: ComplianceSectionProps) {
+  const activeDeadlines = (deadlines || []).filter((d) => d.is_active !== false);
+
+  if (activeDeadlines.length === 0) {
+    return null;
+  }
+
+  const items = activeDeadlines;
 
   return (
-    <section className="w-full bg-white py-6 sm:py-12 lg:py-14 border-b border-gray-200/80">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+    <section className="w-full bg-[#FAF9F6] py-10 sm:py-14 lg:py-18">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-row items-center justify-between mb-4 sm:mb-8">
+        <div className="flex flex-row items-center justify-between mb-6 sm:mb-8">
           <div>
-            <span className="text-[10px] sm:text-xs font-bold tracking-widest text-blue-600 uppercase mb-0.5 block">
-              STAY AHEAD OF DUE DATES
-            </span>
-            <h2 className="text-lg sm:text-3xl font-extrabold text-brand-deepNavy tracking-tight">
-              Key Compliance Deadlines
+            <div className="flex items-center gap-2 mb-1.5 sm:mb-2">
+              <span className="text-[10px] sm:text-xs font-bold tracking-[0.2em] text-[#2b2d54]/80 uppercase block">
+                STATUTORY DUE DATES
+              </span>
+            </div>
+            <h2 className="text-xl sm:text-3xl font-bold text-[#2b2d54] tracking-tight">
+              Key Compliance Calendar
             </h2>
           </div>
 
           <div className="flex-shrink-0">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-1 text-[11px] sm:text-sm font-bold text-blue-600 hover:text-blue-800 group transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#2b2d54] hover:opacity-80 transition-colors group"
             >
-              <span className="hidden sm:inline">View Full Calendar</span>
+              <span className="hidden sm:inline">Request Calendar Filing Support</span>
               <span className="sm:hidden">Calendar</span>
-              <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 transform group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-3.5 h-3.5 text-[#2b2d54] transform group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>
 
-        {/* Content Grid: Table on Left + Calendar Promo Card on Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 lg:gap-6 items-start">
+        {/* Content Grid: Table on Left + Calendar Promo Card on Right (matched heights) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 items-stretch">
           
           {/* Left: Table Container */}
-          <div className="lg:col-span-8 bg-white rounded-xl border border-gray-200/80 shadow-xs overflow-hidden">
+          <div className="lg:col-span-8 bg-white rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-[11px] sm:text-[13px] border-collapse">
                 <thead>
-                  <tr className="bg-gray-50 border-b border-gray-200 text-brand-deepNavy font-bold uppercase text-[9px] sm:text-[11px] tracking-wider">
-                    <th scope="col" className="py-2 px-2.5 sm:py-2.5 sm:px-5">Compliance</th>
-                    <th scope="col" className="py-2 px-2.5 sm:py-2.5 sm:px-5">Form</th>
-                    <th scope="col" className="py-2 px-2.5 sm:py-2.5 sm:px-5">Due Date</th>
+                  <tr className="bg-[#2b2d54]/5 text-[#2b2d54] font-bold uppercase text-[9.5px] sm:text-[11px] tracking-wider">
+                    <th scope="col" className="py-3 px-3 sm:py-3.5 sm:px-5">Compliance Event</th>
+                    <th scope="col" className="py-3 px-3 sm:py-3.5 sm:px-5">Form / Return</th>
+                    <th scope="col" className="py-3 px-3 sm:py-3.5 sm:px-5">Statutory Deadline</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100 text-brand-text">
+                <tbody className="divide-y divide-stone-100 text-slate-700">
                   {items.map((item, index) => (
                     <tr
                       key={item.id}
-                      className={`hover:bg-blue-50/40 transition-colors ${
-                        index % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'
+                      className={`hover:bg-[#fcdd5e]/10 transition-colors ${
+                        index % 2 === 0 ? 'bg-white' : 'bg-stone-50/50'
                       }`}
                     >
-                      <td className="py-2 px-2.5 sm:py-2.5 sm:px-5 font-semibold text-brand-deepNavy text-[11px] sm:text-[13px]">
+                      <td className="py-2.5 px-3 sm:py-3 sm:px-5 font-semibold text-[#2b2d54] text-[11px] sm:text-[13px]">
                         {item.compliance}
                       </td>
-                      <td className="py-2 px-2.5 sm:py-2.5 sm:px-5 text-gray-500 font-medium">
-                        <span className="inline-block bg-gray-100 px-1.5 py-0.5 rounded text-[10px] sm:text-[11px] text-gray-600">
-                          {item.form}
-                        </span>
+                      <td className="py-2.5 px-3 sm:py-3 sm:px-5 font-semibold text-[#2b2d54] text-[11px] sm:text-[13px]">
+                        {item.form}
                       </td>
-                      <td className="py-2 px-2.5 sm:py-2.5 sm:px-5 font-semibold text-blue-600 text-[11px] sm:text-[13px]">
+                      <td className="py-2.5 px-3 sm:py-3 sm:px-5 font-semibold text-[#2b2d54] text-[11px] sm:text-[13px]">
                         {item.due_date}
                       </td>
                     </tr>
@@ -89,35 +84,42 @@ export function ComplianceSection({ deadlines }: ComplianceSectionProps) {
             </div>
           </div>
 
-          {/* Right: Never miss a deadline card */}
-          <div className="lg:col-span-4 bg-white rounded-xl border border-gray-200/80 overflow-hidden shadow-xs flex flex-col justify-between">
-            <div className="relative w-full aspect-[16/11] bg-slate-900">
+          {/* Right: Bespoke Dark Obsidian Calendar Card with matching height */}
+          <div className="lg:col-span-4 bg-[#2b2d54] text-white rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between h-full">
+            <div className="relative w-full flex-1 min-h-[200px] lg:min-h-[220px] bg-slate-900">
               <Image
                 src="/images/compliance-calendar.jpg"
                 alt="Compliance Calendar Reminder"
                 fill
+                unoptimized
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 33vw"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#2b2d54] via-transparent to-transparent" />
             </div>
 
-            <div className="p-4 sm:p-5 flex flex-col justify-between flex-grow">
+            <div className="p-5 sm:p-6 flex flex-col justify-between flex-shrink-0">
               <div>
-                <h3 className="text-lg sm:text-xl font-extrabold text-brand-deepNavy mb-1.5 leading-snug">
-                  Never miss a deadline again.
+                <span className="text-[10px] font-mono tracking-widest text-[#fcdd5e] uppercase font-bold block mb-1">
+                  ZERO PENALTY GUARANTEE
+                </span>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 leading-snug">
+                  Never miss an Indian tax deadline again.
                 </h3>
-                <p className="text-xs sm:text-[13px] text-gray-500 leading-relaxed mb-4">
-                  Let our experts keep your compliance calendar on track.
+                <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed mb-5 font-normal">
+                  Our statutory audit and tax advisory partners keep your filing calendar fully organised and penalty-free.
                 </p>
               </div>
 
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 w-full bg-brand-deepNavy hover:bg-brand-navy text-white font-bold py-2.5 px-4 rounded-lg transition-colors text-xs sm:text-sm shadow-xs group"
+              <button
+                type="button"
+                data-open-consultation="true"
+                data-subject="Statutory Compliance Review"
+                className="inline-flex items-center justify-center gap-2 w-full bg-[#fcdd5e] hover:bg-[#ebd04f] text-[#2b2d54] font-bold py-3 px-4 rounded-xl transition-all text-xs sm:text-sm shadow-sm group cursor-pointer"
               >
-                <span>Book a Consultation</span>
-                <ArrowRight className="w-4 h-4 text-brand-gold transition-transform group-hover:translate-x-1" />
-              </Link>
+                <span>Book a Statutory Review</span>
+                <ArrowRight className="w-4 h-4 text-[#2b2d54] transition-transform group-hover:translate-x-1" />
+              </button>
             </div>
           </div>
 

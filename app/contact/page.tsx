@@ -28,61 +28,60 @@ export default async function ContactPage() {
     'Room No. 48, Harisree Square,\nOttapalam, Palakkad, Kerala – 679101';
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F8FAFC]">
+    <div className="flex flex-col min-h-screen bg-[#FAF7F2]">
       <Navbar navItems={navItems} settings={settings} />
 
       <main className="flex-grow relative overflow-hidden">
 
-
         {/* Content Container */}
-        <section className="relative z-10 pt-16 sm:pt-20 pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
+        <section className="relative z-10 pt-6 sm:pt-20 pb-16 sm:pb-28 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-left sm:text-center">
             {/* Eyebrow */}
-            <span className="text-[11px] sm:text-xs font-bold tracking-[0.25em] text-[#F59E0B] uppercase block mb-3">
+            <span className="text-[11px] sm:text-xs font-semibold tracking-[0.22em] text-[#2b2d54]/80 uppercase block mb-2 sm:mb-3">
               WE ARE HERE TO HELP
             </span>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight font-serif text-[#0B192C]">
+            <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#2b2d54]">
               Get in Touch with{' '}
-              <span className="text-[#2563EB]">H&amp;S Auditors</span>
+              <span className="text-[#2b2d54]">H&amp;S Auditors</span>
             </h1>
 
             {/* Gold Divider Accent Line */}
-            <div className="w-12 h-1 bg-[#F59E0B] rounded-full mx-auto my-4" />
+            <div className="w-12 h-1 bg-[#fcdd5e] rounded-full my-3 sm:my-4 sm:mx-auto" />
 
             {/* Subtitle */}
-            <p className="max-w-2xl mx-auto text-sm sm:text-base text-gray-600 leading-relaxed">
+            <p className="max-w-2xl sm:mx-auto text-xs xs:text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
               Reach out by phone, email, or visit our office. Our accounting and taxation specialists respond within one business day.
             </p>
           </div>
 
           {/* Two-Column Grid: Contact Information & Send Us a Message */}
-          <div className="mt-10 sm:mt-12 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-7 sm:gap-8 items-start">
+          <div className="mt-6 sm:mt-12 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-7 sm:gap-8 items-start">
             
             {/* Left Column: Office & Helpdesk Card */}
-            <div className="lg:col-span-5 bg-white rounded-3xl p-5 sm:p-8 md:p-9 border border-blue-100 shadow-[0_8px_30px_rgb(0,0,0,0.03)] space-y-6 sm:space-y-7">
+            <div className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 md:p-9 shadow-[0_8px_30px_rgba(43,45,84,0.04)] space-y-6 sm:space-y-7">
               <div>
-                <span className="text-[11px] sm:text-xs font-bold tracking-wider uppercase text-[#2563EB] block mb-1.5">
+                <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-[#2b2d54]/80 block mb-1.5">
                   CONTACT INFORMATION
                 </span>
-                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0B192C]">
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#2b2d54]">
                   Office &amp; Helpdesk
                 </h2>
               </div>
 
               {/* Mobile & WhatsApp */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-[#2563EB] flex-shrink-0">
+                <div className="w-12 h-12 rounded-2xl bg-[#fcdd5e]/20 flex items-center justify-center text-[#2b2d54] flex-shrink-0">
                   <Phone className="w-5 h-5 stroke-[1.8]" />
                 </div>
                 <div>
-                  <div className="text-xs text-gray-500 font-medium mb-0.5">
+                  <div className="text-xs text-slate-500 font-medium mb-0.5">
                     Mobile &amp; WhatsApp
                   </div>
                   <a
                     href={`tel:${phone.replace(/\s+/g, '')}`}
-                    className="text-sm sm:text-base font-bold text-[#0B192C] hover:text-[#2563EB] transition-colors block"
+                    className="text-sm sm:text-base font-bold text-[#2b2d54] hover:opacity-80 transition-colors block"
                   >
                     {phone}
                   </a>
@@ -91,7 +90,7 @@ export default async function ContactPage() {
 
               {/* Office Landline */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-[#2563EB] flex-shrink-0">
+                <div className="w-12 h-12 rounded-2xl bg-[#fcdd5e]/20 flex items-center justify-center text-[#2b2d54] flex-shrink-0">
                   {/* Phone with Keypad Device SVG matching screenshot */}
                   <svg
                     className="w-5 h-5 stroke-[1.8]"
@@ -113,12 +112,12 @@ export default async function ContactPage() {
                   </svg>
                 </div>
                 <div>
-                  <div className="text-xs text-gray-500 font-medium mb-0.5">
+                  <div className="text-xs text-slate-500 font-medium mb-0.5">
                     Office Landline
                   </div>
                   <a
                     href={`tel:${landline.replace(/\s+/g, '')}`}
-                    className="text-sm sm:text-base font-bold text-[#0B192C] hover:text-[#2563EB] transition-colors block"
+                    className="text-sm sm:text-base font-bold text-[#2b2d54] hover:opacity-80 transition-colors block"
                   >
                     {landline}
                   </a>
@@ -127,16 +126,16 @@ export default async function ContactPage() {
 
               {/* Email Address */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-[#2563EB] flex-shrink-0">
+                <div className="w-12 h-12 rounded-2xl bg-[#fcdd5e]/20 flex items-center justify-center text-[#2b2d54] flex-shrink-0">
                   <Mail className="w-5 h-5 stroke-[1.8]" />
                 </div>
                 <div>
-                  <div className="text-xs text-gray-500 font-medium mb-0.5">
+                  <div className="text-xs text-slate-500 font-medium mb-0.5">
                     Email Address
                   </div>
                   <a
                     href={`mailto:${email}`}
-                    className="text-sm sm:text-base font-bold text-[#0B192C] hover:text-[#2563EB] transition-colors block"
+                    className="text-sm sm:text-base font-bold text-[#2b2d54] hover:opacity-80 transition-colors block"
                   >
                     {email}
                   </a>
@@ -145,35 +144,35 @@ export default async function ContactPage() {
 
               {/* Headquarters Office */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-[#2563EB] flex-shrink-0">
+                <div className="w-12 h-12 rounded-2xl bg-[#fcdd5e]/20 flex items-center justify-center text-[#2b2d54] flex-shrink-0">
                   <MapPin className="w-5 h-5 stroke-[1.8]" />
                 </div>
                 <div>
-                  <div className="text-xs text-gray-500 font-medium mb-0.5">
+                  <div className="text-xs text-slate-500 font-medium mb-0.5">
                     Headquarters Office
                   </div>
-                  <div className="text-sm font-semibold text-[#0B192C] leading-snug">
+                  <div className="text-sm font-semibold text-[#2b2d54] leading-snug">
                     Room No. 48, Harisree Square,
                   </div>
-                  <div className="text-xs sm:text-sm text-gray-600 font-medium mt-0.5">
+                  <div className="text-xs sm:text-sm text-slate-600 font-medium mt-0.5">
                     Ottapalam, Palakkad, Kerala – 679101
                   </div>
                 </div>
               </div>
 
               {/* Business Working Hours */}
-              <div className="flex items-start gap-4 pt-5 border-t border-slate-100">
-                <div className="w-12 h-12 rounded-2xl bg-[#FEF3C7]/70 border border-[#FDE68A] flex items-center justify-center text-[#D97706] flex-shrink-0">
+              <div className="flex items-start gap-4 pt-5">
+                <div className="w-12 h-12 rounded-2xl bg-[#fcdd5e]/20 flex items-center justify-center text-[#2b2d54] flex-shrink-0">
                   <Clock className="w-5 h-5 stroke-[1.8]" />
                 </div>
                 <div>
-                  <div className="text-xs text-gray-500 font-medium mb-0.5">
+                  <div className="text-xs text-slate-500 font-medium mb-0.5">
                     Business Working Hours
                   </div>
-                  <div className="text-xs sm:text-sm font-bold text-[#0B192C]">
+                  <div className="text-xs sm:text-sm font-bold text-[#2b2d54]">
                     Monday – Saturday: 9:30 AM to 6:00 PM
                   </div>
-                  <div className="text-xs text-gray-500 mt-0.5">
+                  <div className="text-xs text-slate-500 mt-0.5">
                     Closed on Sundays &amp; Public Holidays
                   </div>
                 </div>

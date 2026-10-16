@@ -39,7 +39,7 @@ export function AdminHeader({ userEmail, onOpenMobileMenu }: AdminHeaderProps) {
         </button>
 
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-[#071A3D] flex items-center justify-center p-1 flex-shrink-0 md:hidden shadow-xs">
+          <div className="w-8 h-8 rounded-lg bg-[#2b2d54] flex items-center justify-center p-1 flex-shrink-0 md:hidden shadow-xs">
             <Image
               src="/images/H&S Auditors logo3.png"
               alt="H&S Auditors Logo"

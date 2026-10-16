@@ -56,28 +56,15 @@ export function Footer({ settings }: FooterProps) {
   ];
 
   return (
-    <footer className="w-full bg-[#07152E] text-white pt-10 pb-8 border-t border-brand-gold/30 relative overflow-hidden">
-      {/* Subtle background watermark / logo imprint on right */}
-      <div className="absolute right-4 -bottom-4 opacity-[0.10] pointer-events-none select-none w-56 h-36 sm:w-64 sm:h-44">
-        <Image
-          src="/images/H&S Auditors logo3.png"
-          alt="H&S Auditors Watermark"
-          fill
-          className="object-contain"
-          sizes="256px"
-        />
-      </div>
-
+    <footer className="w-full bg-[#2b2d54] text-white pt-12 pb-8 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
         {/* Main 4-column footer layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 md:gap-8 pb-8 border-b border-white/10">
-          
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 md:gap-8 pb-8">
           {/* Column 1: Brand & Bio (4 cols) */}
-          <div className="lg:col-span-4 pb-4 md:pb-0 border-b border-white/10 md:border-b-0">
-            <BrandLogo variant="dark" className="mb-3" />
-            
-            <p className="text-xs sm:text-[13px] text-gray-300 leading-relaxed mt-3 max-w-sm">
+          <div className="lg:col-span-4 pb-4 md:pb-0">
+            <BrandLogo variant="dark" logoSrc="/logo/logo.png" className="mb-3" />
+
+            <p className="text-xs sm:text-[13px] text-slate-300/90 leading-relaxed mt-3 max-w-sm font-normal">
               A premier Accounting &amp; Tax consultancy firm in India, delivering accurate, compliant and business-focused financial solutions for individuals, startups and established businesses.
             </p>
 
@@ -88,7 +75,7 @@ export function Footer({ settings }: FooterProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="w-8 h-8 rounded-lg bg-white/10 hover:bg-brand-blue flex items-center justify-center text-gray-300 hover:text-white transition-colors"
+                className="w-8 h-8 rounded-lg bg-[#222443] hover:bg-[#fcdd5e] hover:text-[#2b2d54] flex items-center justify-center text-slate-300 transition-all duration-200"
               >
                 <Linkedin className="w-3.5 h-3.5" />
               </a>
@@ -97,7 +84,7 @@ export function Footer({ settings }: FooterProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="w-8 h-8 rounded-lg bg-white/10 hover:bg-brand-blue flex items-center justify-center text-gray-300 hover:text-white transition-colors"
+                className="w-8 h-8 rounded-lg bg-[#222443] hover:bg-[#fcdd5e] hover:text-[#2b2d54] flex items-center justify-center text-slate-300 transition-all duration-200"
               >
                 <Instagram className="w-3.5 h-3.5" />
               </a>
@@ -106,7 +93,7 @@ export function Footer({ settings }: FooterProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube"
-                className="w-8 h-8 rounded-lg bg-white/10 hover:bg-brand-blue flex items-center justify-center text-gray-300 hover:text-white transition-colors"
+                className="w-8 h-8 rounded-lg bg-[#222443] hover:bg-[#fcdd5e] hover:text-[#2b2d54] flex items-center justify-center text-slate-300 transition-all duration-200"
               >
                 <Youtube className="w-3.5 h-3.5" />
               </a>
@@ -114,19 +101,19 @@ export function Footer({ settings }: FooterProps) {
           </div>
 
           {/* Column 2: Quick Links (2 cols) */}
-          <div className="lg:col-span-2 border-b border-white/10 md:border-b-0 pb-3 md:pb-0">
+          <div className="lg:col-span-2 pb-3 md:pb-0">
             <button
               type="button"
               onClick={() => toggleSection('quickLinks')}
               className="w-full flex items-center justify-between text-left md:pointer-events-none mb-0 md:mb-3 py-1.5 md:py-0 select-none group"
               aria-expanded={openSections.quickLinks}
             >
-              <h4 className="text-[11px] font-bold uppercase tracking-wider text-brand-gold group-hover:text-yellow-400 md:group-hover:text-brand-gold transition-colors">
+              <h4 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#fcdd5e] group-hover:text-amber-200 md:group-hover:text-[#fcdd5e] transition-colors">
                 Quick Links
               </h4>
               <ChevronDown
-                className={`w-4 h-4 text-brand-gold/80 transition-transform duration-200 md:hidden ${
-                  openSections.quickLinks ? 'rotate-180 text-brand-gold' : ''
+                className={`w-4 h-4 text-[#fcdd5e]/80 transition-transform duration-200 md:hidden ${
+                  openSections.quickLinks ? 'rotate-180 text-[#fcdd5e]' : ''
                 }`}
               />
             </button>
@@ -136,7 +123,7 @@ export function Footer({ settings }: FooterProps) {
                   <li key={idx}>
                     <Link
                       href={link.href}
-                      className="text-xs sm:text-[13px] text-gray-300 hover:text-white transition-colors hover:underline block py-0.5"
+                      className="text-xs sm:text-[13px] text-slate-300 hover:text-[#EAE3D2] hover:translate-x-0.5 transition-all duration-150 inline-block py-0.5"
                     >
                       {link.label}
                     </Link>
@@ -147,19 +134,19 @@ export function Footer({ settings }: FooterProps) {
           </div>
 
           {/* Column 3: Our Services (3 cols) */}
-          <div className="lg:col-span-3 border-b border-white/10 md:border-b-0 pb-3 md:pb-0">
+          <div className="lg:col-span-3 pb-3 md:pb-0">
             <button
               type="button"
               onClick={() => toggleSection('services')}
               className="w-full flex items-center justify-between text-left md:pointer-events-none mb-0 md:mb-3 py-1.5 md:py-0 select-none group"
               aria-expanded={openSections.services}
             >
-              <h4 className="text-[11px] font-bold uppercase tracking-wider text-brand-gold group-hover:text-yellow-400 md:group-hover:text-brand-gold transition-colors">
+              <h4 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#fcdd5e] group-hover:text-amber-200 md:group-hover:text-[#fcdd5e] transition-colors">
                 Our Services
               </h4>
               <ChevronDown
-                className={`w-4 h-4 text-brand-gold/80 transition-transform duration-200 md:hidden ${
-                  openSections.services ? 'rotate-180 text-brand-gold' : ''
+                className={`w-4 h-4 text-[#fcdd5e]/80 transition-transform duration-200 md:hidden ${
+                  openSections.services ? 'rotate-180 text-[#fcdd5e]' : ''
                 }`}
               />
             </button>
@@ -169,7 +156,7 @@ export function Footer({ settings }: FooterProps) {
                   <li key={idx}>
                     <Link
                       href={link.href}
-                      className="text-xs sm:text-[13px] text-gray-300 hover:text-white transition-colors hover:underline block py-0.5"
+                      className="text-xs sm:text-[13px] text-slate-300 hover:text-[#EAE3D2] hover:translate-x-0.5 transition-all duration-150 inline-block py-0.5"
                     >
                       {link.label}
                     </Link>
@@ -187,79 +174,77 @@ export function Footer({ settings }: FooterProps) {
               className="w-full flex items-center justify-between text-left md:pointer-events-none mb-0 md:mb-3 py-1.5 md:py-0 select-none group"
               aria-expanded={openSections.contact}
             >
-              <h4 className="text-[11px] font-bold uppercase tracking-wider text-brand-gold group-hover:text-yellow-400 md:group-hover:text-brand-gold transition-colors">
+              <h4 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#fcdd5e] group-hover:text-amber-200 md:group-hover:text-[#fcdd5e] transition-colors">
                 Contact Information
               </h4>
               <ChevronDown
-                className={`w-4 h-4 text-brand-gold/80 transition-transform duration-200 md:hidden ${
-                  openSections.contact ? 'rotate-180 text-brand-gold' : ''
+                className={`w-4 h-4 text-[#fcdd5e]/80 transition-transform duration-200 md:hidden ${
+                  openSections.contact ? 'rotate-180 text-[#fcdd5e]' : ''
                 }`}
               />
             </button>
             <div className={`${openSections.contact ? 'block pt-2 pb-2' : 'hidden'} md:block md:pt-0 md:pb-0`}>
-              <div className="space-y-2.5 text-xs sm:text-[13px] text-gray-300">
+              <div className="space-y-2.5 text-xs sm:text-[13px] text-slate-300">
                 <div className="flex items-start gap-2.5">
-                  <Phone className="w-3.5 h-3.5 text-brand-gold flex-shrink-0 mt-0.5" />
-                  <a href={`tel:${phone.replace(/\s+/g, '')}`} className="hover:text-white transition-colors">
+                  <Phone className="w-3.5 h-3.5 text-[#fcdd5e] flex-shrink-0 mt-0.5" />
+                  <a href={`tel:${phone.replace(/\s+/g, '')}`} className="hover:text-[#EAE3D2] transition-colors">
                     {phone}
                   </a>
                 </div>
 
                 <div className="flex items-start gap-2.5">
-                  <Building className="w-3.5 h-3.5 text-brand-gold flex-shrink-0 mt-0.5" />
-                  <a href={`tel:${landline.replace(/\s+/g, '')}`} className="hover:text-white transition-colors">
+                  <Building className="w-3.5 h-3.5 text-[#fcdd5e] flex-shrink-0 mt-0.5" />
+                  <a href={`tel:${landline.replace(/\s+/g, '')}`} className="hover:text-[#EAE3D2] transition-colors">
                     {landline}
                   </a>
                 </div>
 
                 <div className="flex items-start gap-2.5">
-                  <Mail className="w-3.5 h-3.5 text-brand-gold flex-shrink-0 mt-0.5" />
-                  <a href={`mailto:${email}`} className="hover:text-white transition-colors">
+                  <Mail className="w-3.5 h-3.5 text-[#fcdd5e] flex-shrink-0 mt-0.5" />
+                  <a href={`mailto:${email}`} className="hover:text-[#EAE3D2] transition-colors">
                     {email}
                   </a>
                 </div>
 
                 <div className="flex items-start gap-2.5">
-                  <MapPin className="w-3.5 h-3.5 text-brand-gold flex-shrink-0 mt-0.5" />
-                  <address className="not-italic leading-relaxed">
+                  <MapPin className="w-3.5 h-3.5 text-[#fcdd5e] flex-shrink-0 mt-0.5" />
+                  <address className="not-italic leading-relaxed text-slate-300/90">
                     {address}
                   </address>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] sm:text-xs text-gray-400 gap-3">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] sm:text-xs text-slate-400 gap-3">
           <div>
             &copy; {new Date().getFullYear()} H&amp;S Auditors. All rights reserved.
           </div>
 
           <div className="flex items-center space-x-3 sm:space-x-5">
-            <Link href="/privacy-policy" className="hover:text-white transition-colors">
+            <Link href="/privacy-policy" className="hover:text-[#EAE3D2] transition-colors">
               Privacy Policy
             </Link>
-            <span className="text-gray-600">|</span>
-            <Link href="/terms-of-service" className="hover:text-white transition-colors">
+            <span className="text-white/20">|</span>
+            <Link href="/terms-of-service" className="hover:text-[#EAE3D2] transition-colors">
               Terms of Service
             </Link>
-            <span className="text-gray-600">|</span>
-            <span className="text-gray-400">
+            <span className="text-white/20">|</span>
+            <span className="text-slate-400">
               Crafted by{' '}
               <a
                 href="https://ekodrix.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-brand-gold hover:text-yellow-400 font-medium transition-colors"
+                className="text-[#fcdd5e] hover:text-white font-medium transition-colors"
               >
                 ekodrix
               </a>
             </span>
           </div>
         </div>
-
       </div>
     </footer>
   );

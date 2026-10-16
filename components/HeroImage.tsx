@@ -54,7 +54,7 @@ export function HeroImage({ desktopSrc, mobileSrc, alt }: HeroImageProps) {
         />
       </div>
 
-      {/* Mobile Image - Shifted upward to show team clearly with minimal fade */}
+      {/* Mobile Image - Crisp framing with no bottom gradient overlay */}
       <div className="block md:hidden absolute inset-0 w-full h-full">
         <Image
           src={currentMobile}
@@ -62,11 +62,11 @@ export function HeroImage({ desktopSrc, mobileSrc, alt }: HeroImageProps) {
           fill
           priority
           onError={handleMobileError}
-          className="object-cover object-[center_68%] w-full h-full"
+          className="object-cover object-[center_60%] w-full h-full"
           sizes="100vw"
         />
-        {/* Gentle, minimal top fade preserving full clarity and vibrancy of the image */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/50 via-32% to-transparent pointer-events-none" />
+        {/* Top-only text backing: restricted strictly to top half so bottom has zero gradient */}
+        <div className="absolute top-0 left-0 right-0 h-[48%] bg-gradient-to-b from-white via-white/80 to-transparent pointer-events-none" />
       </div>
     </>
   );

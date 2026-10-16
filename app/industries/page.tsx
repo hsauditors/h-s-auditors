@@ -2,8 +2,6 @@ import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import fs from 'fs';
-import path from 'path';
 import {
   ArrowRight,
   Factory,
@@ -37,124 +35,11 @@ export default async function IndustriesPage() {
   // Sync images to public directory
   syncHomepageImages();
 
-  // Local fallback copy if needed
-  try {
-    const brainDir =
-      'C:\\Users\\muham\\.gemini\\antigravity-ide\\brain\\d6957bc8-ff05-458e-aa67-4dfc9cea036f';
-    const userUploadedDir = path.join(brainDir, '.user_uploaded');
-    const industriesBannerSrc = path.join(
-      userUploadedDir,
-      'media_1791882780942.png'
-    );
-    const destDir = path.join(process.cwd(), 'public', 'images');
-    if (fs.existsSync(industriesBannerSrc)) {
-      if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
-      fs.copyFileSync(
-        industriesBannerSrc,
-        path.join(destDir, 'industries-hero-banner.png')
-      );
-      fs.copyFileSync(
-        industriesBannerSrc,
-        path.join(destDir, 'industries-hero-banner.jpg')
-      );
-    }
-  } catch {
-    // Graceful fallback
-  }
-
   const [dbIndustries, navItems, settings] = await Promise.all([
     getIndustries(),
     getNavigationItems(),
     getSiteSettings(),
   ]);
-
-  // Exact 12 industries matching reference image
-  const defaultIndustries = [
-    {
-      id: 'manufacturing',
-      title: 'Manufacturing & MSME',
-      description:
-        'Industry-specific support for compliance, taxation and MSME benefits.',
-      icon: Factory,
-    },
-    {
-      id: 'retail',
-      title: 'Retail & Trading',
-      description:
-        'Practical solutions for inventory, GST and financial management.',
-      icon: Store,
-    },
-    {
-      id: 'construction',
-      title: 'Construction & Real Estate',
-      description:
-        'Advisory for project accounting, GST and regulatory compliance.',
-      icon: HardHat,
-    },
-    {
-      id: 'healthcare',
-      title: 'Healthcare & Hospitals',
-      description:
-        'Comprehensive support for healthcare compliance, audits and taxation.',
-      icon: Heart,
-    },
-    {
-      id: 'hospitality',
-      title: 'Hotels & Restaurants',
-      description:
-        'Guidance for GST, accounting and operational compliance.',
-      icon: Utensils,
-    },
-    {
-      id: 'logistics',
-      title: 'Logistics & Transport',
-      description:
-        'Expertise in transport taxation, fleet management and regulatory requirements.',
-      icon: Truck,
-    },
-    {
-      id: 'it-services',
-      title: 'IT & Software Exports',
-      description:
-        'Support for export benefits, international taxation and compliance.',
-      icon: Laptop,
-    },
-    {
-      id: 'education',
-      title: 'Education & Trusts',
-      description:
-        'Accounting and compliance support for educational institutions and trusts.',
-      icon: GraduationCap,
-    },
-    {
-      id: 'textiles',
-      title: 'Textiles & Apparel',
-      description:
-        'Solutions for manufacturing, export compliance and tax efficiency.',
-      icon: Scissors,
-    },
-    {
-      id: 'agriculture',
-      title: 'Agriculture & Commodities',
-      description:
-        'Advisory for agri-businesses and commodity trading.',
-      icon: Sprout,
-    },
-    {
-      id: 'professional-services',
-      title: 'Professional Services',
-      description:
-        'Tailored support for consultants, agencies and service providers.',
-      icon: Users,
-    },
-    {
-      id: 'nbfc',
-      title: 'NBFC & Co-operative Societies',
-      description:
-        'Accounting, audit and regulatory support for financial institutions.',
-      icon: Landmark,
-    },
-  ];
 
   // Map icon component helper
   const getIconForTitle = (title: string) => {
@@ -174,17 +59,14 @@ export default async function IndustriesPage() {
     return Factory;
   };
 
-  const industriesList =
-    dbIndustries && dbIndustries.length >= 12
-      ? dbIndustries.map((item) => ({
-          id: item.id,
-          title: item.title,
-          description:
-            item.description ||
-            'Specialised accounting, tax, and advisory solutions for this sector.',
-          icon: getIconForTitle(item.title),
-        }))
-      : defaultIndustries;
+  const industriesList = (dbIndustries || []).map((item) => ({
+    id: item.id,
+    title: item.title,
+    description:
+      item.description ||
+      'Specialised accounting, tax, and advisory solutions for this sector.',
+    icon: getIconForTitle(item.title),
+  }));
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F8FAFC]">
@@ -192,7 +74,7 @@ export default async function IndustriesPage() {
 
       <main className="flex-grow pb-16 sm:pb-24">
         {/* 1. Hero Banner Section with Exact Uploaded Image */}
-        <section className="relative w-full min-h-[420px] sm:min-h-[460px] lg:min-h-[500px] flex items-center border-b border-gray-200/80 bg-white overflow-hidden">
+        <section className="relative w-full min-h-[460px] sm:min-h-[460px] lg:min-h-[500px] flex flex-col justify-end sm:justify-center sm:items-center bg-white overflow-hidden">
           {/* Full-bleed background image with right alignment for executives & skyline */}
           <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
             <Image
@@ -200,33 +82,28 @@ export default async function IndustriesPage() {
               alt="Industries We Work With"
               fill
               priority
-              className="object-cover object-[95%_center] sm:object-right w-full h-full"
+              className="object-cover object-[95%_12%] sm:object-right w-full h-full"
               sizes="100vw"
             />
           </div>
 
-          {/* Left Hero Content */}
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
-            <div className="max-w-xl lg:max-w-2xl relative">
-              {/* Soft fade effect strictly behind text in mobile view */}
-              <div className="absolute -inset-3 -left-4 sm:hidden bg-gradient-to-r from-white/95 via-white/80 to-transparent rounded-2xl pointer-events-none -z-10 backdrop-blur-[1.5px]" />
-
+          {/* Left Hero Content - placed at image bottom on mobile */}
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-6 sm:py-16">
+            <div className="max-w-xl lg:max-w-2xl relative text-left">
               {/* Eyebrow with gold line */}
-              <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                <span className="text-xs sm:text-[13px] font-bold tracking-wider text-[#071A3D] uppercase">
+              <div className="flex items-center gap-2 mb-1.5 sm:mb-3">
+                <span className="text-[11px] sm:text-[13px] font-bold tracking-wider text-[#2b2d54]/80 uppercase">
                   SECTOR EXPERTISE
                 </span>
-                <span className="w-8 sm:w-10 h-[2px] bg-[#F59E0B]" />
               </div>
 
-              {/* Headline */}
-              <h1 className="font-serif text-3xl sm:text-5xl lg:text-[56px] font-bold tracking-tight text-[#071A3D] leading-[1.12] mb-3">
-                Industries We{' '}
-                <span className="text-[#F59E0B] block">Work With</span>
+              {/* Headline - on same line */}
+              <h1 className="text-[22px] xs:text-2xl sm:text-5xl lg:text-[56px] font-bold tracking-tight text-[#2b2d54] leading-tight mb-2 sm:mb-3">
+                Industries We <span className="text-[#2b2d54]">Work With</span>
               </h1>
 
               {/* Gold Accent Bar */}
-              <div className="w-12 h-1 bg-[#F59E0B] rounded-full my-3 sm:my-4" />
+              <div className="w-10 sm:w-12 h-1 bg-[#fcdd5e] rounded-full my-2.5 sm:my-4" />
 
               {/* Subtitle */}
               <p className="text-xs sm:text-sm lg:text-[15px] text-gray-700 leading-relaxed max-w-lg font-medium">
@@ -248,16 +125,16 @@ export default async function IndustriesPage() {
                   <Link
                     key={ind.id}
                     href={`/contact?subject=${encodeURIComponent(ind.title)}`}
-                    className="group bg-white rounded-xl sm:rounded-2xl p-2 sm:p-5 border border-gray-100 shadow-[0_2px_12px_rgba(7,26,61,0.03)] hover:shadow-md hover:border-blue-200 transition-all duration-200 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-1.5 sm:gap-3.5 relative min-h-[92px] sm:min-h-0"
+                    className="group bg-white rounded-xl sm:rounded-2xl p-2 sm:p-5 shadow-[0_2px_14px_rgba(43,45,84,0.05)] hover:shadow-xl transition-all duration-200 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-1.5 sm:gap-3.5 relative min-h-[92px] sm:min-h-0"
                   >
                     {/* Circular Icon Badge */}
-                    <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-blue-50/90 border border-blue-100 flex items-center justify-center flex-shrink-0 text-blue-600 group-hover:scale-105 group-hover:bg-blue-600 group-hover:text-white transition-all duration-200 shadow-2xs">
+                    <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-[#fcdd5e]/25 flex items-center justify-center flex-shrink-0 text-[#2b2d54] group-hover:scale-105 group-hover:bg-[#2b2d54] group-hover:text-[#fcdd5e] transition-all duration-200 shadow-2xs">
                       <Icon className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.85]" />
                     </div>
 
                     {/* Middle Content */}
                     <div className="flex-1 min-w-0 pr-0 sm:pr-1">
-                      <h2 className="text-[10.5px] sm:text-sm font-bold text-[#071A3D] group-hover:text-blue-600 transition-colors leading-tight sm:leading-snug mb-0 sm:mb-1">
+                      <h2 className="text-[10.5px] sm:text-sm font-bold text-[#2b2d54] group-hover:text-[#2b2d54] transition-colors leading-tight sm:leading-snug mb-0 sm:mb-1">
                         {ind.title}
                       </h2>
                       <p className="hidden sm:block text-[11.5px] sm:text-xs text-gray-500 leading-snug font-normal line-clamp-2">
@@ -266,7 +143,7 @@ export default async function IndustriesPage() {
                     </div>
 
                     {/* Right Circular Arrow Button (Desktop / Tablet only) */}
-                    <div className="hidden sm:flex w-6 h-6 rounded-full border border-blue-200 text-blue-500 items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all duration-200 self-center ml-auto">
+                    <div className="hidden sm:flex w-6 h-6 rounded-full bg-[#fcdd5e]/20 text-[#2b2d54] items-center justify-center flex-shrink-0 group-hover:bg-[#2b2d54] group-hover:text-[#fcdd5e] transition-all duration-200 self-center ml-auto">
                       <ArrowRight className="w-3.5 h-3.5" />
                     </div>
                   </Link>
@@ -275,7 +152,7 @@ export default async function IndustriesPage() {
             </div>
 
             {/* 3. Bottom Callout Card */}
-            <div className="mt-12 sm:mt-16 bg-gradient-to-r from-blue-50/90 via-[#F3F8FF] to-white border border-blue-100 rounded-3xl p-6 sm:p-8 lg:p-10 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-[0_4px_20px_rgba(7,26,61,0.03)]">
+            <div className="mt-12 sm:mt-16 bg-[#2b2d54] rounded-3xl p-6 sm:p-8 lg:p-10 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-[0_4px_24px_rgba(43,45,84,0.15)]">
               {/* Subtle background chart image on the right */}
               <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden md:block pointer-events-none overflow-hidden">
                 <Image
@@ -283,20 +160,20 @@ export default async function IndustriesPage() {
                   alt="Sector Guidance"
                   fill
                   unoptimized
-                  className="object-cover object-center opacity-30"
+                  className="object-cover object-center opacity-10"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#F3F8FF] via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#2b2d54] via-transparent to-transparent" />
               </div>
 
               {/* Left Content */}
               <div className="relative z-10 max-w-xl">
-                <span className="text-[11px] sm:text-xs font-bold tracking-wider text-blue-600 uppercase mb-2 block">
+                <span className="text-[11px] sm:text-xs font-bold tracking-wider text-[#fcdd5e] uppercase mb-2 block">
                   NEED SECTOR SPECIFIC GUIDANCE?
                 </span>
-                <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#071A3D] tracking-tight">
-                  Discuss Your <span className="text-[#1D4ED8]">Industry Needs</span>
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+                  Discuss Your <span className="text-[#fcdd5e]">Industry Needs</span>
                 </h3>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mt-2 font-normal">
+                <p className="text-xs sm:text-sm text-gray-200 leading-relaxed mt-2 font-normal">
                   Our team will help you with a tailored compliance, taxation and advisory
                   solution based on your industry and business goals.
                 </p>
@@ -306,10 +183,10 @@ export default async function IndustriesPage() {
               <div className="relative z-10 flex-shrink-0">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-[#07152E] hover:bg-[#0E2A5C] text-white px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all duration-200 group"
+                  className="inline-flex items-center gap-2 bg-[#fcdd5e] hover:bg-[#ebd04f] text-[#2b2d54] px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all duration-200 group"
                 >
                   <span>Talk to Our Experts</span>
-                  <ArrowRight className="w-4 h-4 text-[#F59E0B] transition-transform duration-200 group-hover:translate-x-1" />
+                  <ArrowRight className="w-4 h-4 text-[#2b2d54] transition-transform duration-200 group-hover:translate-x-1" />
                 </Link>
               </div>
             </div>
