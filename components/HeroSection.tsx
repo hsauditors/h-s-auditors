@@ -124,7 +124,7 @@ export function HeroSection({ heroData }: HeroSectionProps) {
           </div>
 
           {/* Mobile Trust Badges */}
-          <div className="flex md:hidden items-center justify-center gap-1.5 sm:gap-2 px-1 py-1">
+          {/* <div className="flex md:hidden items-center justify-center gap-1.5 sm:gap-2 px-1 py-1">
             <div className="flex items-center gap-1.5 text-left">
               <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#fcdd5e]/15 flex items-center justify-center flex-shrink-0 text-[#2b2d54] shadow-2xs">
                 <Users className="w-3.5 h-3.5" />
@@ -155,7 +155,7 @@ export function HeroSection({ heroData }: HeroSectionProps) {
                 Timely Support
               </span>
             </div>
-          </div>
+          </div> */}
 
         </div>
       </div>
