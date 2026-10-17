@@ -22,7 +22,7 @@ export function ComplianceSection({ deadlines = [] }: ComplianceSectionProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-row items-center justify-between mb-6 sm:mb-8">
+        <div data-animate="fade-up" className="flex flex-row items-center justify-between mb-6 sm:mb-8">
           <div>
             <div className="flex items-center gap-2 mb-1.5 sm:mb-2">
               <span className="text-[10px] sm:text-xs font-bold tracking-[0.2em] text-[#2b2d54]/80 uppercase block">
@@ -49,8 +49,8 @@ export function ComplianceSection({ deadlines = [] }: ComplianceSectionProps) {
         {/* Content Grid: Table on Left + Calendar Promo Card on Right (matched heights) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 items-stretch">
           
-          {/* Left: Table Container */}
-          <div className="lg:col-span-8 bg-white rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between">
+          {/* Left: Table Container (Slides in from Left) */}
+          <div data-animate="slide-left" className="lg:col-span-8 bg-white rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-[11px] sm:text-[13px] border-collapse">
                 <thead>
@@ -84,8 +84,8 @@ export function ComplianceSection({ deadlines = [] }: ComplianceSectionProps) {
             </div>
           </div>
 
-          {/* Right: Bespoke Dark Obsidian Calendar Card with matching height */}
-          <div className="lg:col-span-4 bg-[#2b2d54] text-white rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between h-full">
+          {/* Right: Bespoke Dark Obsidian Calendar Card (Slides in from Right) */}
+          <div data-animate="slide-right" className="lg:col-span-4 bg-[#2b2d54] text-white rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between h-full group hover:shadow-2xl transition-shadow duration-300">
             <div className="relative w-full flex-1 min-h-[200px] lg:min-h-[220px] bg-slate-900">
               <Image
                 src="/images/compliance-calendar.jpg"

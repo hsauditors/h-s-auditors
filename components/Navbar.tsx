@@ -32,18 +32,21 @@ export function Navbar({ navItems = [], settings }: NavbarProps) {
           {/* Center: Desktop Nav Links */}
           <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
             {regularLinks.map((item) => {
+              const itemPath = (item.href || '/').replace(/\/+$/, '') || '/';
+              const currentPath = (pathname || '/').replace(/\/+$/, '') || '/';
               const isActive =
-                item.href === '/'
-                  ? pathname === '/'
-                  : pathname.startsWith(item.href);
+                itemPath === '/'
+                  ? currentPath === '/'
+                  : currentPath === itemPath || currentPath.startsWith(`${itemPath}/`);
 
               return (
                 <Link
                   key={item.id}
                   href={item.href}
-                  className={`px-3.5 py-1.5 text-[13px] sm:text-[13.5px] tracking-tight transition-all duration-150 relative rounded-md ${
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`px-3.5 py-1.5 text-[13px] sm:text-[13.5px] tracking-tight transition-all duration-150 relative rounded-lg ${
                     isActive
-                      ? 'text-[#2b2d54] font-bold after:absolute after:-bottom-1 after:left-3 after:right-3 after:h-[2.5px] after:bg-[#fcdd5e] after:rounded-full'
+                      ? 'text-[#2b2d54] font-bold bg-[#2b2d54]/5 after:absolute after:-bottom-1 after:left-3 after:right-3 after:h-[2.5px] after:bg-[#fcdd5e] after:rounded-full'
                       : 'text-slate-600 font-medium hover:text-[#2b2d54] hover:bg-stone-100/60'
                   }`}
                 >

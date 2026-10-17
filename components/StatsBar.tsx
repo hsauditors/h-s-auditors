@@ -27,15 +27,17 @@ export function StatsBar({ stats = [] }: StatsBarProps) {
     <section className="w-full bg-[#FAF9F6] py-5 sm:py-7">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
+          data-animate="stagger-cards"
           className={`grid grid-cols-2 sm:grid-cols-2 ${gridColsClass} gap-x-4 gap-y-4 sm:gap-6`}
         >
           {items.map((stat, idx) => (
             <div
               key={stat.id}
-              className="flex items-center gap-2.5 sm:gap-3.5 md:gap-4 min-w-0 bg-white/70 p-3 sm:p-4 rounded-2xl shadow-xs"
+              data-animate-child
+              className="group flex items-center gap-2.5 sm:gap-3.5 md:gap-4 min-w-0 bg-white/70 hover:bg-white p-3 sm:p-4 rounded-2xl shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300"
             >
               {/* Refined Icon Badge with Theme Yellow & Blue */}
-              <div className="w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-xl bg-[#fcdd5e]/15 flex items-center justify-center flex-shrink-0 text-[#2b2d54]">
+              <div className="w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-xl bg-[#fcdd5e]/15 flex items-center justify-center flex-shrink-0 text-[#2b2d54] group-hover:scale-110 transition-transform duration-300">
                 <DynamicIcon
                   name={stat.icon_name || 'ShieldCheck'}
                   className="w-4 h-4 sm:w-5 sm:h-5 md:w-5.5 md:h-5.5 stroke-[1.8]"

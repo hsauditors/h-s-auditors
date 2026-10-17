@@ -51,7 +51,7 @@ export function WhyChooseSection({ items = [] }: WhyChooseSectionProps) {
           <div className="hidden lg:block lg:col-span-5 pointer-events-none min-h-[340px]" />
 
           {/* Right Column: Editorial Text & Dynamic Circular Pillars */}
-          <div className="lg:col-span-7">
+          <div data-animate="slide-right" className="lg:col-span-7">
             <div className="max-w-2xl lg:ml-auto">
               
               {/* Eyebrow with gold accent line */}
@@ -75,14 +75,15 @@ export function WhyChooseSection({ items = [] }: WhyChooseSectionProps) {
               </p>
 
               {/* Dynamic Pillars with Warm Gold Tonal Backgrounds */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3.5 pt-1">
+              <div data-animate="stagger-cards" className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3.5 pt-1">
                 {displayList.map((pillar) => (
                   <div
                     key={pillar.id}
-                    className="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2 sm:gap-3 p-3.5 rounded-2xl bg-white/[0.07] hover:bg-white/[0.12] backdrop-blur-sm transition-all duration-300 min-h-[96px] sm:min-h-0 justify-start"
+                    data-animate-child
+                    className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2 sm:gap-3 p-3.5 rounded-2xl bg-white/[0.07] hover:bg-white/[0.14] hover:shadow-goldGlow hover:-translate-y-1 backdrop-blur-sm transition-all duration-300 min-h-[96px] sm:min-h-0 justify-start"
                   >
                     {/* Circular Antique Gold Icon Badge */}
-                    <div className="w-8 h-8 rounded-full bg-[#fcdd5e]/20 flex items-center justify-center flex-shrink-0 text-[#fcdd5e]">
+                    <div className="w-8 h-8 rounded-full bg-[#fcdd5e]/20 group-hover:bg-[#fcdd5e]/30 flex items-center justify-center flex-shrink-0 text-[#fcdd5e] group-hover:scale-110 transition-transform duration-300">
                       <DynamicIcon
                         name={pillar.icon_name || 'Award'}
                         className="w-4 h-4 stroke-[1.9]"

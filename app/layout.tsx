@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { getSiteSettings } from '@/lib/data';
 import { ConsultationModal } from '@/components/ConsultationModal';
+import { ScrollAnimationObserver } from '@/components/ui/ScrollAnimationObserver';
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
@@ -121,6 +122,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-white text-brand-text">
+        <ScrollAnimationObserver />
         {children}
         <ConsultationModal />
       </body>
