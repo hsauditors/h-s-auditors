@@ -16,6 +16,7 @@ import {
 import { createClient } from '@/lib/supabase/client';
 import { ValueItem } from '@/types';
 import { DynamicIcon } from '@/components/ui/DynamicIcon';
+import { AdminToast } from '@/components/admin/AdminToast';
 
 export default function AdminValuesPage() {
   const [values, setValues] = useState<ValueItem[]>([]);
@@ -87,22 +88,7 @@ export default function AdminValuesPage() {
         </p>
       </div>
 
-      {message && (
-        <div
-          className={`p-3.5 rounded-lg flex items-center gap-2 text-xs font-semibold ${
-            message.type === 'success'
-              ? 'bg-green-50 text-green-700 border border-green-200'
-              : 'bg-red-50 text-red-700 border border-red-200'
-          }`}
-        >
-          {message.type === 'success' ? (
-            <CheckCircle className="w-4 h-4 flex-shrink-0" />
-          ) : (
-            <AlertCircle className="w-4 h-4 flex-shrink-0" />
-          )}
-          <span>{message.text}</span>
-        </div>
-      )}
+      <AdminToast message={message} onClose={() => setMessage(null)} />
 
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

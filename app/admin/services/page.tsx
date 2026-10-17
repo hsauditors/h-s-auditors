@@ -30,6 +30,7 @@ import {
 } from 'lucide-react';
 import { SubService } from '@/types';
 import { DynamicIcon } from '@/components/ui/DynamicIcon';
+import { AdminToast } from '@/components/admin/AdminToast';
 
 interface ServiceCategory {
   id: string;
@@ -616,30 +617,8 @@ export default function AdminServicesPage() {
         </div>
       </div>
 
-      {/* Status Alert Notification */}
-      {message && (
-        <div
-          className={`p-3.5 rounded-xl text-xs flex items-center gap-2 ${
-            message.type === 'success'
-              ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-              : 'bg-rose-50 text-rose-800 border border-rose-200'
-          }`}
-        >
-          {message.type === 'success' ? (
-            <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-          ) : (
-            <AlertCircle className="w-4 h-4 text-rose-600 flex-shrink-0" />
-          )}
-          <span>{message.text}</span>
-          <button
-            type="button"
-            onClick={() => setMessage(null)}
-            className="ml-auto text-gray-400 hover:text-gray-600"
-          >
-            <X className="w-3.5 h-3.5" />
-          </button>
-        </div>
-      )}
+      {/* Modern Floating Top-Right Toast Notification */}
+      <AdminToast message={message} onClose={() => setMessage(null)} />
 
       {/* ========================================================================= */}
       {/* 1. SERVICES PAGE HERO BANNER SETTINGS CARD */}

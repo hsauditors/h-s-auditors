@@ -17,6 +17,7 @@ import {
 import { createClient } from '@/lib/supabase/client';
 import { TeamMember } from '@/types';
 import { ImageUploader } from '@/components/admin/ImageUploader';
+import { AdminToast } from '@/components/admin/AdminToast';
 
 export default function AdminTeamPage() {
   const [members, setMembers] = useState<TeamMember[]>([]);
@@ -141,22 +142,7 @@ export default function AdminTeamPage() {
         </button>
       </div>
 
-      {message && (
-        <div
-          className={`p-3.5 rounded-lg flex items-center gap-2 text-xs font-semibold ${
-            message.type === 'success'
-              ? 'bg-green-50 text-green-700 border border-green-200'
-              : 'bg-red-50 text-red-700 border border-red-200'
-          }`}
-        >
-          {message.type === 'success' ? (
-            <CheckCircle className="w-4 h-4 flex-shrink-0" />
-          ) : (
-            <AlertCircle className="w-4 h-4 flex-shrink-0" />
-          )}
-          <span>{message.text}</span>
-        </div>
-      )}
+      <AdminToast message={message} onClose={() => setMessage(null)} />
 
       {/* Team List */}
       <div className="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
