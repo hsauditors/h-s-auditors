@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { createClient } from '@/lib/supabase/server';
+import { requireAdmin } from '@/lib/supabase/require-admin';
 
 const OVERRIDES_FILE = path.join(process.cwd(), 'data', 'cms_overrides.json');
 
@@ -141,6 +142,9 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    const auth = await requireAdmin();
+    if (auth.response) return auth.response;
+
     const body = await request.json();
     const { table, matchKey = 'id', matchValue, data } = body;
 
@@ -209,6 +213,9 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
+    const auth = await requireAdmin();
+    if (auth.response) return auth.response;
+
     const { searchParams } = new URL(request.url);
     const table = searchParams.get('table');
     const id = searchParams.get('id');

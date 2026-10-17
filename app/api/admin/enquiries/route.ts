@@ -4,11 +4,15 @@ import {
   updateEnquiryStatus,
   deleteEnquiry,
 } from '@/lib/enquiries';
+import { requireAdmin } from '@/lib/supabase/require-admin';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
+    const auth = await requireAdmin();
+    if (auth.response) return auth.response;
+
     const list = await getAllEnquiries();
     return NextResponse.json(list);
   } catch (err: any) {
@@ -22,6 +26,9 @@ export async function GET() {
 
 export async function PATCH(request: Request) {
   try {
+    const auth = await requireAdmin();
+    if (auth.response) return auth.response;
+
     const body = await request.json();
     const { id, status } = body;
 
@@ -45,6 +52,9 @@ export async function PATCH(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
+    const auth = await requireAdmin();
+    if (auth.response) return auth.response;
+
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
 

@@ -54,12 +54,12 @@
         "Observation discussion with leadership",
         "Final audit report issuance"
       ],
-      "display_order": 5,
+      "display_order": 2,
       "is_active": true,
       "seo_title": "Audit & Assurance Services | H&S Auditors",
       "seo_description": "Statutory, internal and tax audits that ensure complete compliance and financial transparency.",
       "created_at": "2026-10-07T12:18:51.14279+00:00",
-      "updated_at": "2026-10-16T12:49:25.516Z",
+      "updated_at": "2026-10-17T09:57:34.775Z",
       "sub_services": [
         {
           "id": "sub-aud-1",
@@ -90,8 +90,8 @@
     },
     "00000000-0000-0000-0004-000000000001": {
       "id": "00000000-0000-0000-0004-000000000001",
-      "title": "GST Filing",
-      "slug": "gst-filing",
+      "title": "GST Compliance",
+      "slug": "gst-compliance",
       "short_description": "We architect your GST compliance end-to-end — from registration and classification to return filing, reconciliation and notice resolution — so you never miss an input credit or due date.",
       "long_description": "Navigating Goods and Services Tax in India requires meticulous attention to deadlines, classification, and input tax credit (ITC) reconciliation. H&S Auditors provides comprehensive GST advisory, registration, periodic return filings (GSTR-1, GSTR-3B, GSTR-9/9C), departmental audit support, and handling of departmental notices to ensure 100% statutory compliance without business disruption.",
       "icon": "FileText",
@@ -115,7 +115,7 @@
       "seo_title": "GST Filing & Compliance Services | H&S Auditors",
       "seo_description": "Accurate, hassle-free GST registration, monthly returns and reconciliation by experienced tax professionals.",
       "created_at": "2026-10-07T12:18:51.14279+00:00",
-      "updated_at": "2026-10-16T12:48:35.411Z",
+      "updated_at": "2026-10-17T09:57:34.775Z",
       "sub_services": [
         {
           "id": "sub_1791545805921",
@@ -166,12 +166,12 @@
         "Draft return review",
         "E-filing and acknowledgement verification"
       ],
-      "display_order": 2,
+      "display_order": 3,
       "is_active": true,
       "seo_title": "Income Tax Planning & Filing Services | H&S Auditors",
       "seo_description": "Maximise tax savings while staying fully compliant with the Income Tax Act with expert advisory from H&S Auditors.",
       "created_at": "2026-10-07T12:18:51.14279+00:00",
-      "updated_at": "2026-10-16T12:57:59.187Z",
+      "updated_at": "2026-10-17T09:57:34.775Z",
       "sub_services": [
         {
           "id": "sub_1791546843150",
@@ -221,7 +221,7 @@
       "display_order": 4,
       "is_active": true,
       "sub_services": [],
-      "updated_at": "2026-10-16T12:48:11.498Z",
+      "updated_at": "2026-10-17T09:57:34.775Z",
       "_deleted": false,
       "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1792154728/hs_auditors/services/xb5hlp5immc5yet3bnng.jpg"
     },
@@ -235,7 +235,7 @@
       "display_order": 5,
       "is_active": true,
       "sub_services": [],
-      "updated_at": "2026-10-16T12:54:06.299Z",
+      "updated_at": "2026-10-17T09:57:34.775Z",
       "_deleted": false
     },
     "cat_1792155378086": {
@@ -248,7 +248,7 @@
       "display_order": 6,
       "is_active": true,
       "sub_services": [],
-      "updated_at": "2026-10-16T12:56:18.203Z",
+      "updated_at": "2026-10-17T09:57:34.775Z",
       "_deleted": false
     }
   },

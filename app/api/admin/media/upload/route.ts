@@ -4,9 +4,13 @@ import path from 'path';
 import cloudinary from '@/lib/cloudinary';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { createClient } from '@/lib/supabase/server';
+import { requireAdmin } from '@/lib/supabase/require-admin';
 
 export async function POST(request: Request) {
   try {
+    const auth = await requireAdmin();
+    if (auth.response) return auth.response;
+
     const formData = await request.formData();
     const file = formData.get('file') as File | null;
     const folder = (formData.get('folder') as string) || 'hs_auditors';
