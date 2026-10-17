@@ -98,7 +98,7 @@ export function ServicesSection({ services = [] }: ServicesSectionProps) {
     <section className="w-full bg-[#FFFFFF] py-10 sm:py-14 lg:py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex items-end justify-between gap-3 sm:gap-4 mb-6 sm:mb-10">
+        <div data-animate="fade-up" className="flex items-end justify-between gap-3 sm:gap-4 mb-6 sm:mb-10">
           <div>
             {/* Eyebrow with gold accent line */}
             <div className="flex items-center gap-2 mb-1.5 sm:mb-2.5">
@@ -126,7 +126,7 @@ export function ServicesSection({ services = [] }: ServicesSectionProps) {
         </div>
 
         {/* 1. Laptop & Desktop View: Curated Grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div data-animate="stagger-cards" className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {displayServices.map((service, idx) => {
             const imageUrl = getServiceImage(service);
             const linkHref = service.cta_url || `/services#${service.slug}`;
@@ -135,7 +135,8 @@ export function ServicesSection({ services = [] }: ServicesSectionProps) {
             return (
               <div
                 key={service.id || service.slug}
-                className="group bg-white rounded-2xl shadow-[0_4px_20px_rgba(10,19,34,0.04)] hover:shadow-[0_16px_36px_rgba(10,19,34,0.08)] transition-all duration-300 overflow-hidden flex flex-col"
+                data-animate-child
+                className="group bg-white rounded-2xl shadow-[0_4px_20px_rgba(10,19,34,0.04)] hover:shadow-[0_20px_40px_rgba(10,19,34,0.1)] hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col"
               >
                 {/* Image Container with subtle hover zoom */}
                 <div className="relative w-full aspect-[16/10] bg-stone-100 overflow-hidden">

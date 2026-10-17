@@ -31,7 +31,7 @@ export function ValuesSection({ values = [] }: ValuesSectionProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center mb-8 sm:mb-12">
+        <div data-animate="fade-down" className="text-center mb-8 sm:mb-12">
           <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#2b2d54]/80 block mb-1.5">
             OUR GUIDING PRINCIPLES
           </span>
@@ -41,7 +41,7 @@ export function ValuesSection({ values = [] }: ValuesSectionProps) {
         </div>
 
         {/* Dynamic Value Cards from Database */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-7 lg:gap-8">
+        <div data-animate="stagger-cards" className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-7 lg:gap-8">
           {activeValues.map((val, idx) => {
             const number = String(idx + 1).padStart(2, '0');
             const imageUrl = getValueImage(val, idx);
@@ -49,7 +49,8 @@ export function ValuesSection({ values = [] }: ValuesSectionProps) {
             return (
               <div
                 key={val.id || idx}
-                className="group bg-white rounded-2xl shadow-[0_4px_20px_rgba(43,45,84,0.06)] hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
+                data-animate-child
+                className="group bg-white rounded-2xl shadow-[0_4px_20px_rgba(43,45,84,0.06)] hover:shadow-2xl hover:-translate-y-2.5 transition-all duration-500 overflow-hidden flex flex-col"
               >
                 {/* Image Container with subtle wave scoop at bottom */}
                 <div className="relative w-full aspect-[16/10] bg-stone-100 overflow-hidden">

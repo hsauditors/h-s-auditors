@@ -55,7 +55,7 @@ export function IndustriesSection({ industries = [] }: IndustriesSectionProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Header Column: Eyebrow, Heading, Description & CTA */}
-          <div className="lg:col-span-4 lg:pr-4">
+          <div data-animate="slide-left" className="lg:col-span-4 lg:pr-4">
             {/* Eyebrow with gold accent line */}
             <div className="flex items-center gap-2 mb-2 sm:mb-3">
               <span className="text-[10.5px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#2b2d54]/80">
@@ -87,7 +87,7 @@ export function IndustriesSection({ industries = [] }: IndustriesSectionProps) {
 
           {/* Cards Grid: Dynamic database records */}
           <div className="lg:col-span-8 flex flex-col">
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3.5">
+            <div data-animate="stagger-cards" className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3.5">
               {activeIndustries.map((ind, index) => {
                 const Icon = getIconForIndustry(ind.title);
                 const isHiddenOnMobile = !showAllMobile && index >= 6;
@@ -96,7 +96,8 @@ export function IndustriesSection({ industries = [] }: IndustriesSectionProps) {
                   <Link
                     key={ind.id || ind.slug}
                     href={`/industries#${ind.slug}`}
-                    className={`group items-center justify-start sm:justify-between text-center sm:text-left gap-1.5 sm:gap-3 p-3.5 sm:p-4 rounded-2xl bg-[#FAF9F6] hover:bg-white transition-all duration-200 shadow-[0_2px_10px_rgba(43,45,84,0.04)] hover:shadow-lg hover:-translate-y-0.5 min-h-[92px] sm:min-h-[64px] ${
+                    data-animate-child
+                    className={`group items-center justify-start sm:justify-between text-center sm:text-left gap-1.5 sm:gap-3 p-3.5 sm:p-4 rounded-2xl bg-[#FAF9F6] hover:bg-white transition-all duration-300 shadow-[0_2px_10px_rgba(43,45,84,0.04)] hover:shadow-lg hover:-translate-y-1 min-h-[92px] sm:min-h-[64px] ${
                       isHiddenOnMobile ? 'hidden sm:flex' : 'flex'
                     } flex-col sm:flex-row`}
                   >

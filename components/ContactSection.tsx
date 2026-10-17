@@ -20,7 +20,7 @@ export function ContactSection({ settings }: ContactSectionProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center">
           
           {/* Left Column: Heading, text, and warm gold CTA button */}
-          <div className="lg:col-span-7">
+          <div data-animate="slide-left" className="lg:col-span-7">
             {/* Eyebrow with gold accent line */}
             <div className="flex items-center gap-2 mb-2 sm:mb-2.5">
               <span className="text-[10.5px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#2b2d54]/80">
@@ -41,7 +41,7 @@ export function ContactSection({ settings }: ContactSectionProps) {
             {/* CTA Button */}
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 bg-[#fcdd5e] hover:bg-[#ebd04f] text-[#2b2d54] font-bold px-6 py-3.5 rounded-xl shadow-[0_4px_16px_rgba(252,221,94,0.3)] hover:shadow-lg transition-all text-xs sm:text-sm group"
+              className="inline-flex items-center justify-center gap-2 bg-[#fcdd5e] hover:bg-[#ebd04f] text-[#2b2d54] font-bold px-6 py-3.5 rounded-xl shadow-[0_4px_16px_rgba(252,221,94,0.3)] hover:shadow-goldGlow hover:-translate-y-0.5 transition-all text-xs sm:text-sm group"
             >
               <span>Talk to our partners</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-150 group-hover:translate-x-1 text-[#2b2d54]" />
@@ -49,12 +49,12 @@ export function ContactSection({ settings }: ContactSectionProps) {
           </div>
 
           {/* Right Column: Clean White Contact Info Card */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="w-full max-w-md bg-white rounded-2xl p-6 sm:p-7 shadow-md divide-y divide-stone-100">
+          <div data-animate="slide-right" className="lg:col-span-5 flex justify-center lg:justify-end">
+            <div className="w-full max-w-md bg-white rounded-2xl p-6 sm:p-7 shadow-md hover:shadow-xl transition-shadow duration-300 divide-y divide-stone-100">
               
               {/* Phone */}
-              <div className="flex items-start gap-3.5 pb-4 sm:pb-5">
-                <div className="w-10 h-10 rounded-xl bg-[#fcdd5e]/25 flex items-center justify-center flex-shrink-0 text-[#2b2d54]">
+              <div className="group flex items-start gap-3.5 pb-4 sm:pb-5">
+                <div className="w-10 h-10 rounded-xl bg-[#fcdd5e]/25 group-hover:bg-[#fcdd5e]/40 flex items-center justify-center flex-shrink-0 text-[#2b2d54] group-hover:scale-105 transition-all duration-200">
                   <Phone className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.9]" />
                 </div>
                 <div>

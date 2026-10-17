@@ -27,19 +27,19 @@ export function AboutSection({ about, features = [] }: AboutSectionProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           
           {/* Left Column: Office Image with Floating Stat Badge */}
-          <div className="hidden lg:block lg:col-span-5 relative">
-            <div className="relative w-full aspect-[4/3.4] rounded-2xl overflow-hidden shadow-md bg-stone-100">
+          <div data-animate="zoom-in" className="hidden lg:block lg:col-span-5 relative">
+            <div className="relative w-full aspect-[4/3.4] rounded-2xl overflow-hidden shadow-md bg-stone-100 group">
               <Image
                 src={officeImage}
                 alt={about?.image_alt || 'H&S Auditors Corporate Reception'}
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
                 sizes="40vw"
               />
             </div>
 
-            {/* Floating 10+ Years Stat Badge */}
-            <div className="absolute -bottom-4 left-4 z-10 bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-5 shadow-xl max-w-[210px]">
+            {/* Floating 10+ Years Stat Badge with gentle continuous float */}
+            <div className="absolute -bottom-4 left-4 z-10 bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-5 shadow-xl max-w-[210px] animate-gentle-float border border-stone-100">
               <div className="text-3xl font-bold text-[#2b2d54] leading-none mb-1">
                 10+
               </div>
@@ -50,7 +50,7 @@ export function AboutSection({ about, features = [] }: AboutSectionProps) {
           </div>
 
           {/* Right Column: Narrative, Features & CTA */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
+          <div data-animate="slide-right" className="lg:col-span-7 flex flex-col justify-center">
             {/* Eyebrow */}
             <div className="flex items-center gap-2 mb-2 sm:mb-2.5">
               <span className="text-[10.5px] sm:text-xs font-bold tracking-[0.2em] text-[#2b2d54]/80 uppercase block">
@@ -76,7 +76,7 @@ export function AboutSection({ about, features = [] }: AboutSectionProps) {
 
             {/* Features Checklist from Database */}
             {featureList.length > 0 && (
-              <div className="space-y-2.5 sm:space-y-3 bg-[#FAF9F6] p-4 sm:p-5 rounded-2xl mb-6">
+              <div data-animate="fade-up" className="space-y-2.5 sm:space-y-3 bg-[#FAF9F6] p-4 sm:p-5 rounded-2xl mb-6 delay-100">
                 {featureList.map((feature) => (
                   <div key={feature.id} className="flex items-center gap-3">
                     <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#fcdd5e]/25 flex items-center justify-center flex-shrink-0 text-[#2b2d54]">
@@ -90,7 +90,7 @@ export function AboutSection({ about, features = [] }: AboutSectionProps) {
               </div>
             )}
 
-            <div>
+            <div data-animate="zoom-in" className="delay-200">
               <Link
                 href={ctaLink}
                 className="inline-flex items-center justify-center gap-2 bg-[#2b2d54] hover:bg-[#222443] text-white font-semibold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-sm transition-all group w-full sm:w-auto"
