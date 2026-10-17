@@ -5,6 +5,7 @@ import { Save, CheckCircle, AlertCircle, RefreshCw, Upload, Image as ImageIcon }
 import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import { SiteSettings } from '@/types';
+import { AdminToast } from '@/components/admin/AdminToast';
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
@@ -166,22 +167,7 @@ export default function AdminSettingsPage() {
         </button>
       </div>
 
-      {message && (
-        <div
-          className={`p-3.5 rounded-lg flex items-center gap-2 text-xs font-semibold ${
-            message.type === 'success'
-              ? 'bg-green-50 text-green-700 border border-green-200'
-              : 'bg-red-50 text-red-700 border border-red-200'
-          }`}
-        >
-          {message.type === 'success' ? (
-            <CheckCircle className="w-4 h-4 flex-shrink-0" />
-          ) : (
-            <AlertCircle className="w-4 h-4 flex-shrink-0" />
-          )}
-          <span>{message.text}</span>
-        </div>
-      )}
+      <AdminToast message={message} onClose={() => setMessage(null)} />
 
       <form onSubmit={handleSave} className="bg-white rounded-2xl border border-brand-border p-6 sm:p-8 space-y-6 shadow-sm">
         {/* Brand Name & Tagline */}

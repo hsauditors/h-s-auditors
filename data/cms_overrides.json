@@ -59,7 +59,7 @@
       "seo_title": "Audit & Assurance Services | H&S Auditors",
       "seo_description": "Statutory, internal and tax audits that ensure complete compliance and financial transparency.",
       "created_at": "2026-10-07T12:18:51.14279+00:00",
-      "updated_at": "2026-10-17T10:20:20.846Z",
+      "updated_at": "2026-10-17T12:25:17.467Z",
       "sub_services": [
         {
           "id": "sub-aud-1",
@@ -115,7 +115,7 @@
       "seo_title": "GST Filing & Compliance Services | H&S Auditors",
       "seo_description": "Accurate, hassle-free GST registration, monthly returns and reconciliation by experienced tax professionals.",
       "created_at": "2026-10-07T12:18:51.14279+00:00",
-      "updated_at": "2026-10-17T10:20:20.847Z",
+      "updated_at": "2026-10-17T12:25:17.467Z",
       "sub_services": [
         {
           "id": "sub_1791545805921",
@@ -171,7 +171,7 @@
       "seo_title": "Income Tax Planning & Filing Services | H&S Auditors",
       "seo_description": "Maximise tax savings while staying fully compliant with the Income Tax Act with expert advisory from H&S Auditors.",
       "created_at": "2026-10-07T12:18:51.14279+00:00",
-      "updated_at": "2026-10-17T10:22:49.036Z",
+      "updated_at": "2026-10-17T12:25:17.467Z",
       "sub_services": [
         {
           "id": "sub_1791546843150",
@@ -221,7 +221,7 @@
       "display_order": 4,
       "is_active": true,
       "sub_services": [],
-      "updated_at": "2026-10-17T10:40:33.942Z",
+      "updated_at": "2026-10-17T12:25:17.467Z",
       "_deleted": false,
       "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1792154728/hs_auditors/services/xb5hlp5immc5yet3bnng.jpg"
     },
@@ -235,7 +235,7 @@
       "display_order": 5,
       "is_active": true,
       "sub_services": [],
-      "updated_at": "2026-10-17T10:40:14.170Z",
+      "updated_at": "2026-10-17T12:25:17.467Z",
       "_deleted": false
     },
     "cat_1792155378086": {
@@ -248,7 +248,7 @@
       "display_order": 6,
       "is_active": true,
       "sub_services": [],
-      "updated_at": "2026-10-17T10:41:59.055Z",
+      "updated_at": "2026-10-17T12:25:17.467Z",
       "_deleted": false
     }
   },

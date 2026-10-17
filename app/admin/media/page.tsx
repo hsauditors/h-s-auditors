@@ -16,6 +16,7 @@ import {
 import { createClient } from '@/lib/supabase/client';
 import { MediaItem } from '@/types';
 import { ImageUploader } from '@/components/admin/ImageUploader';
+import { AdminToast } from '@/components/admin/AdminToast';
 
 export default function AdminMediaPage() {
   const [media, setMedia] = useState<MediaItem[]>([]);
@@ -86,22 +87,7 @@ export default function AdminMediaPage() {
         </div>
       </div>
 
-      {message && (
-        <div
-          className={`p-3.5 rounded-lg flex items-center gap-2 text-xs font-semibold ${
-            message.type === 'success'
-              ? 'bg-green-50 text-green-700 border border-green-200'
-              : 'bg-red-50 text-red-700 border border-red-200'
-          }`}
-        >
-          {message.type === 'success' ? (
-            <CheckCircle className="w-4 h-4 flex-shrink-0" />
-          ) : (
-            <AlertCircle className="w-4 h-4 flex-shrink-0" />
-          )}
-          <span>{message.text}</span>
-        </div>
-      )}
+      <AdminToast message={message} onClose={() => setMessage(null)} />
 
       {/* Upload Zone */}
       <div className="bg-white rounded-2xl border border-brand-border p-6 shadow-sm">
