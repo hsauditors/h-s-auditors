@@ -34,7 +34,7 @@ export default async function AdminLayout({
     // Ignore error
   }
 
-  let userEmail = 'admin@hsauditors.com';
+  let userEmail = '';
 
   try {
     const supabase = createClient();

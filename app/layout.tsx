@@ -24,8 +24,11 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description,
     icons: {
-      icon: '/logo.png',
-      apple: '/logo.png',
+      icon: [
+        { url: '/logo/logo-icon.png', type: 'image/png' },
+        { url: '/favicon.ico', sizes: 'any' },
+      ],
+      apple: '/logo/logo-icon.png',
     },
     keywords: [
       'H&S Auditors',
@@ -108,8 +111,6 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/logo.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/logo.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

@@ -1010,10 +1010,7 @@ export default function AdminServicesPage() {
                           </div>
 
                           {/* Sub-Card Actions */}
-                          <div className="pt-2.5 mt-3 border-t border-gray-100 flex items-center justify-between">
-                            <span className="text-[10px] font-bold text-[#2563EB]">
-                              Learn More →
-                            </span>
+                          <div className="pt-2.5 mt-3 border-t border-gray-100 flex items-center justify-end">
                             <div className="flex items-center gap-1">
                               <button
                                 type="button"

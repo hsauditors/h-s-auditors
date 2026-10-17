@@ -6,7 +6,11 @@ import { Lock, Mail, ArrowRight, AlertCircle, Loader2 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { BrandLogo } from '@/components/BrandLogo';
 
-export default function AdminLoginPage() {
+export default function AdminLoginPage({
+  searchParams,
+}: {
+  searchParams?: { error?: string };
+}) {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -56,6 +60,12 @@ export default function AdminLoginPage() {
         <div className="mb-6 p-3.5 rounded-lg bg-red-50 border border-red-200 flex items-center gap-2.5 text-xs text-red-700">
           <AlertCircle className="w-4 h-4 flex-shrink-0" />
           <span>{errorMsg}</span>
+        </div>
+      )}
+
+      {searchParams?.error === 'not-admin' && (
+        <div className="mb-6 p-3.5 rounded-lg bg-red-50 border border-red-200 text-xs text-red-700">
+          This account does not have admin access. Contact your site administrator.
         </div>
       )}
 

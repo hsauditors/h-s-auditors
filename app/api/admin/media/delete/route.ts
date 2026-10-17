@@ -1,19 +1,13 @@
 import { NextResponse } from 'next/server';
 import cloudinary from '@/lib/cloudinary';
 import { createAdminClient } from '@/lib/supabase/admin';
-import { createClient } from '@/lib/supabase/server';
+import { requireAdmin } from '@/lib/supabase/require-admin';
 
 export async function POST(request: Request) {
   try {
-    const supabaseUserClient = createClient();
-    const {
-      data: { user },
-      error: authError,
-    } = await supabaseUserClient.auth.getUser();
-
-    if (process.env.NODE_ENV === 'production' && (authError || !user)) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    const auth = await requireAdmin();
+    if (auth.response) return auth.response;
+    const supabaseUserClient = auth.supabase;
 
     const { public_id } = await request.json();
 
