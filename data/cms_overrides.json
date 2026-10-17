@@ -54,12 +54,12 @@
         "Observation discussion with leadership",
         "Final audit report issuance"
       ],
-      "display_order": 2,
+      "display_order": 1,
       "is_active": true,
       "seo_title": "Audit & Assurance Services | H&S Auditors",
       "seo_description": "Statutory, internal and tax audits that ensure complete compliance and financial transparency.",
       "created_at": "2026-10-07T12:18:51.14279+00:00",
-      "updated_at": "2026-10-17T09:57:34.775Z",
+      "updated_at": "2026-10-17T10:20:20.846Z",
       "sub_services": [
         {
           "id": "sub-aud-1",
@@ -110,12 +110,12 @@
         "Return preparation & validation",
         "Client sign-off & electronic filing"
       ],
-      "display_order": 1,
+      "display_order": 2,
       "is_active": true,
       "seo_title": "GST Filing & Compliance Services | H&S Auditors",
       "seo_description": "Accurate, hassle-free GST registration, monthly returns and reconciliation by experienced tax professionals.",
       "created_at": "2026-10-07T12:18:51.14279+00:00",
-      "updated_at": "2026-10-17T09:57:34.775Z",
+      "updated_at": "2026-10-17T10:20:20.847Z",
       "sub_services": [
         {
           "id": "sub_1791545805921",
@@ -146,8 +146,8 @@
     },
     "00000000-0000-0000-0004-000000000002": {
       "id": "00000000-0000-0000-0004-000000000002",
-      "title": "Income Tax",
-      "slug": "income-tax",
+      "title": "Income Tax & TDS",
+      "slug": "income-tax-tds",
       "short_description": "Strategic tax planning, return filing, advance-tax projections and assessment representation under the Income Tax Act 1961, designed to optimise liability while keeping you fully compliant.",
       "long_description": "Our direct tax consultancy assists corporate entities, partnerships, LLPs, and individuals in strategic tax planning, advance tax computation, tax-deducted-at-source (TDS) management, and annual return filings. We provide sound representation in scrutiny assessments and appeals before tax authorities, keeping your tax liability optimised and fully legitimate.",
       "icon": "BarChart3",
@@ -171,7 +171,7 @@
       "seo_title": "Income Tax Planning & Filing Services | H&S Auditors",
       "seo_description": "Maximise tax savings while staying fully compliant with the Income Tax Act with expert advisory from H&S Auditors.",
       "created_at": "2026-10-07T12:18:51.14279+00:00",
-      "updated_at": "2026-10-17T09:57:34.775Z",
+      "updated_at": "2026-10-17T10:22:49.036Z",
       "sub_services": [
         {
           "id": "sub_1791546843150",
@@ -214,41 +214,41 @@
     },
     "cat_1792153252257": {
       "id": "cat_1792153252257",
-      "title": "Bookkeeping & Accounting",
-      "slug": "bookkeeping-accounting",
-      "short_description": "Tally- and Zoho-based bookkeeping, bank reconciliation, debtor/creditor tracking and MIS reports that give you a real-time view of your financial position.",
+      "title": "Accounting & Payroll",
+      "slug": "accounting-payroll",
+      "short_description": "Books that stay current, reconciled and ready for any statutory or lender review.",
       "icon": "FileText",
       "display_order": 4,
       "is_active": true,
       "sub_services": [],
-      "updated_at": "2026-10-17T09:57:34.775Z",
+      "updated_at": "2026-10-17T10:40:33.942Z",
       "_deleted": false,
       "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1792154728/hs_auditors/services/xb5hlp5immc5yet3bnng.jpg"
     },
     "cat_1792155246231": {
       "id": "cat_1792155246231",
-      "title": "Business Registration",
-      "slug": "business-registration",
-      "short_description": "Entity selection, name approval, incorporation filings, PAN/TAN, GSTIN and shop-licence assistance under the Companies Act 2013 and LLP Act 2008.",
+      "title": "Business Set-up & ROC",
+      "slug": "business-set-up-roc",
+      "short_description": "Incorporation and ongoing secretarial compliance under the Companies Act, 2013 and LLP Act, 2008.",
       "icon": "FileText",
       "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1792155241/hs_auditors/services/lnngwophchmnhawcissa.jpg",
       "display_order": 5,
       "is_active": true,
       "sub_services": [],
-      "updated_at": "2026-10-17T09:57:34.775Z",
+      "updated_at": "2026-10-17T10:40:14.170Z",
       "_deleted": false
     },
     "cat_1792155378086": {
       "id": "cat_1792155378086",
-      "title": "Company Secretarial",
-      "slug": "company-secretarial",
-      "short_description": "Annual ROC filings (AOC-4, MGT-7), board minutes, change-of-director filings and compliance calendars to keep your company in good standing.",
+      "title": "Advisory",
+      "slug": "advisory",
+      "short_description": "Practical, sustainable advice for businesses navigating a fast-changing regulatory landscape.",
       "icon": "Users",
       "image_url": "https://res.cloudinary.com/ovbx5bzv/image/upload/v1792155373/hs_auditors/services/qbdpcwfwosqilk5lxebu.jpg",
       "display_order": 6,
       "is_active": true,
       "sub_services": [],
-      "updated_at": "2026-10-17T09:57:34.775Z",
+      "updated_at": "2026-10-17T10:41:59.055Z",
       "_deleted": false
     }
   },
