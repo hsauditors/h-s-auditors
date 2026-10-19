@@ -216,6 +216,7 @@ export interface Database {
           is_active: boolean;
           seo_title: string | null;
           seo_description: string | null;
+          sub_services?: any;
           created_at: string;
           updated_at: string;
         };
@@ -235,6 +236,7 @@ export interface Database {
           is_active?: boolean;
           seo_title?: string | null;
           seo_description?: string | null;
+          sub_services?: any;
           created_at?: string;
           updated_at?: string;
         };
@@ -254,6 +256,7 @@ export interface Database {
           is_active?: boolean;
           seo_title?: string | null;
           seo_description?: string | null;
+          sub_services?: any;
           created_at?: string;
           updated_at?: string;
         };

@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
-import fs from 'fs';
-import path from 'path';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { requireAdmin } from '@/lib/supabase/require-admin';
 
@@ -40,27 +38,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Invalid items array' }, { status: 400 });
     }
 
-    // 1. Sync display_order in local overrides file
-    try {
-      const OVERRIDES_FILE = path.join(process.cwd(), 'data', 'cms_overrides.json');
-      if (fs.existsSync(OVERRIDES_FILE)) {
-        const overrides = JSON.parse(fs.readFileSync(OVERRIDES_FILE, 'utf-8') || '{}');
-        if (!overrides[table]) overrides[table] = {};
-        for (const item of items) {
-          overrides[table][item.id] = {
-            ...(overrides[table][item.id] || {}),
-            id: item.id,
-            display_order: item.display_order,
-            updated_at: new Date().toISOString(),
-          };
-        }
-        fs.writeFileSync(OVERRIDES_FILE, JSON.stringify(overrides, null, 2), 'utf-8');
-      }
-    } catch (fsErr) {
-      console.warn('Reorder local overrides note:', fsErr);
-    }
-
-    // 2. Sync to Supabase
+    // Sync to Supabase
     try {
       let supabase: any;
       try {
