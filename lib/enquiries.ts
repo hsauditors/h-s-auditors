@@ -1,72 +1,33 @@
-import fs from 'fs';
-import path from 'path';
 import { Enquiry } from '@/types';
 import { createClient } from './supabase/server';
 import { createAdminClient } from './supabase/admin';
 
-const ENQUIRIES_FILE = path.join(process.cwd(), 'data', 'enquiries.json');
-
-export function getLocalEnquiries(): Enquiry[] {
+async function getSupabase() {
   try {
-    if (fs.existsSync(ENQUIRIES_FILE)) {
-      const content = fs.readFileSync(ENQUIRIES_FILE, 'utf-8');
-      const parsed = JSON.parse(content || '[]');
-      if (Array.isArray(parsed)) {
-        return parsed;
-      }
-    }
-  } catch (err) {
-    console.warn('Error reading local enquiries:', err);
-  }
-  return [];
-}
-
-export function saveLocalEnquiries(enquiries: Enquiry[]) {
-  try {
-    const dir = path.dirname(ENQUIRIES_FILE);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    fs.writeFileSync(ENQUIRIES_FILE, JSON.stringify(enquiries, null, 2), 'utf-8');
-  } catch (err) {
-    console.error('Error saving local enquiries:', err);
+    return createAdminClient();
+  } catch {
+    return createClient();
   }
 }
 
 export async function getAllEnquiries(): Promise<Enquiry[]> {
-  const local = getLocalEnquiries();
-  const map = new Map<string, Enquiry>();
-
-  // Add local enquiries first
-  local.forEach((e) => map.set(e.id, e));
-
-  // Try fetching from Supabase with short timeout
   try {
-    let supabase;
-    try {
-      supabase = createAdminClient();
-    } catch {
-      supabase = createClient();
-    }
-
-    const { data } = await supabase
+    const supabase = await getSupabase();
+    const { data, error } = await supabase
       .from('enquiries')
       .select('*')
       .order('created_at', { ascending: false });
 
-    if (Array.isArray(data)) {
-      data.forEach((e) => {
-        if (!map.has(e.id)) {
-          map.set(e.id, e as Enquiry);
-        }
-      });
+    if (error) {
+      console.error('Error fetching enquiries from Supabase:', error.message);
+      return [];
     }
-  } catch {}
 
-  const merged = Array.from(map.values());
-  return merged.sort(
-    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-  );
+    return (data as Enquiry[]) || [];
+  } catch (err: any) {
+    console.error('Error in getAllEnquiries:', err?.message);
+    return [];
+  }
 }
 
 export async function addEnquiry(data: {
@@ -86,33 +47,23 @@ export async function addEnquiry(data: {
     updated_at: new Date().toISOString(),
   };
 
-  // 1. Immediately save locally to disk so it's NEVER lost
-  const local = getLocalEnquiries();
-  local.unshift(newEnquiry);
-  saveLocalEnquiries(local);
+  const supabase = await getSupabase();
+  const { error } = await supabase.from('enquiries').insert([
+    {
+      id: newEnquiry.id,
+      name: newEnquiry.name,
+      email: newEnquiry.email,
+      phone: newEnquiry.phone,
+      message: newEnquiry.message,
+      status: newEnquiry.status,
+      created_at: newEnquiry.created_at,
+      updated_at: newEnquiry.updated_at,
+    },
+  ]);
 
-  // 2. Best-effort async save to Supabase
-  try {
-    let supabase;
-    try {
-      supabase = createAdminClient();
-    } catch {
-      supabase = createClient();
-    }
-
-    await supabase.from('enquiries').insert([
-      {
-        id: newEnquiry.id,
-        name: newEnquiry.name,
-        email: newEnquiry.email,
-        phone: newEnquiry.phone,
-        message: newEnquiry.message,
-        status: newEnquiry.status,
-        created_at: newEnquiry.created_at,
-      },
-    ]);
-  } catch (err) {
-    console.warn('Note: Supabase sync for enquiry skipped (saved locally):', err);
+  if (error) {
+    console.error('Error saving enquiry to Supabase:', error.message);
+    throw new Error('Failed to save enquiry. Please try again.');
   }
 
   return newEnquiry;
@@ -122,44 +73,36 @@ export async function updateEnquiryStatus(
   id: string,
   newStatus: 'new' | 'contacted' | 'closed'
 ): Promise<boolean> {
-  const local = getLocalEnquiries();
-  const index = local.findIndex((e) => e.id === id);
-
-  if (index !== -1) {
-    local[index].status = newStatus;
-    local[index].updated_at = new Date().toISOString();
-    saveLocalEnquiries(local);
-  }
-
   try {
-    let supabase;
-    try {
-      supabase = createAdminClient();
-    } catch {
-      supabase = createClient();
-    }
-    await supabase
+    const supabase = await getSupabase();
+    const { error } = await supabase
       .from('enquiries')
       .update({ status: newStatus, updated_at: new Date().toISOString() })
       .eq('id', id);
-  } catch {}
 
-  return true;
+    if (error) {
+      console.error('Error updating enquiry in Supabase:', error.message);
+      return false;
+    }
+
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export async function deleteEnquiry(id: string): Promise<boolean> {
-  const local = getLocalEnquiries().filter((e) => e.id !== id);
-  saveLocalEnquiries(local);
-
   try {
-    let supabase;
-    try {
-      supabase = createAdminClient();
-    } catch {
-      supabase = createClient();
-    }
-    await supabase.from('enquiries').delete().eq('id', id);
-  } catch {}
+    const supabase = await getSupabase();
+    const { error } = await supabase.from('enquiries').delete().eq('id', id);
 
-  return true;
+    if (error) {
+      console.error('Error deleting enquiry from Supabase:', error.message);
+      return false;
+    }
+
+    return true;
+  } catch {
+    return false;
+  }
 }
