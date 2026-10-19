@@ -48,10 +48,9 @@ export default function AdminAboutPage() {
     try {
       const res = await fetch('/api/admin/content/save?table=about_content');
       if (res.ok) {
-        const overrides = await res.json();
-        const firstOverride = Object.values(overrides)[0] as any;
-        if (firstOverride) {
-          aboutItem = { ...(aboutItem || {}), ...firstOverride };
+        const item = await res.json();
+        if (item && typeof item === 'object' && item.id) {
+          aboutItem = { ...(aboutItem || {}), ...item };
         }
       }
     } catch {}

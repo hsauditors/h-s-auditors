@@ -17,7 +17,8 @@ export function AboutSection({ about, features = [] }: AboutSectionProps) {
   const paragraph2 = about?.paragraph_2 || '';
   const ctaText = about?.cta_text || 'More About Us';
   const ctaLink = about?.cta_link || '/about';
-  const officeImage = about?.image_url || '/images/H&S Auditors about section.png';
+  const officeImage = about?.image_url?.trim() || '';
+  const hasImage = Boolean(officeImage);
 
   const featureList = (features || []).filter((f) => f.is_active !== false);
 
@@ -26,36 +27,47 @@ export function AboutSection({ about, features = [] }: AboutSectionProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           
-          {/* Left Column: Office Image with Floating Stat Badge */}
-          <div data-animate="zoom-in" className="hidden lg:block lg:col-span-5 relative">
-            <div className="relative w-full aspect-[4/3.4] rounded-2xl overflow-hidden shadow-md bg-stone-100 group">
-              <Image
-                src={officeImage}
-                alt={about?.image_alt || 'H&S Auditors Corporate Reception'}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-                sizes="40vw"
-              />
-            </div>
-
-            {/* Floating 10+ Years Stat Badge with gentle continuous float */}
-            <div className="absolute -bottom-4 left-4 z-10 bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-5 shadow-xl max-w-[210px] animate-gentle-float border border-stone-100">
-              <div className="text-3xl font-bold text-[#2b2d54] leading-none mb-1">
-                10+
+          {/* Left Column: Office Image with Floating Stat Badge (only if image exists) */}
+          {hasImage && (
+            <div data-animate="zoom-in" className="hidden lg:block lg:col-span-5 relative">
+              <div className="relative w-full aspect-[4/3.4] rounded-2xl overflow-hidden shadow-md bg-stone-100 group">
+                <Image
+                  src={officeImage}
+                  alt={about?.image_alt || 'H&S Auditors Corporate Reception'}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  sizes="40vw"
+                />
               </div>
-              <div className="text-xs font-semibold text-slate-700 leading-snug">
-                Years of Professional Excellence
+
+              {/* Floating 10+ Years Stat Badge with gentle continuous float */}
+              <div className="absolute -bottom-4 left-4 z-10 bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-5 shadow-xl max-w-[210px] animate-gentle-float border border-stone-100">
+                <div className="text-3xl font-bold text-[#2b2d54] leading-none mb-1">
+                  10+
+                </div>
+                <div className="text-xs font-semibold text-slate-700 leading-snug">
+                  Years of Professional Excellence
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
-          {/* Right Column: Narrative, Features & CTA */}
-          <div data-animate="slide-right" className="lg:col-span-7 flex flex-col justify-center">
-            {/* Eyebrow */}
-            <div className="flex items-center gap-2 mb-2 sm:mb-2.5">
+          {/* Right Column: Narrative, Features & CTA (full width when no image) */}
+          <div
+            data-animate="slide-right"
+            className={`${hasImage ? 'lg:col-span-7' : 'lg:col-span-12 max-w-4xl'} flex flex-col justify-center`}
+          >
+            {/* Eyebrow & Optional Inline Badge if no image */}
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-2 sm:mb-2.5">
               <span className="text-[10.5px] sm:text-xs font-bold tracking-[0.2em] text-[#2b2d54]/80 uppercase block">
                 {eyebrow}
               </span>
+              {!hasImage && (
+                <div className="inline-flex items-center gap-2 bg-[#FAF9F6] border border-stone-200/60 rounded-full px-3 py-1 shadow-2xs">
+                  <span className="text-xs font-extrabold text-[#2b2d54]">10+ Years</span>
+                  <span className="text-[11px] font-medium text-slate-600">of Professional Excellence</span>
+                </div>
+              )}
             </div>
 
             <h2 className="text-2xl sm:text-3xl lg:text-[36px] font-bold text-[#2b2d54] tracking-tight leading-snug mb-4">

@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import { createClient } from './supabase/server';
 import {
   SiteSettings,
@@ -19,41 +17,20 @@ import {
   Career,
 } from '@/types';
 
-function getOverridesForTable(table: string): Record<string, any> {
-  try {
-    const file = path.join(process.cwd(), 'data', 'cms_overrides.json');
-    if (fs.existsSync(file)) {
-      const content = fs.readFileSync(file, 'utf-8');
-      const json = JSON.parse(content || '{}');
-      return json[table] || {};
-    }
-  } catch {}
-  return {};
-}
-
-function getOverride(table: string, key: string): any {
-  const tableData = getOverridesForTable(table);
-  return tableData[key] || Object.values(tableData)[0] || null;
-}
-
 export async function getSiteSettings(): Promise<SiteSettings | null> {
-  const override = getOverride('site_settings', 'settings') || getOverride('site_settings', 'default');
-  let base: any = null;
   try {
     const supabase = createClient();
     const { data } = await supabase
       .from('site_settings')
       .select('*')
       .limit(1)
-      .single();
+      .maybeSingle();
 
-    if (data) {
-      base = data;
-    }
-  } catch {}
-
-  if (!base && !override) return null;
-  return { ...(base || {}), ...(override || {}) } as SiteSettings;
+    return data as SiteSettings | null;
+  } catch (err) {
+    console.warn('Error fetching site_settings from Supabase:', err);
+    return null;
+  }
 }
 
 export async function getNavigationItems(): Promise<NavigationItem[]> {
@@ -73,9 +50,6 @@ export async function getNavigationItems(): Promise<NavigationItem[]> {
 }
 
 export async function getHomepageSection(sectionKey: string): Promise<HomepageSection | null> {
-  const override = getOverride('homepage_sections', sectionKey);
-  let base: any = null;
-
   try {
     const supabase = createClient();
     const { data } = await supabase
@@ -84,22 +58,15 @@ export async function getHomepageSection(sectionKey: string): Promise<HomepageSe
       .eq('section_key', sectionKey)
       .eq('is_active', true)
       .limit(1)
-      .single();
+      .maybeSingle();
 
-    if (data) {
-      base = data;
-    }
-  } catch {}
-
-  if (!base && !override) return null;
-  return { ...(base || {}), ...(override || {}) } as HomepageSection;
+    return data as HomepageSection | null;
+  } catch {
+    return null;
+  }
 }
 
 export async function getServicesBanner(): Promise<ServicesBannerData> {
-  const override =
-    getOverride('services_banner', 'banner') ||
-    getOverride('services_banner', 'default');
-
   const defaultBanner: ServicesBannerData = {
     eyebrow: 'OUR SERVICES',
     headline: 'Accounting, Audit & Advisory Services',
@@ -107,15 +74,30 @@ export async function getServicesBanner(): Promise<ServicesBannerData> {
     image_url: '/images/service-accounting.jpg',
   };
 
-  return {
-    ...defaultBanner,
-    ...(override || {}),
-  };
+  try {
+    const supabase = createClient();
+    const { data } = await supabase
+      .from('homepage_sections')
+      .select('*')
+      .eq('section_key', 'services_banner')
+      .eq('is_active', true)
+      .limit(1)
+      .maybeSingle();
+
+    if (data) {
+      return {
+        eyebrow: data.eyebrow || defaultBanner.eyebrow,
+        headline: data.headline || defaultBanner.headline,
+        description: data.description || defaultBanner.description,
+        image_url: data.desktop_image_url || data.mobile_image_url || defaultBanner.image_url,
+      };
+    }
+  } catch {}
+
+  return defaultBanner;
 }
 
 export async function getHomepageStats(): Promise<HomepageStat[]> {
-  const overrides = getOverridesForTable('homepage_stats');
-  let baseList: HomepageStat[] = [];
   try {
     const supabase = createClient();
     const { data } = await supabase
@@ -123,73 +105,32 @@ export async function getHomepageStats(): Promise<HomepageStat[]> {
       .select('*')
       .eq('is_active', true)
       .order('display_order', { ascending: true });
-    if (data && data.length > 0) baseList = data as HomepageStat[];
-  } catch {}
 
-  const map = new Map<string, HomepageStat>();
-  baseList.forEach((item) => map.set(item.id, item));
-
-  Object.entries(overrides).forEach(([key, val]: [string, any]) => {
-    if (val._deleted) {
-      map.delete(key);
-      return;
-    }
-    if (map.has(key)) {
-      map.set(key, { ...map.get(key)!, ...val });
-    } else if (key !== 'default') {
-      map.set(key, val);
-    }
-  });
-
-  return Array.from(map.values())
-    .filter((s) => s.is_active !== false && !(s as any)._deleted)
-    .sort((a, b) => (a.display_order ?? 99) - (b.display_order ?? 99));
+    return (data as HomepageStat[]) || [];
+  } catch {
+    return [];
+  }
 }
 
 export async function getServices(): Promise<Service[]> {
-  const serviceOverrides = getOverridesForTable('services');
-  let baseList: Service[] = [];
   try {
     const supabase = createClient();
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('services')
       .select('*')
       .eq('is_active', true)
       .order('display_order', { ascending: true });
 
-    if (data && data.length > 0) baseList = data as Service[];
-  } catch {}
-
-  const map = new Map<string, Service>();
-  baseList.forEach((s: any) => {
-    map.set(String(s.id || s.slug), s);
-  });
-
-  Object.entries(serviceOverrides).forEach(([key, val]: [string, any]) => {
-    if (val._deleted) {
-      map.delete(key);
-      return;
+    if (error || !data) {
+      console.warn('Error fetching services from Supabase:', error?.message);
+      return [];
     }
-    let matched = false;
-    for (const [existingKey, existingVal] of Array.from(map.entries())) {
-      if (
-        existingKey === key ||
-        String(existingVal.id) === String(val.id) ||
-        existingVal.slug === val.slug
-      ) {
-        map.set(existingKey, { ...existingVal, ...val });
-        matched = true;
-        break;
-      }
-    }
-    if (!matched && key !== 'default') {
-      map.set(key, val);
-    }
-  });
 
-  return Array.from(map.values())
-    .filter((s) => s.is_active !== false && !(s as any)._deleted)
-    .sort((a, b) => (a.display_order ?? 99) - (b.display_order ?? 99));
+    return (data as Service[]) || [];
+  } catch (err) {
+    console.warn('Failed to query services:', err);
+    return [];
+  }
 }
 
 export async function getServiceBySlug(slug: string): Promise<Service | null> {
@@ -202,15 +143,13 @@ export async function getServiceBySlug(slug: string): Promise<Service | null> {
     return all.find((s) => s.slug === 'accounting-payroll') || null;
   }
   if (slug === 'business-registration' || slug === 'company-secretarial') {
-    return all.find((s) => s.slug === 'business-setup-roc') || null;
+    return all.find((s) => s.slug === 'business-setup-roc' || s.slug === 'business-set-up-roc') || null;
   }
 
   return null;
 }
 
 export async function getComplianceDeadlines(): Promise<ComplianceDeadline[]> {
-  const overrides = getOverridesForTable('compliance_deadlines');
-  let baseList: ComplianceDeadline[] = [];
   try {
     const supabase = createClient();
     const { data } = await supabase
@@ -218,32 +157,14 @@ export async function getComplianceDeadlines(): Promise<ComplianceDeadline[]> {
       .select('*')
       .eq('is_active', true)
       .order('display_order', { ascending: true });
-    if (data && data.length > 0) baseList = data as ComplianceDeadline[];
-  } catch {}
 
-  const map = new Map<string, ComplianceDeadline>();
-  baseList.forEach((item) => map.set(String(item.id), item));
-
-  Object.entries(overrides).forEach(([key, val]: [string, any]) => {
-    if (val._deleted) {
-      map.delete(key);
-      return;
-    }
-    if (map.has(key)) {
-      map.set(key, { ...map.get(key)!, ...val });
-    } else if (key !== 'default') {
-      map.set(key, val);
-    }
-  });
-
-  return Array.from(map.values())
-    .filter((s) => s.is_active !== false && !(s as any)._deleted)
-    .sort((a, b) => (a.display_order ?? 99) - (b.display_order ?? 99));
+    return (data as ComplianceDeadline[]) || [];
+  } catch {
+    return [];
+  }
 }
 
 export async function getWhyChooseItems(): Promise<WhyChooseItem[]> {
-  const overrides = getOverridesForTable('why_choose_items');
-  let baseList: WhyChooseItem[] = [];
   try {
     const supabase = createClient();
     const { data } = await supabase
@@ -251,47 +172,26 @@ export async function getWhyChooseItems(): Promise<WhyChooseItem[]> {
       .select('*')
       .eq('is_active', true)
       .order('display_order', { ascending: true });
-    if (data && data.length > 0) baseList = data as WhyChooseItem[];
-  } catch {}
 
-  const map = new Map<string, WhyChooseItem>();
-  baseList.forEach((item) => map.set(String(item.id), item));
-
-  Object.entries(overrides).forEach(([key, val]: [string, any]) => {
-    if (val._deleted) {
-      map.delete(key);
-      return;
-    }
-    if (map.has(key)) {
-      map.set(key, { ...map.get(key)!, ...val });
-    } else if (key !== 'default') {
-      map.set(key, val);
-    }
-  });
-
-  return Array.from(map.values())
-    .filter((s) => s.is_active !== false && !(s as any)._deleted)
-    .sort((a, b) => (a.display_order ?? 99) - (b.display_order ?? 99));
+    return (data as WhyChooseItem[]) || [];
+  } catch {
+    return [];
+  }
 }
 
 export async function getAboutContent(): Promise<AboutContent | null> {
-  const override = getOverride('about_content', 'about') || getOverride('about_content', 'default');
-  let base: any = null;
   try {
     const supabase = createClient();
     const { data } = await supabase
       .from('about_content')
       .select('*')
       .limit(1)
-      .single();
+      .maybeSingle();
 
-    if (data) {
-      base = data;
-    }
-  } catch {}
-
-  if (!base && !override) return null;
-  return { ...(base || {}), ...(override || {}) } as AboutContent;
+    return data as AboutContent | null;
+  } catch {
+    return null;
+  }
 }
 
 export async function getAboutFeatures(): Promise<AboutFeature[]> {
@@ -327,8 +227,6 @@ export async function getValues(): Promise<ValueItem[]> {
 }
 
 export async function getIndustries(): Promise<Industry[]> {
-  const overrides = getOverridesForTable('industries');
-  let baseList: Industry[] = [];
   try {
     const supabase = createClient();
     const { data } = await supabase
@@ -337,37 +235,10 @@ export async function getIndustries(): Promise<Industry[]> {
       .eq('is_active', true)
       .order('display_order', { ascending: true });
 
-    if (data && data.length > 0) baseList = data as Industry[];
-  } catch {}
-
-  const map = new Map<string, Industry>();
-  baseList.forEach((item) => map.set(String(item.id || item.slug), item));
-
-  Object.entries(overrides).forEach(([key, val]: [string, any]) => {
-    if (val._deleted) {
-      map.delete(key);
-      return;
-    }
-    let matched = false;
-    for (const [existingKey, existingVal] of Array.from(map.entries())) {
-      if (
-        existingKey === key ||
-        String(existingVal.id) === String(val.id) ||
-        existingVal.slug === val.slug
-      ) {
-        map.set(existingKey, { ...existingVal, ...val });
-        matched = true;
-        break;
-      }
-    }
-    if (!matched && key !== 'default') {
-      map.set(key, val);
-    }
-  });
-
-  return Array.from(map.values())
-    .filter((s) => s.is_active !== false && !(s as any)._deleted)
-    .sort((a, b) => (a.display_order ?? 99) - (b.display_order ?? 99));
+    return (data as Industry[]) || [];
+  } catch {
+    return [];
+  }
 }
 
 export async function getIndustryBySlug(slug: string): Promise<Industry | null> {
@@ -376,7 +247,6 @@ export async function getIndustryBySlug(slug: string): Promise<Industry | null> 
 }
 
 export async function getTeamMembers(): Promise<TeamMember[]> {
-  const overrides = getOverridesForTable('team_members');
   try {
     const supabase = createClient();
     const { data } = await supabase
@@ -385,20 +255,13 @@ export async function getTeamMembers(): Promise<TeamMember[]> {
       .eq('is_active', true)
       .order('display_order', { ascending: true });
 
-    let list = (data as TeamMember[]) || [];
-    if (Object.keys(overrides).length > 0) {
-      list = list.map((item) => ({ ...item, ...(overrides[item.id] || {}) }));
-    }
-    if (list.length > 0) return list;
-    return Object.values(overrides) as TeamMember[];
+    return (data as TeamMember[]) || [];
   } catch {
-    return (Object.values(overrides) as TeamMember[]) || [];
+    return [];
   }
 }
 
 export async function getTestimonials(): Promise<Testimonial[]> {
-  const overrides = getOverridesForTable('testimonials');
-  let baseList: Testimonial[] = [];
   try {
     const supabase = createClient();
     const { data } = await supabase
@@ -407,32 +270,13 @@ export async function getTestimonials(): Promise<Testimonial[]> {
       .eq('is_active', true)
       .order('display_order', { ascending: true });
 
-    if (data && data.length > 0) baseList = data as Testimonial[];
-  } catch {}
-
-  const map = new Map<string, Testimonial>();
-  baseList.forEach((item) => map.set(String(item.id), item));
-
-  Object.entries(overrides).forEach(([key, val]: [string, any]) => {
-    if (val._deleted) {
-      map.delete(key);
-      return;
-    }
-    if (map.has(key)) {
-      map.set(key, { ...map.get(key)!, ...val });
-    } else if (key !== 'default') {
-      map.set(key, val);
-    }
-  });
-
-  return Array.from(map.values())
-    .filter((s) => s.is_active !== false && !(s as any)._deleted)
-    .sort((a, b) => (a.display_order ?? 99) - (b.display_order ?? 99));
+    return (data as Testimonial[]) || [];
+  } catch {
+    return [];
+  }
 }
 
 export async function getCareers(): Promise<Career[]> {
-  const overrides = getOverridesForTable('careers');
-  let baseList: Career[] = [];
   try {
     const supabase = createClient();
     const { data } = await supabase
@@ -441,27 +285,10 @@ export async function getCareers(): Promise<Career[]> {
       .eq('is_active', true)
       .order('display_order', { ascending: true });
 
-    if (data && data.length > 0) baseList = data as Career[];
-  } catch {}
-
-  const map = new Map<string, Career>();
-  baseList.forEach((item) => map.set(String(item.id), item));
-
-  Object.entries(overrides).forEach(([key, val]: [string, any]) => {
-    if (val._deleted) {
-      map.delete(key);
-      return;
-    }
-    if (map.has(key)) {
-      map.set(key, { ...map.get(key)!, ...val });
-    } else if (key !== 'default') {
-      map.set(key, val);
-    }
-  });
-
-  return Array.from(map.values())
-    .filter((s) => s.is_active !== false && !(s as any)._deleted)
-    .sort((a, b) => (a.display_order ?? 99) - (b.display_order ?? 99));
+    return (data as Career[]) || [];
+  } catch {
+    return [];
+  }
 }
 
 export interface CareerSettings {
@@ -473,7 +300,6 @@ export interface CareerSettings {
 }
 
 export async function getCareerSettings(): Promise<CareerSettings> {
-  const overrides = getOverridesForTable('career_settings');
   const defaults: CareerSettings = {
     heading: "Don't see your role above?",
     description: "We are always looking for driven CA finalists, semi-qualified accountants, and tax interns to join our talent pool.",
@@ -482,8 +308,25 @@ export async function getCareerSettings(): Promise<CareerSettings> {
     is_active: true,
   };
 
-  if (overrides && overrides.talent_pool) {
-    return { ...defaults, ...overrides.talent_pool };
-  }
+  try {
+    const supabase = createClient();
+    const { data } = await supabase
+      .from('homepage_sections')
+      .select('*')
+      .eq('section_key', 'talent_pool')
+      .limit(1)
+      .maybeSingle();
+
+    if (data) {
+      return {
+        heading: data.headline || defaults.heading,
+        description: data.description || defaults.description,
+        button_text: data.primary_cta_text || defaults.button_text,
+        email: defaults.email,
+        is_active: data.is_active ?? true,
+      };
+    }
+  } catch {}
+
   return defaults;
 }

@@ -63,7 +63,8 @@ export default async function AboutPage() {
     getSiteSettings(),
   ]);
 
-  const officeImage = about?.image_url || '/images/H&S Auditors about section.png';
+  const officeImage = about?.image_url?.trim() || '';
+  const hasImage = Boolean(officeImage);
   const activeFeatures = (features || []).filter((f) => f.is_active !== false);
   const activeValues = (values || []).filter((v) => v.is_active !== false);
   const activeWhyChoose = (whyChoose || []).filter((w) => w.is_active !== false);
@@ -173,6 +174,7 @@ export default async function AboutPage() {
         <section className="py-16 sm:py-20 lg:py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+              {hasImage && (
               <div className="lg:col-span-5 relative">
                 <div className="relative w-full aspect-[4/3.4] rounded-2xl overflow-hidden shadow-lg bg-gray-100">
                   <Image
@@ -194,15 +196,24 @@ export default async function AboutPage() {
                   </div>
                 </div>
               </div>
+            )}
 
-              <div className="lg:col-span-7">
-                <span className="text-xs font-bold tracking-widest text-[#2b2d54] uppercase block mb-2">
+            <div className={`${hasImage ? 'lg:col-span-7' : 'lg:col-span-12 max-w-4xl'}`}>
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
+                <span className="text-xs font-bold tracking-widest text-[#2b2d54] uppercase block">
                   WHO WE ARE
                 </span>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#2b2d54] tracking-tight leading-tight mb-4">
-                  Your Reliable Partner in{' '}
-                  <span className="text-[#2b2d54] block">Financial Growth &amp; Compliance</span>
-                </h2>
+                {!hasImage && (
+                  <div className="inline-flex items-center gap-2 bg-[#FAF9F6] border border-stone-200/60 rounded-full px-3 py-1 shadow-2xs">
+                    <span className="text-xs font-extrabold text-[#2b2d54]">10+ Years</span>
+                    <span className="text-[11px] font-medium text-gray-700">of Professional Excellence</span>
+                  </div>
+                )}
+              </div>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#2b2d54] tracking-tight leading-tight mb-4">
+                Your Reliable Partner in{' '}
+                <span className="text-[#2b2d54] block">Financial Growth &amp; Compliance</span>
+              </h2>
                 {about?.paragraph_1 && (
                   <p className="text-xs sm:text-sm text-gray-700 leading-relaxed mb-3">
                     {about.paragraph_1}
