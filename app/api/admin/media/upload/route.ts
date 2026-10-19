@@ -41,45 +41,66 @@ export async function POST(request: Request) {
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    // 1. ALWAYS write locally to public/uploads/ so the image is guaranteed to work instantly
-    const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
-    if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir, { recursive: true });
-    }
+    // 1. Primary: Upload buffer directly to Cloudinary from memory (safe for Vercel serverless)
+    let finalUrl = '';
     const safeFilename = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
-    const localFilePath = path.join(uploadsDir, safeFilename);
-    fs.writeFileSync(localFilePath, buffer);
-    const localUrl = `/uploads/${safeFilename}`;
-
-    // 2. Also attempt Cloudinary upload
-    let finalUrl = localUrl;
     let publicId = safeFilename;
     let width = 1200;
     let height = 800;
 
-    try {
-      const uploadResult: any = await new Promise((resolve, reject) => {
-        const uploadStream = cloudinary.uploader.upload_stream(
-          {
-            folder,
-            resource_type: 'image',
-          },
-          (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-          }
-        );
-        uploadStream.end(buffer);
-      });
+    const hasCloudinary = Boolean(
+      process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME &&
+      process.env.CLOUDINARY_API_KEY &&
+      process.env.CLOUDINARY_API_SECRET
+    );
 
-      if (uploadResult?.secure_url) {
-        finalUrl = uploadResult.secure_url;
-        publicId = uploadResult.public_id;
-        width = uploadResult.width;
-        height = uploadResult.height;
+    if (hasCloudinary) {
+      try {
+        const uploadResult: any = await new Promise((resolve, reject) => {
+          const uploadStream = cloudinary.uploader.upload_stream(
+            {
+              folder,
+              resource_type: 'image',
+            },
+            (error, result) => {
+              if (error) reject(error);
+              else resolve(result);
+            }
+          );
+          uploadStream.end(buffer);
+        });
+
+        if (uploadResult?.secure_url) {
+          finalUrl = uploadResult.secure_url;
+          publicId = uploadResult.public_id;
+          width = uploadResult.width;
+          height = uploadResult.height;
+        }
+      } catch (cloudErr: any) {
+        console.warn('Cloudinary upload error:', cloudErr?.message);
       }
-    } catch (cloudErr: any) {
-      console.warn('Cloudinary upload fallback to local storage:', cloudErr?.message);
+    }
+
+    // 2. Fallback: Only try local disk write if Cloudinary was not used and filesystem is writable (e.g. local dev)
+    if (!finalUrl) {
+      try {
+        const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
+        if (!fs.existsSync(uploadsDir)) {
+          fs.mkdirSync(uploadsDir, { recursive: true });
+        }
+        const localFilePath = path.join(uploadsDir, safeFilename);
+        fs.writeFileSync(localFilePath, buffer);
+        finalUrl = `/uploads/${safeFilename}`;
+      } catch (fsErr: any) {
+        console.warn('Local filesystem write skipped (serverless environment):', fsErr?.message);
+      }
+    }
+
+    if (!finalUrl) {
+      return NextResponse.json(
+        { error: 'Image upload failed. Please verify Cloudinary environment variables in Vercel settings.' },
+        { status: 500 }
+      );
     }
 
     // 3. Attempt Supabase media log (non-blocking)
